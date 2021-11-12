@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float Speed;
     public float Jump;
     public float SpeedCap;
+    public float Acceleration;
+    public Camera MainCamera;
    
     Vector2 velocity = new Vector2(0, 0);
 
@@ -34,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.IsTouchingLayers(GetComponent<CapsuleCollider2D>(), LayerMask.GetMask("Ground"));
-        print(moving);
+        isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
+        MainCamera.transform.position = new Vector3(transform.position.x, transform.position.y,transform.position.z -5);
         Run();
         Jumping();
     }
@@ -48,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Jump * Input.GetAxis("Jump");
             Body.velocity = velocity;
         }
+        if (isGrounded == false && Input.GetAxis("Vertical") < 0 && Body.velocity.y < 3)
+        {
+            velocity.x = Body.velocity.x * .3f;
+            velocity.y = -Jump * 2;
+            Body.velocity = velocity;
+        }
     }
 
     private void Run()
@@ -58,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(RunTimer());
             if (Speed < SpeedCap)
             {
-                Speed += (Speed / SpeedCap) * 0.05f;
+                Speed += (SpeedCache / SpeedCapCache) * Acceleration;
             }
             velocity.x = Speed * Input.GetAxis("Horizontal");
             velocity.y = Body.velocity.y;

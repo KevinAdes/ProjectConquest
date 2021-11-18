@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEditor.UI;
 using UnityEngine;
 
@@ -13,33 +14,35 @@ public class PlayerMovement : MonoBehaviour
     public float SpeedCap;
     public float Acceleration;
     public Camera MainCamera;
-   
+    public Animator animator;
+
     Vector2 velocity = new Vector2(0, 0);
 
     bool isGrounded;
     bool boost;
     bool moving;
+    bool attack;
 
     float SpeedCache;
     float SpeedCapCache;
     float JumpCache;
-    
+    float ScaleCache;
 
-    // Start is called before the first frame update
     void Start()
     { 
         SpeedCache = Speed;
         SpeedCapCache = SpeedCap;
         JumpCache = Jump;
+        ScaleCache = transform.localScale.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
         MainCamera.transform.position = new Vector3(transform.position.x, transform.position.y,transform.position.z -5);
         Run();
         Jumping();
+        Attack();
     }
 
     private void Jumping()
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Jump * Input.GetAxis("Jump");
             Body.velocity = velocity;
         }
-        if (isGrounded == false && Input.GetAxis("Vertical") < 0 && Body.velocity.y < 3)
+        if (isGrounded == false && Input.GetAxis("Vertical") < -0.75 && Body.velocity.y < 3)
         {
             velocity.x = Body.velocity.x * .3f;
             velocity.y = -Jump * 2;
@@ -60,8 +63,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0 && attack == false)
         {
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                transform.localScale = new Vector3(ScaleCache * -1, transform.localScale.y, transform.localScale.z);
+            }
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                transform.localScale = new Vector3(ScaleCache, transform.localScale.y, transform.localScale.z);
+            }
             StartCoroutine(AmIStopped());
             StartCoroutine(RunTimer());
             if (Speed < SpeedCap)
@@ -86,6 +97,27 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        
+        if (Input.GetAxis("Fire1") != 0 && attack == false)
+        {
+            attack = true;
+            animator.SetTrigger("Attack");
+
+        }
+        
+    }
+
+    private void Crouch()
+    {
+        return;
+    }
+
+    private void AttackDone()
+    {
+        attack = false;
+    }
     IEnumerator RunTimer()
     {
         if (moving == true)

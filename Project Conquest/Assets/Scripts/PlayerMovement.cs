@@ -8,11 +8,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D Body;
+
+    [Header("Player Stats")]
+    public float health;
+    public float damage;
+    public float defense;
     public float Speed;
     public float Jump;
+
+    [Header("Calculation Variables")]
     public float SpeedCap;
     public float Acceleration;
+
+    [Header("Components")]
+    public Rigidbody2D Body;
     public Camera MainCamera;
     public Animator animator;
 
@@ -27,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     float SpeedCapCache;
     float JumpCache;
     float ScaleCache;
+
+    //functionally a bool that alternates between -1 and 1.
+    int right = 1;
 
     void Start()
     { 
@@ -43,6 +55,22 @@ public class PlayerMovement : MonoBehaviour
         Run();
         Jumping();
         Attack();
+        Crouch();
+        Direction();
+    }
+
+    private void Direction()
+    {
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            transform.localScale = new Vector3(ScaleCache * -1, transform.localScale.y, transform.localScale.z);
+            right = -1;
+        }
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            transform.localScale = new Vector3(ScaleCache, transform.localScale.y, transform.localScale.z);
+            right = 1;
+        }
     }
 
     private void Jumping()
@@ -63,16 +91,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        if (Input.GetAxis("Horizontal") != 0 && attack == false)
+        if (Input.GetAxis("Horizontal") != 0 && attack == false && animator.GetBool("Crouch") == false)
         {
-            if (Input.GetAxis("Horizontal") < 0)
-            {
-                transform.localScale = new Vector3(ScaleCache * -1, transform.localScale.y, transform.localScale.z);
-            }
-            if (Input.GetAxis("Horizontal") > 0)
-            {
-                transform.localScale = new Vector3(ScaleCache, transform.localScale.y, transform.localScale.z);
-            }
             StartCoroutine(AmIStopped());
             StartCoroutine(RunTimer());
             if (Speed < SpeedCap)
@@ -84,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             Body.velocity = velocity;
         }
 
-        if (Input.GetAxis("Horizontal") == 0)
+        if (Input.GetAxis("Horizontal") == 0 && animator.GetBool("Crouch") == false)
         {
             moving = false;
             boost = false;
@@ -99,25 +119,48 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
-        
+
+        if (Input.GetAxis("Fire1") != 0 && attack == false && animator.GetBool("Crouch") == true)
+        {
+            attack = true;
+            animator.SetTrigger("Attack");
+            velocity.x = SpeedCapCache * right;
+            velocity.y = Body.velocity.y;
+            Body.velocity = velocity;
+        }
+
         if (Input.GetAxis("Fire1") != 0 && attack == false)
         {
             attack = true;
             animator.SetTrigger("Attack");
-
         }
-        
-    }
 
+    }
+       
     private void Crouch()
     {
-        return;
+        if (Input.GetAxis("Vertical") < 0 && isGrounded == true && animator.GetBool("Crouch") == false)
+        {
+            animator.SetBool("Crouch", true);
+        }
+        if (Input.GetAxis("Vertical") >= -.5)
+        {
+            animator.SetBool("Crouch", false);
+        }
     }
 
     private void AttackDone()
     {
         attack = false;
     }
+
+    private void SlideDone()
+    {
+        velocity.x = 0;
+        velocity.y = Body.velocity.y;
+        Body.velocity = velocity;
+    }
+
     IEnumerator RunTimer()
     {
         if (moving == true)
@@ -126,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (boost == false && moving == true)
             {
-                SpeedCap = SpeedCap * 2f;
+                SpeedCap = SpeedCap * 1.25f;
                 Jump = Jump * 1.5f;
                 boost = true;
             }

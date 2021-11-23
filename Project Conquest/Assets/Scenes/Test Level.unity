@@ -261,8 +261,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781413687}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.036, y: 0.73, z: 0}
-  m_LocalScale: {x: 5.6373134, y: 8.99054, z: 0.65279}
+  m_LocalPosition: {x: 11.23, y: 1.3, z: 0}
+  m_LocalScale: {x: 93.5794, y: 1.2361993, z: 0.65279}
   m_Children: []
   m_Father: {fileID: 936708741}
   m_RootOrder: 1
@@ -403,8 +403,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026978776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.04, y: 0.205, z: 0}
-  m_LocalScale: {x: 6.6994615, y: 14.677297, z: 0.65279}
+  m_LocalPosition: {x: 16.97, y: -0.2, z: 0}
+  m_LocalScale: {x: 6.6994615, y: 22.74981, z: 0.65279}
   m_Children: []
   m_Father: {fileID: 936708741}
   m_RootOrder: 3
@@ -513,14 +513,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061426480}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.041, y: 0.028, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0016914601, w: 0.9999986}
+  m_LocalPosition: {x: 0.062, y: -0.018, z: 0}
   m_LocalScale: {x: 4.356056, y: 5.986784, z: 1.7871}
   m_Children:
   - {fileID: 2132081957}
+  - {fileID: 1858505789}
   m_Father: {fileID: 203166611}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.194}
 --- !u!50 &1061426482
 Rigidbody2D:
   serializedVersion: 4
@@ -630,11 +631,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c5102eb9b24f7469c58678682e746d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Body: {fileID: 1061426482}
-  Speed: 0.08
+  health: 0
+  damage: 0
+  defense: 0
+  Speed: 3
   Jump: 5
-  SpeedCap: 5
-  Acceleration: 1
+  SpeedCap: 7
+  Acceleration: 2
+  Body: {fileID: 1061426482}
   MainCamera: {fileID: 519420031}
   animator: {fileID: 1061426486}
 --- !u!95 &1061426486
@@ -683,8 +687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156359575}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5765599, y: -1.9018466, z: 0.6375098}
-  m_LocalScale: {x: 190.94885, y: 6.110543, z: 1.7841}
+  m_LocalPosition: {x: 1.5767, y: -1.9018466, z: 0.6375098}
+  m_LocalScale: {x: 19333.572, y: 6.110543, z: 1.7841}
   m_Children: []
   m_Father: {fileID: 936708741}
   m_RootOrder: 0
@@ -812,8 +816,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225847480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.04, y: -0.92, z: 0}
-  m_LocalScale: {x: 6.6994615, y: 8.99054, z: 0.65279}
+  m_LocalPosition: {x: 5.04, y: 0.63, z: 0}
+  m_LocalScale: {x: 6.6994615, y: 11.687702, z: 0.65279}
   m_Children: []
   m_Father: {fileID: 936708741}
   m_RootOrder: 2
@@ -894,6 +898,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!1 &1858505788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858505789}
+  - component: {fileID: 1858505790}
+  m_Layer: 0
+  m_Name: AttackBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1858505789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858505788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.144, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061426481}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1858505790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858505788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18523109, y: 0.1775169, z: 1}
+  m_Center: {x: 0.00073328434, y: 0.14398439, z: -0.00000003335272}
 --- !u!1 &2132081956
 GameObject:
   m_ObjectHideFlags: 0

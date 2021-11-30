@@ -15,17 +15,21 @@ public class HumanController : MonoBehaviour
     [Header ("Components")]
     public Animator animator;
     public Collider2D collider2;
+    public Rigidbody2D rigidbody2;
 
     public bool vulerable = true;
 
+    public int right = -1;
 
     PlayerMovement Dracula;
 
+    string STATE;
     
     // Start is called before the first frame update
     void Start()
     {
         Dracula = FindObjectOfType<PlayerMovement>();
+        STATE = "Default";
     }
 
     // Update is called once per frame
@@ -34,6 +38,15 @@ public class HumanController : MonoBehaviour
         
     }
 
+    /*
+    Human behavior
+
+    default, set some waypoints. maybe left and right a bit to give it some wander, maybe specific locations in the level
+    detection system, visual and audible, to see if dracula is near (future potential, sneak stat that bypasses this?)
+    if dracula spotted, run opposite direction.
+
+    bingo?
+     */
 
     public float Get_Dmg()
     {
@@ -66,6 +79,12 @@ public class HumanController : MonoBehaviour
         vulerable = false;
         Dracula.AddXP(expYield);
         Physics2D.IgnoreCollision(collider2, Dracula.collider2);
+        StartCoroutine(Decomposing());
+    }
+
+    private void Run()
+    {
+        
     }
 
     IEnumerator invincibility()
@@ -76,5 +95,16 @@ public class HumanController : MonoBehaviour
         {
             vulerable = true;
         }
+    }
+
+    IEnumerator Decomposing()
+    {
+        yield return new WaitForSeconds(60);
+        animator.SetTrigger("Eaten");
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

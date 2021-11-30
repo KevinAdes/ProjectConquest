@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     bool boost;
     bool moving;
     bool attack;
+    bool drink;
     //functionally a bool that alternates between -1 and 1.
     int right = 1;
 
@@ -52,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
 
     string STATE;
 
+    HumanController target;
+
+    //^^^^VARIABLES^^^^
+    //############################################################################
+    //vvvvSCRIPTvvvv
+
     void Start()
     {
         STATE = "Default";
@@ -64,8 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        print(isGrounded);
         isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
-        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y,transform.position.z -5);
+        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
         switch (STATE)
         {
             case "Default":
@@ -78,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
             case "Drinking":
                 Run();
                 Jumping();
+                Drink();
                 Direction();
                 Crouch();
                 break;
@@ -101,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    
+
     private void Jumping()
     {
         if (Input.GetAxis("Jump") != 0 && isGrounded && animator.GetBool("Crouch") == false)
@@ -170,6 +180,19 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void Drink()
+    {
+        if (Input.GetAxis("Fire1") != 0 && drink == false)
+        {
+            drink = true;
+            //Gain extra exp from victim
+            animator.SetTrigger("Drink");
+            target.animator.SetTrigger("Eaten");
+
+        }
+
+    }
+
     private void Crouch()
     {
         if (Input.GetAxis("Vertical") < 0 && isGrounded == true && animator.GetBool("Crouch") == false)
@@ -182,20 +205,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     //Animation Functions
-    private void DumbassAttack()
+    
+    private void AttackCall()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemies);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             HumanController human = enemy.GetComponent<HumanController>();
-            if(human.vulerable == true)
+            if (human.vulerable == true)
             {
                 human.TakeDamage(DamageCalculator(human.Get_Def()));
 
                 Vector3 knockback = enemy.transform.position - transform.position + Vector3.up * 0.33f;
-                enemy.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
+                enemy.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 5;
             }
         }
     }
@@ -206,6 +231,11 @@ public class PlayerMovement : MonoBehaviour
         damage = damageCache;
     }
 
+    private void DrinkDone()
+    {
+        drink = false;
+    }
+
     private void SlideDone()
     {
         velocity.x = 0;
@@ -213,11 +243,11 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = velocity;
     }
 
-    private void ReturnDefault()
+    private void StateSwitcher(string State)
     {
-        STATE = "Default";
+        STATE = State;
     }
-
+    
     //Calculation Functions
     private float DamageCalculator(float Def)
     {
@@ -304,15 +334,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 10)
         {
-            STATE = "Drinking";
-            print("gotcha");
-            if(Input.GetAxis("Fire1") != 0 && collision.gameObject.GetComponent<HumanController>().vulerable == false)
-            {
-                print("huh");
-                animator.SetTrigger("Drink");
-            }
+            target = collision.gameObject.GetComponent<HumanController>();
+            StateSwitcher("Drinking");
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            target = null;
+            StateSwitcher("Default");
+        }
+    }
+
 
     private void OnDrawGizmosSelected()
     {

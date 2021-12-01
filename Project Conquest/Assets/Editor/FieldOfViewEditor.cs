@@ -14,7 +14,7 @@ public class FieldOfViewEditor : Editor
         Vector3 viewAngleA = FOV.DirFromAngle(-FOV.viewAngle / 2, false);
         Vector3 viewAngleB = FOV.DirFromAngle(FOV.viewAngle / 2, false);
 
-        Handles.DrawLine(FOV.transform.position, FOV.transform.position + viewAngleA * FOV.viewRadius);
-        Handles.DrawLine(FOV.transform.position, FOV.transform.position + viewAngleB * FOV.viewRadius);
+        Handles.DrawLine(FOV.transform.position, FOV.transform.position + (viewAngleA * FOV.viewRadius) * FOV.direction);
+        Handles.DrawLine(FOV.transform.position, FOV.transform.position + (viewAngleB * FOV.viewRadius) * FOV.direction);
     }
 }

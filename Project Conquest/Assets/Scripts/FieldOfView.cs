@@ -13,15 +13,18 @@ public class FieldOfView : MonoBehaviour
     public LayerMask TargetMask;
     public LayerMask Obstacles;
 
-    int direction;
+    public int direction;
+    //eventually this may have to be changed to allow for non humans to have a field of view.
+    HumanController human;
 
     public void Start()
     {
-        direction = GetComponent<HumanController>().right;
+        human = GetComponent<HumanController>();
     }
 
     public void Update()
     {
+        direction = GetComponent<HumanController>().right;
         FindVisibleTargets();
     }
 
@@ -48,8 +51,9 @@ public class FieldOfView : MonoBehaviour
             if (Vector3.Angle(transform.right * direction,dirToTarget) < viewAngle/2)
             {
                 float distace = Vector3.Distance(transform.position, targetPos.position);
-                if (!Physics2D.Raycast(transform.position, dirToTarget, distace, Obstacles)){
-                    print("yes");
+                if (!Physics2D.Raycast(transform.position, dirToTarget, distace, Obstacles) && !human.spooked){
+                    human.spooked = true;
+                    GetComponent<Animator>().SetTrigger("Spooked");
                 }
             }
         }

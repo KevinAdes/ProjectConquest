@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     float scaleCache;
     float damageCache;
 
-    int experience = 0;
+    public float experience = 0;
 
     string STATE;
 
@@ -72,7 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        print(isGrounded);
         isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
         switch (STATE)
@@ -187,8 +187,8 @@ public class PlayerMovement : MonoBehaviour
             drink = true;
             //Gain extra exp from victim
             animator.SetTrigger("Drink");
+            AddXP(target.expYield);
             target.animator.SetTrigger("Eaten");
-
         }
 
     }
@@ -219,8 +219,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 human.TakeDamage(DamageCalculator(human.Get_Def()));
 
-                Vector3 knockback = enemy.transform.position - transform.position + Vector3.up * 0.33f;
-                enemy.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 5;
+                Vector2 knockback = enemy.transform.position - transform.position + Vector3.up;
+                enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
             }
         }
     }
@@ -309,23 +309,33 @@ public class PlayerMovement : MonoBehaviour
             if (collision.gameObject.GetComponent<HumanController>().Get_Dmg() > defense)
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                body.velocity = knockback * 10;
+                body.velocity = knockback * 30;
+                health -= 1;
+                print("enemy damage is greater than player defense, player takes knockback and damage");
             }
             //Enemy Damage is less than player defense
             else
             {
+                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
+                print("enemy damage is <||= player defense, enemy takes knockback");
+
 
             }
             //Player Damage is greater than Enemy Defense
             if (damage > collision.gameObject.GetComponent<HumanController>().Get_Def())
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 30;
+                print("player damage is greater than enemy defense, enemy takes knockback and damage");
+                collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
             }
             //Player Damage is less than Enemy Defense
             else
             {
-
+                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                body.velocity = knockback * 10;
+                print("player damage is <||= enemy defense, player takes knockback");
             }
         }
     }

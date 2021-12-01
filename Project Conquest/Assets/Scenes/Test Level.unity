@@ -600,9 +600,9 @@ MonoBehaviour:
   collider2: {fileID: 804624366}
   rigidbody2: {fileID: 804624367}
   Path: {fileID: 1403867553}
-  speed: 0
+  speed: 2
   wait: 1.04
-  courage: 0
+  courage: 10
   vulerable: 1
   spooked: 0
   right: -1
@@ -1082,8 +1082,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  damage: 7
-  defense: 6
+  damage: 4
+  defense: 4
   speed: 2
   jump: 5
   attackMultiplier: 2
@@ -1737,7 +1737,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484070956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3, y: 2.2, z: 0}
+  m_LocalPosition: {x: 5.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1403867553}

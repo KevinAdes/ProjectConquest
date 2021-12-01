@@ -28,10 +28,12 @@ public class HumanController : MonoBehaviour
     public bool vulerable = true;
     public bool spooked = false;
     bool courageRolled = false;
+    public bool stunned = false;
 
     [HideInInspector]
     public int right = 1;
     int currentPoint = 0;
+    int flip;
 
     PlayerMovement Dracula;
 
@@ -44,7 +46,11 @@ public class HumanController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        if (courage == 0)
+        {
+            courage = Random.Range(0, 10);
+        }
         scaleCache = transform.localScale.x;
         Dracula = FindObjectOfType<PlayerMovement>();
         STATE = "Default";
@@ -53,13 +59,13 @@ public class HumanController : MonoBehaviour
         for (int i = 0; i < waypoints.Length; i++){
             waypoints[i] = Path.GetChild(i).position;
         }
+        expYield = expYield + Mathf.RoundToInt(courage / 5);
         StartCoroutine(Wander(waypoints));
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(STATE);
         switch(STATE)
         {
             case "Default":
@@ -105,20 +111,17 @@ public class HumanController : MonoBehaviour
         if (!facingRight)
             {
                 transform.localScale = new Vector3(scaleCache * -1, transform.localScale.y, transform.localScale.z);
-            print(transform.localScale);
                 right = -1;
             }
         if (facingRight)
             {
                 transform.localScale = new Vector3(scaleCache, transform.localScale.y, transform.localScale.z);
-            print(transform.localScale);
                 right = 1;
             }
     }
 
     private void Run()
     {
-        int flip = 1;
         if (courageRolled == false)
         {
             int random = Random.Range(0,10);
@@ -130,6 +133,7 @@ public class HumanController : MonoBehaviour
             {
                 flip = 1;
             }
+            courageRolled = true;
 
         }
         bool facingRight = (transform.position.x - Dracula.transform.position.x >= 0);
@@ -143,9 +147,12 @@ public class HumanController : MonoBehaviour
             transform.localScale = new Vector3(scaleCache * flip, transform.localScale.y, transform.localScale.z);
             right = 1;
         }
-        velocity.x = speed * right * flip;
-        velocity.y = rigidbody2.velocity.y;
-        rigidbody2.velocity = velocity;
+        if (!stunned)
+        {
+            velocity.x = speed * right * flip;
+            velocity.y = rigidbody2.velocity.y;
+            rigidbody2.velocity = velocity;
+        }
     }
 
     IEnumerator invincibility()
@@ -188,6 +195,8 @@ public class HumanController : MonoBehaviour
     //Death Functions
     public void TakeDamage(float Dmg)
     {
+        spooked = true;
+        STATE = "Scared";
         health -= Dmg;
         if (health <= 0)
         {

@@ -219,7 +219,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 human.TakeDamage(DamageCalculator(human.Get_Def()));
 
-                Vector2 knockback = enemy.transform.position - transform.position + Vector3.up;
+                Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
+                print(knockback.x);
+                human.animator.SetTrigger("Hit");
                 enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
             }
         }
@@ -305,11 +307,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 10 && collision.gameObject.GetComponent<HumanController>().vulerable == true)
         {
+            HumanController human = collision.gameObject.GetComponent<HumanController>();
             //Enemy Damage is greater than player defense
-            if (collision.gameObject.GetComponent<HumanController>().Get_Dmg() > defense)
+            if (human.Get_Dmg() > defense)
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                body.velocity = knockback * 30;
+                body.velocity = knockback * 15;
                 health -= 1;
                 print("enemy damage is greater than player defense, player takes knockback and damage");
             }
@@ -326,7 +329,7 @@ public class PlayerMovement : MonoBehaviour
             if (damage > collision.gameObject.GetComponent<HumanController>().Get_Def())
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 30;
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 15;
                 print("player damage is greater than enemy defense, enemy takes knockback and damage");
                 collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
             }

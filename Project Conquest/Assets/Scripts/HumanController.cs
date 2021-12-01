@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -22,11 +21,13 @@ public class HumanController : MonoBehaviour
     [Header("Calculation Variables")]
     public float speed;
     public float wait;
+    [Range(0,10)]
     public float courage;
 
     [HideInInspector]
     public bool vulerable = true;
     public bool spooked = false;
+    bool courageRolled = false;
 
     [HideInInspector]
     public int right = 1;
@@ -117,18 +118,32 @@ public class HumanController : MonoBehaviour
 
     private void Run()
     {
+        int flip = 1;
+        if (courageRolled == false)
+        {
+            int random = Random.Range(0,10);
+            if (random < courage)
+            {
+                flip = -1;
+            }
+            else
+            {
+                flip = 1;
+            }
+
+        }
         bool facingRight = (transform.position.x - Dracula.transform.position.x >= 0);
         if (!facingRight)
         {
-            transform.localScale = new Vector3(scaleCache * -1, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(scaleCache * -1 * flip, transform.localScale.y, transform.localScale.z);
             right = -1;
         }
         if (facingRight)
         {
-            transform.localScale = new Vector3(scaleCache, transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(scaleCache * flip, transform.localScale.y, transform.localScale.z);
             right = 1;
         }
-        velocity.x = speed * right;
+        velocity.x = speed * right * flip;
         velocity.y = rigidbody2.velocity.y;
         rigidbody2.velocity = velocity;
     }

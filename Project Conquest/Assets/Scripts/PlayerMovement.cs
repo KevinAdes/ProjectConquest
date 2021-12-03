@@ -13,14 +13,15 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Player Stats")]
-    public float health;
+    public float maxHealth;
     public float damage;
     public float defense;
     public float speed;
     public float jump;
-    public float attackMultiplier;
+    public float attackModifier;
 
     [Header("Calculation Variables")]
+    public float health;
     public float speedCap;
     public float acceleration;
     public float attackRange;
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     float scaleCache;
     float damageCache;
 
-    public float experience = 0;
+    public float blood = 0;
 
     string STATE;
 
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         STATE = "Default";
+        health = maxHealth;
         speedCache = speed;
         speedCapCache = speedCap;
         jumpCache = jump;
@@ -163,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
         {
             attack = true;
             animator.SetTrigger("Attack");
-            damage = damage * attackMultiplier;
             velocity.x = speedCapCache * right;
             velocity.y = body.velocity.y;
             body.velocity = velocity;
@@ -175,7 +176,6 @@ public class PlayerMovement : MonoBehaviour
             speed = speed / 2;
             attack = true;
             animator.SetTrigger("Attack");
-            damage = damage * attackMultiplier;
         }
 
     }
@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    //
     //Animation Functions
     
     private void AttackCall()
@@ -255,11 +255,77 @@ public class PlayerMovement : MonoBehaviour
     {
         if(attack == true)
         {
-            //add damage multiplier
+            damage += attackModifier;
         }
         float DMG = damage/Def + 1;
         return DMG;
     }
+
+    public void AddXP(int gains)
+    {
+        blood += gains;
+    }
+
+    //Upgrade Functions
+    public void UpgradeDamage()
+    {
+        if (blood > 0)
+        {
+            blood -= 1;
+            damage += .1f;
+            damage = (Mathf.RoundToInt(damage * 10));
+            damage = damage / 10;
+            damageCache += .1f;
+            damageCache = (Mathf.RoundToInt(damageCache * 10));
+            damageCache = damageCache / 10;
+        }
+
+    }
+
+    public void UpgradeDefense()
+    {
+        if (blood > 0)
+        {
+            blood -= 1;
+            defense += .1f;
+            defense = (Mathf.RoundToInt(defense * 10));
+            defense = defense / 10;
+        }
+
+    }
+
+    public void UpgradeSpeed()
+    {
+        if (blood > 0)
+        {
+            blood -= 1;
+            speed += .1f;
+            speed = (Mathf.RoundToInt(speed * 10));
+            speed = speed / 10;
+            speedCache += .1f;
+            speedCache = (Mathf.RoundToInt(speedCache * 10));
+            speedCache = speedCache / 10;
+            //speed cap may need to be upgraded by a higher amount
+            speedCap += .1f;
+            speedCap = (Mathf.RoundToInt(speedCap * 10));
+            speedCap = speedCap / 10;
+            speedCapCache += .1f;
+            speedCapCache = (Mathf.RoundToInt(speedCapCache * 10));
+            speedCapCache = speedCapCache / 10;
+        }
+
+    }
+
+    public void UpgradeHealth()
+    {
+        if (blood > 0)
+        {
+            blood -= 1;
+            maxHealth += 1;
+        }
+
+    }
+
 
     //Enumerators
     IEnumerator RunTimer()
@@ -360,15 +426,10 @@ public class PlayerMovement : MonoBehaviour
             StateSwitcher("Default");
         }
     }
-
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    public void AddXP(int gains)
-    {
-        experience += gains;
-    }
 }

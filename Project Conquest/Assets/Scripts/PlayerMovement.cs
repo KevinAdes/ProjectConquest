@@ -326,7 +326,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
+    //I've grown tired of the runtimer boost eventually need to phase this out.
     //Enumerators
     IEnumerator RunTimer()
     {

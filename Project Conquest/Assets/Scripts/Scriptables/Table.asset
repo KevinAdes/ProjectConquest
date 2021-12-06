@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e11f76dd80ffa4c72a90bd8f6d91d9f8, type: 3}
-  m_Name: Enemy
+  m_Script: {fileID: 11500000, guid: 8cfb3b1e0002143b4ad3634a9ac91bc8, type: 3}
+  m_Name: Table
   m_EditorClassIdentifier: 
-  EnemyName: 
-  waypoints: []

@@ -57,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
     string STATE;
 
     HumanController target;
+    LevelManager manager;
+
 
     //^^^^VARIABLES^^^^
     //############################################################################
@@ -64,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        if (manager == null)
+        {
+            manager = FindObjectOfType<LevelManager>();
+        }
         STATE = "Default";
         health = maxHealth;
         speedCache = speed;
@@ -71,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         jumpCache = jump;
         scaleCache = transform.localScale.x;
         damageCache = damage;
+        manager = FindObjectOfType<LevelManager>();
     }
 
     void Update()
@@ -220,7 +227,6 @@ public class PlayerMovement : MonoBehaviour
                 human.TakeDamage(DamageCalculator(human.Get_Def()));
 
                 Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
-                print(knockback.x);
                 human.animator.SetTrigger("Hit");
                 enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
             }
@@ -380,14 +386,14 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
                 body.velocity = knockback * 15;
                 health -= 1;
-                print("enemy damage is greater than player defense, player takes knockback and damage");
+                //print("enemy damage is greater than player defense, player takes knockback and damage");
             }
             //Enemy Damage is less than player defense
             else
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
-                print("enemy damage is <||= player defense, enemy takes knockback");
+                //print("enemy damage is <||= player defense, enemy takes knockback");
 
 
             }
@@ -396,7 +402,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 15;
-                print("player damage is greater than enemy defense, enemy takes knockback and damage");
+                //print("player damage is greater than enemy defense, enemy takes knockback and damage");
                 collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
             }
             //Player Damage is less than Enemy Defense
@@ -404,13 +410,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
                 body.velocity = knockback * 10;
-                print("player damage is <||= enemy defense, player takes knockback");
+                //print("player damage is <||= enemy defense, player takes knockback");
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer == 8)
+        {
+            manager.LoadLevel("Map");
+        }
+
         if (collision.gameObject.layer == 10)
         {
             target = collision.gameObject.GetComponent<HumanController>();

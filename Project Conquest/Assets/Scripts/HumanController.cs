@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.SceneManagement;
 
 public class HumanController : MonoBehaviour
 {
@@ -29,11 +30,13 @@ public class HumanController : MonoBehaviour
     public bool spooked = false;
     bool courageRolled = false;
     public bool stunned = false;
+    public bool dead = false;
 
     [HideInInspector]
     public int right = 1;
     int currentPoint = 0;
     int flip;
+    public int ID;
 
     PlayerMovement Dracula;
 
@@ -44,9 +47,20 @@ public class HumanController : MonoBehaviour
 
     float scaleCache;
 
+    LevelManager manager;
+    
+    public void Awake()
+    {
+        if (manager == null)
+        {
+            manager = FindObjectOfType<LevelManager>();
+        }
+
+    }
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        manager = FindObjectOfType<LevelManager>(); 
         if (courage == 0)
         {
             courage = Random.Range(0, 10);
@@ -207,7 +221,9 @@ public class HumanController : MonoBehaviour
 
     private void Death()
     {
+        dead = true;
         animator.SetBool("Dead", true);
+        manager.markDead(ID, SceneManager.GetActiveScene().name);
         STATE = "dead";
         vulerable = false;
         Physics2D.IgnoreCollision(collider2, Dracula.collider2);

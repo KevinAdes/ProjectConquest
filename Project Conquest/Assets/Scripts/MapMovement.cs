@@ -2,19 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapMovement : MonoBehaviour
 {
     public float speed;
+
     public Camera mainCamera;
+
+    string target = null;
+
+    LevelData temp;
+    LevelManager manager;
+
     Vector3 move = new Vector3(0, 0, 0);
     Vector3 horizon = new Vector3(0, 0, 0);
     Vector3 verizon = new Vector3(0, 0, 0);
 
+    public void Awake()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (manager == null)
+        {
+            manager = FindObjectOfType<LevelManager>();
+        }
     }
 
     // Update is called once per frame
@@ -22,10 +38,29 @@ public class MapMovement : MonoBehaviour
     {
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
         Movement();
+        Select();
+        
+    }
+
+    private void Select()
+    {
+        if (Input.GetAxisRaw("Fire1") != 0)
+        {
+            if (target != null)
+            {
+                manager.LoadLevel(target);
+            }
+
+        }
     }
 
     private void Movement()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print(manager.table.Levels.Count);
+        }
 
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
@@ -55,4 +90,21 @@ public class MapMovement : MonoBehaviour
         move = (horizon + verizon).normalized * speed;
         transform.position += move;
     }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        { 
+            target = collision.gameObject.GetComponent<Level>().ID;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            target = null;
+        }
+    }
+
 }

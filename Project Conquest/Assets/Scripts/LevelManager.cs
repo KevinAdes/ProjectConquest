@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -8,9 +9,14 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField]
     public LevelTable table;
+    public GameObject LoadHider;
     LevelData temp;
 
+    public MapMovement Mapula;
+
     public static LevelManager instance;
+
+    bool right;
 
     private void Awake()
     {
@@ -23,11 +29,23 @@ public class LevelManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
     }
 
     public void LoadLevel(string ID)
     {
+        LoadHider.SetActive(true);
+        if (ID == "Map")
+        {
+            Mapula.gameObject.SetActive(true);
+        }
+        else
+        {
+            Mapula.gameObject.SetActive(false);
+
+        }
         SceneManager.LoadScene(ID);
+        LoadHider.SetActive(false);
     }
 
 
@@ -35,12 +53,10 @@ public class LevelManager : MonoBehaviour
     {
         if (table.Levels.ContainsKey(Level.levelID))
         {
-            print("i am checking");
             temp = (LevelData)table.Levels[Level.levelID];
             foreach(EnemyManager human in Level.Entities)
             {
-
-                print(human.dead);
+                   
                 if (temp.Entities[human.EnemyID].dead == true)
                 {
                     Destroy(human.guy.gameObject);
@@ -55,15 +71,9 @@ public class LevelManager : MonoBehaviour
 
     public void markDead(int ID, string levelID)
     {
-        print(ID);
         temp = (LevelData)table.Levels[levelID];
         temp.Entities[ID].dead = true;
         table.Levels[levelID] = temp;
-        foreach(EnemyManager human in temp.Entities)
-        {
-            print(human.dead);
-        }
-
     }
 }
 

@@ -8,10 +8,9 @@ public class MapMovement : MonoBehaviour
 {
     public float speed;
 
-    public Camera mainCamera;
-
     string target = null;
 
+    Camera mainCamera;
     LevelData temp;
     LevelManager manager;
 
@@ -19,10 +18,6 @@ public class MapMovement : MonoBehaviour
     Vector3 horizon = new Vector3(0, 0, 0);
     Vector3 verizon = new Vector3(0, 0, 0);
 
-    public void Awake()
-    {
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +25,10 @@ public class MapMovement : MonoBehaviour
         if (manager == null)
         {
             manager = FindObjectOfType<LevelManager>();
+        }
+        if (mainCamera == null)
+        {
+            mainCamera = FindObjectOfType<Camera>();
         }
     }
 

@@ -21,9 +21,14 @@ public class PauseControl : MonoBehaviour
     public GameObject pauseScreen;
 
     //extra
-    public PlayerMovement Dracula;
+    PlayerMovement Dracula;
     bool isAxisInUse = false;
     bool pause = false;
+
+    public void Awake()
+    {
+        Dracula = FindObjectOfType<PlayerMovement>();
+    }
 
     public void Calibrate()
     {
@@ -33,6 +38,7 @@ public class PauseControl : MonoBehaviour
         Health.text = "HEALTH " + Dracula.maxHealth;
         Experience.text = Dracula.blood.ToString();
     }
+
 
     // Update is called once per frame
     void Update()

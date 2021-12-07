@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     public Rigidbody2D body;
-    public Camera mainCamera;
     public Animator animator;
     public Transform attackPoint;
     public Collider2D collider2;
@@ -36,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Extras")]
     public LayerMask enemies;
 
-    Vector2 velocity = new Vector2(0, 0);
+    Vector2 velocity;
 
     bool isGrounded;
     bool boost;
@@ -58,11 +57,20 @@ public class PlayerMovement : MonoBehaviour
 
     HumanController target;
     LevelManager manager;
+    Camera mainCamera;
 
 
     //^^^^VARIABLES^^^^
     //############################################################################
     //vvvvSCRIPTvvvv
+
+    public void Awake()
+    {
+        if (mainCamera == null)
+        {
+            mainCamera = FindObjectOfType<Camera>();
+        }
+    }
 
     void Start()
     {
@@ -70,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
         {
             manager = FindObjectOfType<LevelManager>();
         }
+        velocity = new Vector2(0, 0);
+        body.velocity = velocity;
         STATE = "Default";
         health = maxHealth;
         speedCache = speed;
@@ -77,13 +87,18 @@ public class PlayerMovement : MonoBehaviour
         jumpCache = jump;
         scaleCache = transform.localScale.x;
         damageCache = damage;
-        manager = FindObjectOfType<LevelManager>();
     }
 
     void Update()
     {
-        isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
+        if (mainCamera == null)
+        {
+            mainCamera = FindObjectOfType<Camera>();
+        }
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
+
+        isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
+        
         switch (STATE)
         {
             case "Default":
@@ -101,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
                 Crouch();
                 break;
         }
+        
+
     }
 
     //Control Functions
@@ -419,6 +436,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 8)
         {
+            print(manager.Mapula);
             manager.LoadLevel("Map");
         }
 

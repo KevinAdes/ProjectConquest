@@ -45,20 +45,16 @@ public class PlayerMovement : MonoBehaviour
     //functionally a bool that alternates between -1 and 1.
     int right = 1;
 
-    float speedCache;
-    float speedCapCache;
-    float jumpCache;
+    public float speedCache;
+    public float speedCapCache;
     float scaleCache;
-    float damageCache;
-
-    public float blood = 0;
 
     string STATE;
 
     HumanController target;
     LevelManager manager;
     Camera mainCamera;
-
+    PauseControl pauseControl;
 
     //^^^^VARIABLES^^^^
     //############################################################################
@@ -78,15 +74,14 @@ public class PlayerMovement : MonoBehaviour
         {
             manager = FindObjectOfType<LevelManager>();
         }
+        pauseControl = FindObjectOfType<PauseControl>();
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
         STATE = "Default";
         health = maxHealth;
         speedCache = speed;
         speedCapCache = speedCap;
-        jumpCache = jump;
         scaleCache = transform.localScale.x;
-        damageCache = damage;
     }
 
     void Update()
@@ -158,8 +153,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0 && animator.GetBool("Crouch") == false)
         {
-            StartCoroutine(AmIStopped());
-            StartCoroutine(RunTimer());
             if (speed < speedCap)
             {
                 speed += (speedCache / speedCapCache) * acceleration;
@@ -173,7 +166,6 @@ public class PlayerMovement : MonoBehaviour
         {
             moving = false;
             boost = false;
-            jump = jumpCache;
             speedCap = speedCapCache;
             speed = (speed + speedCache) / 2;
             velocity.x = speed * Input.GetAxis("Horizontal");
@@ -253,7 +245,6 @@ public class PlayerMovement : MonoBehaviour
     private void AttackDone()
     {
         attack = false;
-        damage = damageCache;
     }
 
     private void DrinkDone()
@@ -286,111 +277,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddXP(int gains)
     {
-        blood += gains;
+        pauseControl.playerData.blood += gains;
     }
 
     //Upgrade Functions
-    public void UpgradeDamage()
-    {
-        if (blood > 0)
-        {
-            blood -= 1;
-            damage += .1f;
-            damage = (Mathf.RoundToInt(damage * 10));
-            damage = damage / 10;
-            damageCache += .1f;
-            damageCache = (Mathf.RoundToInt(damageCache * 10));
-            damageCache = damageCache / 10;
-        }
-
-    }
-
-    public void UpgradeDefense()
-    {
-        if (blood > 0)
-        {
-            blood -= 1;
-            defense += .1f;
-            defense = (Mathf.RoundToInt(defense * 10));
-            defense = defense / 10;
-        }
-
-    }
-
-    public void UpgradeSpeed()
-    {
-        if (blood > 0)
-        {
-            blood -= 1;
-            speed += .1f;
-            speed = (Mathf.RoundToInt(speed * 10));
-            speed = speed / 10;
-            speedCache += .1f;
-            speedCache = (Mathf.RoundToInt(speedCache * 10));
-            speedCache = speedCache / 10;
-            //speed cap may need to be upgraded by a higher amount
-            speedCap += .1f;
-            speedCap = (Mathf.RoundToInt(speedCap * 10));
-            speedCap = speedCap / 10;
-            speedCapCache += .1f;
-            speedCapCache = (Mathf.RoundToInt(speedCapCache * 10));
-            speedCapCache = speedCapCache / 10;
-        }
-
-    }
-
-    public void UpgradeHealth()
-    {
-        if (blood > 0)
-        {
-            blood -= 1;
-            maxHealth += 1;
-        }
-
-    }
-
-    //I've grown tired of the runtimer boost eventually need to phase this out.
-    //Enumerators
-    IEnumerator RunTimer()
-    {
-        if (moving == true)
-        {
-            yield return new WaitForSeconds(10);
-
-            if (boost == false && moving == true)
-            {
-                speedCap = speedCap * 1.25f;
-                jump = jump * 1.5f;
-                boost = true;
-            }
-            if (boost == true)
-            {
-                yield break;
-            }
-        }
-        else
-        {
-            jump = jumpCache;
-            speedCap = speedCapCache;
-            yield break;
-        }
-
-    }
-    IEnumerator AmIStopped()
-    {
-        float Gposition = GetComponent<Transform>().position.x;
-        yield return new WaitForSeconds(2);
-        if (Gposition == GetComponent<Transform>().position.x)
-        {
-            moving = false;
-        }
-        else
-        {
-            moving = true;
-        }
-
-    }
-
     //Engine Functions
     private void OnCollisionEnter2D(Collision2D collision)
     {

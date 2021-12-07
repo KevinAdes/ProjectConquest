@@ -8,6 +8,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField]
+    public PlayerData playerData;
     public LevelTable table;
     public GameObject LoadHider;
     LevelData temp;

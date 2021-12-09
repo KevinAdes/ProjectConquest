@@ -47,20 +47,20 @@ public class HumanController : MonoBehaviour
 
     float scaleCache;
 
-    LevelManager manager;
+    GameManager manager;
     
     public void Awake()
     {
         if (manager == null)
         {
-            manager = FindObjectOfType<LevelManager>();
+            manager = FindObjectOfType<GameManager>();
         }
 
     }
     // Start is called before the first frame update
     void Start()
     {
-        manager = FindObjectOfType<LevelManager>(); 
+        manager = FindObjectOfType<GameManager>(); 
         if (courage == 0)
         {
             courage = Random.Range(0, 10);

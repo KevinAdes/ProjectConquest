@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class LevelManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public PlayerData playerData;
@@ -15,12 +15,14 @@ public class LevelManager : MonoBehaviour
 
     public MapMovement Mapula;
 
-    public static LevelManager instance;
+    public static GameManager instance;
 
     bool right;
 
     private void Awake()
     {
+        playerData = ScriptableObject.CreateInstance<PlayerData>();
+        table = ScriptableObject.CreateInstance<LevelTable>();
         if (instance != null)
         {
             Destroy(gameObject);
@@ -54,6 +56,7 @@ public class LevelManager : MonoBehaviour
     {
         if (table.Levels.ContainsKey(Level.levelID))
         {
+            print("its already here...");
             temp = (LevelData)table.Levels[Level.levelID];
             foreach(EnemyManager human in Level.Entities)
             {

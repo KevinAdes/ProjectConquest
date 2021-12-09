@@ -12,7 +12,7 @@ public class MapMovement : MonoBehaviour
 
     Camera mainCamera;
     LevelData temp;
-    LevelManager manager;
+    GameManager manager;
 
     Vector3 move = new Vector3(0, 0, 0);
     Vector3 horizon = new Vector3(0, 0, 0);
@@ -24,7 +24,7 @@ public class MapMovement : MonoBehaviour
     {
         if (manager == null)
         {
-            manager = FindObjectOfType<LevelManager>();
+            manager = FindObjectOfType<GameManager>();
         }
         if (mainCamera == null)
         {

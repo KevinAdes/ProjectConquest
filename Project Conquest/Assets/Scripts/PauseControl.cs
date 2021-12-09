@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class PauseControl : MonoBehaviour
 {
     public PlayerData playerData;
-    public LevelManager manager;
+    public GameManager manager;
     //buttons
     public GameObject focusButton;
     public GameObject itemsTab;
@@ -30,7 +30,7 @@ public class PauseControl : MonoBehaviour
 
     public void Awake()
     {
-        manager = FindObjectOfType<LevelManager>();
+        manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
         Dracula = FindObjectOfType<PlayerMovement>();
         Calibrate();

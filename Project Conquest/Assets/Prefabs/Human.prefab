@@ -212,7 +212,7 @@ MonoBehaviour:
   Path: {fileID: 1520593126952406735}
   speed: 2
   wait: 1.04
-  courage: 10
+  courage: 0
   vulerable: 1
   spooked: 0
   stunned: 0

@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
     Vector2 velocity;
 
     bool isGrounded;
-    bool boost;
-    bool moving;
     bool attack;
     bool drink;
     //functionally a bool that alternates between -1 and 1.
@@ -52,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     string STATE;
 
     HumanController target;
-    LevelManager manager;
+    GameManager manager;
     Camera mainCamera;
     PauseControl pauseControl;
 
@@ -72,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (manager == null)
         {
-            manager = FindObjectOfType<LevelManager>();
+            manager = FindObjectOfType<GameManager>();
         }
         pauseControl = FindObjectOfType<PauseControl>();
         velocity = new Vector2(0, 0);
@@ -103,12 +101,14 @@ public class PlayerMovement : MonoBehaviour
                 Crouch();
                 Direction();
                 break;
-            case "Drinking":
+            case "Drink":
                 Run();
                 Jumping();
                 Drink();
                 Direction();
                 Crouch();
+                break;
+            case "Drinking":
                 break;
         }
         
@@ -116,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Control Functions
+    //
+
     private void Direction()
     {
         if (attack == false)
@@ -164,8 +166,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetAxis("Horizontal") == 0 && animator.GetBool("Crouch") == false)
         {
-            moving = false;
-            boost = false;
             speedCap = speedCapCache;
             speed = (speed + speedCache) / 2;
             velocity.x = speed * Input.GetAxis("Horizontal");
@@ -200,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") != 0 && drink == false)
         {
+            STATE = "Drink";
             drink = true;
             //Gain extra exp from victim
             animator.SetTrigger("Drink");
@@ -221,19 +222,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //
     //Animation Functions
-    
+    //
+
     private void AttackCall()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemies);
 
         foreach (Collider2D enemy in hitEnemies)
         {
+            //when theres more enemy types, add a switch-case for different types or add a base class with a vulnerable stat
+
             HumanController human = enemy.GetComponent<HumanController>();
             if (human.vulerable == true)
             {
-                human.TakeDamage(DamageCalculator(human.Get_Def()));
+                human.TakeDamage(DamageCalculator(damage, human.Get_Def(), attackModifier));
 
                 Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
                 human.animator.SetTrigger("Hit");
@@ -249,6 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void DrinkDone()
     {
+        STATE = "Default";
         drink = false;
     }
 
@@ -265,13 +269,12 @@ public class PlayerMovement : MonoBehaviour
     }
     
     //Calculation Functions
-    private float DamageCalculator(float Def)
+    //
+
+    private float DamageCalculator(float dmg, float def, float modifier)
     {
-        if(attack == true)
-        {
-            damage += attackModifier;
-        }
-        float DMG = damage/Def + 1;
+        dmg += modifier;
+        float DMG = dmg/def + 1;
         return DMG;
     }
 
@@ -280,8 +283,14 @@ public class PlayerMovement : MonoBehaviour
         pauseControl.playerData.blood += gains;
     }
 
-    //Upgrade Functions
+    private void Damage(Rigidbody2D target, Vector3 knockback, float dmg, float def)
+    {
+        target.velocity = knockback;
+        health -= dmg;
+    }
     //Engine Functions
+    //
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 10 && collision.gameObject.GetComponent<HumanController>().vulerable == true)
@@ -291,6 +300,7 @@ public class PlayerMovement : MonoBehaviour
             if (human.Get_Dmg() > defense)
             {
                 Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                //Damage(body, knockback, human.Get_Dmg());
                 body.velocity = knockback * 15;
                 health -= 1;
                 //print("enemy damage is greater than player defense, player takes knockback and damage");
@@ -333,7 +343,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == 10)
         {
             target = collision.gameObject.GetComponent<HumanController>();
-            StateSwitcher("Drinking");
+            StateSwitcher("Drink");
         }
     }
 

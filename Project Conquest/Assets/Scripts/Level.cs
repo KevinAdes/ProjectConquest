@@ -8,7 +8,7 @@ public class Level : MonoBehaviour
 {
     public bool icon;
     public string ID;
-    LevelManager manager;
+    GameManager manager;
     LevelData data;
 
     public void Awake()
@@ -16,7 +16,7 @@ public class Level : MonoBehaviour
 
         if (icon != true)
         {
-            manager = FindObjectOfType<LevelManager>();
+            manager = FindObjectOfType<GameManager>();
             print(manager.table.Levels);
             if (manager.table.Levels.Contains(SceneManager.GetActiveScene().name))
             {

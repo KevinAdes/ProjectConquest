@@ -336,7 +336,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 8)
         {
-            print(manager.Mapula);
             manager.LoadLevel("Map");
         }
 

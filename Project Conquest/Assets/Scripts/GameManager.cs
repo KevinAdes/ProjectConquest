@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public PlayerData playerData;
     public LevelTable table;
+    public MapFogTable mapFogTable;
     public GameObject LoadHider;
     LevelData temp;
 
@@ -18,11 +19,13 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     bool right;
+    bool cloudChecking = false;
 
     private void Awake()
     {
         playerData = ScriptableObject.CreateInstance<PlayerData>();
         table = ScriptableObject.CreateInstance<LevelTable>();
+        mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
         if (instance != null)
         {
             Destroy(gameObject);
@@ -38,18 +41,43 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(string ID)
     {
         LoadHider.SetActive(true);
+        SceneManager.LoadScene(ID);
+        if (ID != "Map")
+        {
+            Mapula.gameObject.SetActive(false);
+            LoadHider.SetActive(false);
+
+        }
         if (ID == "Map")
         {
             Mapula.gameObject.SetActive(true);
+            StartCoroutine(CheckClouds());
         }
-        else
-        {
-            Mapula.gameObject.SetActive(false);
+    }
 
+
+    IEnumerator CheckClouds()
+    {
+        if (cloudChecking == false)
+        {
+            cloudChecking = true;
+
+            yield return new WaitForSeconds(.1f);
+            
+            MapFog[] clouds = FindObjectsOfType<MapFog>();
+            foreach (MapFog cloud in clouds)
+            {
+                if (mapFogTable.clouds.ContainsKey(cloud.gameObject.name))
+                {
+                    Destroy(cloud.gameObject);
+                }
+            }
+            cloudChecking = false;
         }
-        SceneManager.LoadScene(ID);
         LoadHider.SetActive(false);
     }
+
+
 
 
     public void CheckData(LevelData Level)

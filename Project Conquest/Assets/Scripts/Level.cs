@@ -11,13 +11,14 @@ public class Level : MonoBehaviour
     GameManager manager;
     LevelData data;
 
+    SpriteRenderer levelIcon;
+
     public void Awake()
     {
 
         if (icon != true)
         {
             manager = FindObjectOfType<GameManager>();
-            print(manager.table.Levels);
             if (manager.table.Levels.Contains(SceneManager.GetActiveScene().name))
             {
                 data = (LevelData)manager.table.Levels[ID];
@@ -31,7 +32,10 @@ public class Level : MonoBehaviour
                 manager.CheckData(data);
             }
         }
-       
+        if (icon == true)
+        {
+            levelIcon = GetComponent<SpriteRenderer>();
+        }
     }
 
     private void reinitializeEntities(LevelData data)
@@ -68,6 +72,17 @@ public class Level : MonoBehaviour
             data.Entities[count] = guy;
             count++;
 
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (levelIcon != null)
+        {
+            if (levelIcon.enabled == false)
+            {
+                levelIcon.enabled = true;
+            }
         }
     }
 }

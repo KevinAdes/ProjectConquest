@@ -14,9 +14,9 @@ public class MapMovement : MonoBehaviour
     LevelData temp;
     GameManager manager;
 
-    Vector3 move = new Vector3(0, 0, 0);
-    Vector3 horizon = new Vector3(0, 0, 0);
-    Vector3 verizon = new Vector3(0, 0, 0);
+    Vector2 move = new Vector2(0, 0);
+    Vector2 horizon = new Vector2(0, 0);
+    Vector2 verizon = new Vector2(0, 0);
 
 
     // Start is called before the first frame update
@@ -45,7 +45,7 @@ public class MapMovement : MonoBehaviour
     {
         if (Input.GetAxisRaw("Fire1") != 0)
         {
-            if (target != null)
+            if (target != null && Time.timeScale > 0)
             {
                 manager.LoadLevel(target);
             }
@@ -63,31 +63,31 @@ public class MapMovement : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            horizon = new Vector3(speed, 0);
+            horizon = new Vector2(speed, 0);
         }
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            horizon = new Vector3(-speed, 0);
+            horizon = new Vector2(-speed, 0);
         }
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            horizon = new Vector3(0, 0);
+            horizon = new Vector2(0, 0);
         }
         if (Input.GetAxisRaw("Vertical") > 0)
         {
-            verizon = new Vector3(0, speed);
+            verizon = new Vector2(0, speed);
         }
         if (Input.GetAxisRaw("Vertical") < 0)
         {
-            verizon = new Vector3(0, -speed);
+            verizon = new Vector2(0, -speed);
         }
         if (Input.GetAxisRaw("Vertical") == 0)
         {
-            verizon = new Vector3(0, 0);
+            verizon = new Vector2(0, 0);
         }
 
         move = (horizon + verizon).normalized * speed;
-        transform.position += move;
+        GetComponent<Rigidbody2D>().velocity = move;
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

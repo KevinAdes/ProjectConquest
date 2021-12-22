@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
@@ -11,14 +13,15 @@ public class Level : MonoBehaviour
     GameManager manager;
     LevelData data;
 
+    Vector2[] levelExits;
+
     SpriteRenderer levelIcon;
 
     public void Awake()
     {
-
+        manager = FindObjectOfType<GameManager>();
         if (icon != true)
         {
-            manager = FindObjectOfType<GameManager>();
             if (manager.table.Levels.Contains(SceneManager.GetActiveScene().name))
             {
                 data = (LevelData)manager.table.Levels[ID];
@@ -81,7 +84,8 @@ public class Level : MonoBehaviour
         {
             if (levelIcon.enabled == false)
             {
-                levelIcon.enabled = true;
+                levelIcon.enabled = true; 
+                manager.LoadAlert(ID);
             }
         }
     }

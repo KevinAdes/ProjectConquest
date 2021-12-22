@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
@@ -12,11 +14,16 @@ public class GameManager : MonoBehaviour
     public LevelTable table;
     public MapFogTable mapFogTable;
     public GameObject LoadHider;
+    public GameObject alertBox;
     LevelData temp;
+
+    Animator animator;
 
     public MapMovement Mapula;
 
     public static GameManager instance;
+
+    string target;
 
     bool right;
     bool cloudChecking = false;
@@ -26,6 +33,7 @@ public class GameManager : MonoBehaviour
         playerData = ScriptableObject.CreateInstance<PlayerData>();
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
+        animator = GetComponent<Animator>();
         if (instance != null)
         {
             Destroy(gameObject);
@@ -40,19 +48,24 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(string ID)
     {
-        LoadHider.SetActive(true);
-        SceneManager.LoadScene(ID);
-        if (ID != "Map")
+        target = ID;
+        animator.SetTrigger("Show");
+    }
+
+    public void LoadLevelANIMATIONEVENT()
+    {
+        SceneManager.LoadScene(target);
+        if (target != "Map")
         {
             Mapula.gameObject.SetActive(false);
-            LoadHider.SetActive(false);
 
         }
-        if (ID == "Map")
+        if (target == "Map")
         {
             Mapula.gameObject.SetActive(true);
             StartCoroutine(CheckClouds());
         }
+        animator.SetTrigger("Hide");
     }
 
 
@@ -74,7 +87,6 @@ public class GameManager : MonoBehaviour
             }
             cloudChecking = false;
         }
-        LoadHider.SetActive(false);
     }
 
 
@@ -106,6 +118,25 @@ public class GameManager : MonoBehaviour
         temp = (LevelData)table.Levels[levelID];
         temp.Entities[ID].dead = true;
         table.Levels[levelID] = temp;
+    }
+
+    public void LoadAlert(string levelID)
+    {
+        if (table.Levels.ContainsKey(levelID) == false)
+        {
+            alertBox.SetActive(true);
+            Time.timeScale = 0;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(alertBox.GetComponentInChildren<Button>().gameObject);
+
+        }
+       
+    }
+
+    public void HideAlert()
+    {
+        Time.timeScale = 1;
+        alertBox.SetActive(false);
     }
 }
 

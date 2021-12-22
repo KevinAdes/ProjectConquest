@@ -29,7 +29,6 @@ public class MapFog : MonoBehaviour
             if (!Manager.mapFogTable.clouds.ContainsKey(cloudData.ID))
             {
                 Manager.mapFogTable.clouds.Add(cloudData.ID, cloudData);
-                print(Manager.mapFogTable.clouds.Count);
             }
         }
     }

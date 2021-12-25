@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             mainCamera = FindObjectOfType<Camera>();
         }
-        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
+        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z - 5);
 
         isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
         

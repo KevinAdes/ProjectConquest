@@ -52604,7 +52604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: 1
-  ID: House1
+  ID: Test Level
 --- !u!212 &1730966334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -64865,6 +64865,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7738306761374759171, guid: 353f2833100b34054bd1f2cc6a58e580,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7738306762641248460, guid: 353f2833100b34054bd1f2cc6a58e580,
         type: 3}
       propertyPath: m_Name

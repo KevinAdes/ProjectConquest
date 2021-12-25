@@ -19,7 +19,11 @@ public class FieldOfView : MonoBehaviour
 
     public void Start()
     {
-        human = GetComponent<HumanController>();
+        if(GetComponent<HumanController>() != null)
+        {
+            human = GetComponent<HumanController>();
+
+        }
     }
 
     public void Update()

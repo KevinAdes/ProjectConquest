@@ -40,7 +40,6 @@ public class Turret : MonoBehaviour
         target = Dracula.transform;
         Vector2 targetPosition = target.position;
         direction = targetPosition - (Vector2)transform.position;
-        RaycastHit2D rayinfo = Physics2D.Raycast(transform.position, direction, range);
         transform.up = -direction;
 
         if (Time.time > shotSpacing)

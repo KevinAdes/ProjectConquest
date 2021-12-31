@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -232,14 +226,27 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             //when theres more enemy types, add a switch-case for different types or add a base class with a vulnerable stat
+            //really need whatever I'm adding to field of view to automatically differentiate what type of thing were dealingwith
 
-            HumanController human = enemy.GetComponent<HumanController>();
-            if (human.vulerable == true)
+            if(enemy.GetComponent<HumanController>() != null)
             {
-                human.TakeDamage(DamageCalculator(damage, human.Get_Def(), attackModifier));
+                HumanController human = enemy.GetComponent<HumanController>();
+                if (human.vulerable == true)
+                {
+                    human.TakeDamage(DamageCalculator(damage, human.Get_Def(), attackModifier));
+
+                    Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
+                    human.animator.SetTrigger("Hit");
+                     enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
+                }
+            }
+            if (enemy.GetComponent<Entity>() != null)
+            {
+                Entity entity = enemy.GetComponent<Entity>();
+                entity.TakeDamage(DamageCalculator(damage, entity.Get_Def(), attackModifier));
 
                 Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
-                human.animator.SetTrigger("Hit");
+                entity.animator.SetTrigger("Hit");
                 enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
             }
         }
@@ -293,43 +300,47 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 10 && collision.gameObject.GetComponent<HumanController>().vulerable == true)
+        if (collision.gameObject.GetComponent<HumanController>() != null)
         {
-            HumanController human = collision.gameObject.GetComponent<HumanController>();
-            //Enemy Damage is greater than player defense
-            if (human.Get_Dmg() > defense)
+            if (collision.gameObject.layer == 10 && collision.gameObject.GetComponent<HumanController>().vulerable == true)
             {
-                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                //Damage(body, knockback, human.Get_Dmg());
-                body.velocity = knockback * 15;
-                health -= 1;
-                //print("enemy damage is greater than player defense, player takes knockback and damage");
-            }
-            //Enemy Damage is less than player defense
-            else
-            {
-                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
-                //print("enemy damage is <||= player defense, enemy takes knockback");
+                HumanController human = collision.gameObject.GetComponent<HumanController>();
+                //Enemy Damage is greater than player defense
+                if (human.Get_Dmg() > defense)
+                {
+                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                    //Damage(body, knockback, human.Get_Dmg());
+                    body.velocity = knockback * 15;
+                    health -= 1;
+                    //print("enemy damage is greater than player defense, player takes knockback and damage");
+                }
+                //Enemy Damage is less than player defense
+                else
+                {
+                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
+                    //print("enemy damage is <||= player defense, enemy takes knockback");
 
 
-            }
-            //Player Damage is greater than Enemy Defense
-            if (damage > collision.gameObject.GetComponent<HumanController>().Get_Def())
-            {
-                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 15;
-                //print("player damage is greater than enemy defense, enemy takes knockback and damage");
-                collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
-            }
-            //Player Damage is less than Enemy Defense
-            else
-            {
-                Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                body.velocity = knockback * 10;
-                //print("player damage is <||= enemy defense, player takes knockback");
+                }
+                //Player Damage is greater than Enemy Defense
+                if (damage > collision.gameObject.GetComponent<HumanController>().Get_Def())
+                {
+                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 15;
+                    //print("player damage is greater than enemy defense, enemy takes knockback and damage");
+                    collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
+                }
+                //Player Damage is less than Enemy Defense
+                else
+                {
+                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
+                    body.velocity = knockback * 10;
+                    //print("player damage is <||= enemy defense, player takes knockback");
+                }
             }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

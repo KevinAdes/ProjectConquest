@@ -10,22 +10,28 @@ public class Turret : MonoBehaviour
     public float force;
     float shotSpacing = 0;
 
-    public float range;
+
+    //eventually this will be used to save which entities remain on level re-load and which ones dont.
+    public bool important;
+
     public Transform target;
     public bool detected = false;
     Vector2 direction = new Vector2(0, 0);
     PlayerMovement Dracula;
 
+    Entity me;
+
     // Start is called before the first frame update
     void Start()
     {
+        me = GetComponent<Entity>();
         Dracula = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (detected)
+        switch (me.detected)
         {
             case true:
                 Seek();
@@ -54,4 +60,4 @@ public class Turret : MonoBehaviour
         GameObject BulletInst = Instantiate(projectile, transform.position, Quaternion.identity);
         BulletInst.GetComponent<Rigidbody2D>().AddForce(direction * force);
     }
-}
+}  

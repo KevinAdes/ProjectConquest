@@ -264,7 +264,8 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 1024
-  blood: 0
+  speedCache: 0
+  speedCapCache: 0
 --- !u!1 &838653766966197789
 GameObject:
   m_ObjectHideFlags: 0

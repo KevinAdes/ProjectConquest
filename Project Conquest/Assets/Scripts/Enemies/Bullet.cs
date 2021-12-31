@@ -18,6 +18,9 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.layer == 13 || collision.gameObject.layer == 8 || collision.gameObject.layer == 9)
+        {
+            Destroy(gameObject);
+        }
     }
 }

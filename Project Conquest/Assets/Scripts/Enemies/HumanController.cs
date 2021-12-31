@@ -27,13 +27,13 @@ public class HumanController : MonoBehaviour
 
     [HideInInspector]
     public bool vulerable = true;
-    public bool spooked = false;
+    public bool detected = false;
     bool courageRolled = false;
     public bool stunned = false;
     public bool dead = false;
 
     [HideInInspector]
-    public int right = 1;
+    public int direction = 1;
     int currentPoint = 0;
     int flip;
     public int ID;
@@ -121,16 +121,16 @@ public class HumanController : MonoBehaviour
     //Control Functions
     private void Direction()
     {
-        bool facingRight = (transform.position.x - waypoints[currentPoint].x <= 0);
-        if (!facingRight)
+        bool facingdirection = (transform.position.x - waypoints[currentPoint].x <= 0);
+        if (!facingdirection)
             {
                 transform.localScale = new Vector3(scaleCache * -1, transform.localScale.y, transform.localScale.z);
-                right = -1;
+                direction = -1;
             }
-        if (facingRight)
+        if (facingdirection)
             {
                 transform.localScale = new Vector3(scaleCache, transform.localScale.y, transform.localScale.z);
-                right = 1;
+                direction = 1;
             }
     }
 
@@ -150,20 +150,20 @@ public class HumanController : MonoBehaviour
             courageRolled = true;
 
         }
-        bool facingRight = (transform.position.x - Dracula.transform.position.x >= 0);
-        if (!facingRight)
+        bool facingdirection = (transform.position.x - Dracula.transform.position.x >= 0);
+        if (!facingdirection)
         {
             transform.localScale = new Vector3(scaleCache * -1 * flip, transform.localScale.y, transform.localScale.z);
-            right = -1;
+            direction = -1;
         }
-        if (facingRight)
+        if (facingdirection)
         {
             transform.localScale = new Vector3(scaleCache * flip, transform.localScale.y, transform.localScale.z);
-            right = 1;
+            direction = 1;
         }
         if (!stunned)
         {
-            velocity.x = speed * right * flip;
+            velocity.x = speed * direction * flip;
             velocity.y = rigidbody2.velocity.y;
             rigidbody2.velocity = velocity;
         }
@@ -195,7 +195,7 @@ public class HumanController : MonoBehaviour
             Vector3 positionStore = transform.position;
             var dist = Vector3.Distance(positionStore, targetWaypoint);
             transform.position = Vector2.Lerp(transform.position, targetWaypoint, speed*(Time.deltaTime/dist) );
-            if (spooked) { break; }
+            if (detected) { break; }
             if (Mathf.Abs(transform.position.x - targetWaypoint.x) < .1)
             {
                 currentPoint = (currentPoint + 1) % waypoints.Length;
@@ -209,7 +209,7 @@ public class HumanController : MonoBehaviour
     //Death Functions
     public void TakeDamage(float Dmg)
     {
-        spooked = true;
+        detected = true;
         STATE = "Scared";
         health -= Dmg;
         if (health <= 0)
@@ -219,7 +219,7 @@ public class HumanController : MonoBehaviour
         StartCoroutine(invincibility());
     }
 
-    private void Death()
+    public void Death()
     {
         dead = true;
         animator.SetBool("Dead", true);

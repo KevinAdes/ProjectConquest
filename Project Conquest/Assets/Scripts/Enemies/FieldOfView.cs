@@ -20,27 +20,20 @@ public class FieldOfView : MonoBehaviour
 
     string TYPE;
 
-    //This Script will be attached to many different game objects and will
-    //impact them differently. I don't know if this process can be
-    //automated so for now I will add object types to this list and
-    //manually select what kind of object has a field of view via the
-    //start method. Eventually I would like to make it work so that I don't
-    //have to update this script everytime i make a new thing-that-needs-a-field-of-view.
-
-    Turret turret;
+    Entity entity;
     HumanController human;
 
     public void Start()
     {
-        if(GetComponent<HumanController>() != null)
+        if (GetComponent<HumanController>() != null)
         {
             human = GetComponent<HumanController>();
             TYPE = "HUMAN";
         }
-        if(GetComponent<Turret>() != null)
+        if (GetComponent<Entity>() != null)
         {
-            turret = GetComponent<Turret>();
-            TYPE = "TURRET";
+            entity = GetComponent<Entity>();
+            TYPE = "ENTITY";
         }
     }
 
@@ -48,7 +41,12 @@ public class FieldOfView : MonoBehaviour
     {
         if (human != null)
         {
-            direction = GetComponent<HumanController>().right;
+            direction = GetComponent<HumanController>().direction;
+
+        }
+        if (entity != null)
+        {
+            direction = GetComponent<Entity>().direction;
 
         }
         FindVisibleTargets();
@@ -77,15 +75,7 @@ public class FieldOfView : MonoBehaviour
             {
                 float distace = Vector3.Distance(transform.position, targetPos.position);
                 if (!Physics2D.Raycast(transform.position, dirToTarget, distace, Obstacles)){
-                    switch (TYPE)
-                    {
-                        case "HUMAN":
-                            HumanInit();
-                            break;
-                        case "TURRET":
-                            TurretInit();
-                            break;
-                    }
+                    Init();
                 }
             }
             //handles removing targets if they leave the radius
@@ -95,29 +85,32 @@ public class FieldOfView : MonoBehaviour
                 {
                     case "HUMAN":
                         break;
-                    case "TURRET":
-                        turret.detected = false;
+                    case "ENTITY":
+                        entity.detected = false;
                         break;
                 }
             }
         }
     }
 
-    private void HumanInit()
+    private void Init()
     {
-        if (human != null && human.spooked == false)
+        switch (TYPE)
         {
-            human.spooked = true;
-            GetComponent<Animator>().SetTrigger("Spooked");
+            case "HUMAN":
+                if (human.detected == false)
+                {
+                    human.detected = true;
+                    GetComponent<Animator>().SetTrigger("Spooked");
+                }
+                break;
+            case "ENTITY":
+                if (entity.detected == false)
+                {
+                    entity.detected = true;
+                }
+                break;
         }
     }
 
-    private void TurretInit()
-    {
-        if (turret != null && turret.detected == false)
-        {
-            turret.range = viewRadius;
-            turret.detected = true;
-        }
-    }
 }

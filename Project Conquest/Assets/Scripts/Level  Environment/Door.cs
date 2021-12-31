@@ -7,30 +7,16 @@ public class Door : MonoBehaviour
     public GameObject[] triggerGroupOff;
     public GameObject[] triggerGroupOn;
     public bool vertical;
+    public bool right;
+
+    //will eventually be used to determine if we need to press z to open or if it opens automatcally
+    public bool closed;
 
     bool active;
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         active = true;
-        while (active)
-        {
-            if (Input.GetAxis("Fire1") != 0)
-            {
-
-                for (int i = 0; i < triggerGroupOff.Length; i++)
-                {
-                    triggerGroupOff[i].SetActive(false);
-                    print(triggerGroupOff[i].name);
-                }
-                for (int i = 0; i < triggerGroupOn.Length; i++)
-                {
-                    triggerGroupOn[i].SetActive(true);
-                }
-            }
-
-        }
-
+        StartCoroutine(OpenDoor());
     }
 
     public void OnTriggerExit2D(Collider2D collision)
@@ -62,13 +48,19 @@ public class Door : MonoBehaviour
         {
             if (vertical == false)
             {
-                if (transform.position.x < triggerGroupOn[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                if (right == false)
                 {
-                    triggerGroupOn[i].SetActive(false);
+                    if (transform.position.x < triggerGroupOn[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                    {
+                        triggerGroupOn[i].SetActive(false);
+                    }
                 }
-                if (transform.position.x > triggerGroupOn[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                if (right)
                 {
-                    triggerGroupOn[i].SetActive(false);
+                    if (transform.position.x > triggerGroupOn[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                    {
+                        triggerGroupOn[i].SetActive(false);
+                    }
                 }
 
             }
@@ -82,16 +74,28 @@ public class Door : MonoBehaviour
         }
 
     }
-
-    private void Down()
+    IEnumerator OpenDoor()
     {
-        
+        while (active)
+        {
+            if (!active) { break; }
+            if (Input.GetAxis("Fire1") != 0)
+            {
+
+                for (int i = 0; i < triggerGroupOff.Length; i++)
+                {
+                    triggerGroupOff[i].SetActive(false);
+                }
+                for (int i = 0; i < triggerGroupOn.Length; i++)
+                {
+                    triggerGroupOn[i].SetActive(true);
+                }
+                break;
+            }
+            yield return null;
+        }
     }
 
-    private void Up()
-    {
-
-    }
 }
 
 

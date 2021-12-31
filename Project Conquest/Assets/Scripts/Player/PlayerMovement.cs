@@ -242,6 +242,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (enemy.GetComponent<Entity>() != null)
             {
+                print("hello");
                 Entity entity = enemy.GetComponent<Entity>();
                 entity.TakeDamage(DamageCalculator(damage, entity.Get_Def(), attackModifier));
 

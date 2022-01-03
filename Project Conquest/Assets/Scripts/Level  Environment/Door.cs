@@ -24,53 +24,62 @@ public class Door : MonoBehaviour
         active = false;
         for (int i = 0; i < triggerGroupOff.Length; i++)
         {
-            if (vertical == false)
+            if (triggerGroupOff[i] != null)
             {
-                if (transform.position.x < triggerGroupOff[i].transform.position.x && collision.transform.position.x < transform.position.x)
-                {
-                    triggerGroupOff[i].SetActive(true);
-                }
-                if (transform.position.x > triggerGroupOff[i].transform.position.x && collision.transform.position.x > transform.position.x)
-                {
-                    triggerGroupOff[i].SetActive(true);
-                }
 
-            }
-            if (vertical == true)
-            {
-                if (collision.transform.position.y > transform.position.y)
+                if (vertical == false)
                 {
-                    triggerGroupOff[i].SetActive(true);
+                    if (transform.position.x < triggerGroupOff[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                    {
+                        triggerGroupOff[i].SetActive(true);
+                    }
+                    if (transform.position.x > triggerGroupOff[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                    {
+                        triggerGroupOff[i].SetActive(true);
+                    }
+
+                }
+                if (vertical == true)
+                {
+                    if (collision.transform.position.y > transform.position.y)
+                    {
+                        triggerGroupOff[i].SetActive(true);
+                    }
                 }
             }
         }
         for (int i = 0; i < triggerGroupOn.Length; i++)
         {
-            if (vertical == false)
+            if (triggerGroupOn[i] != null)
             {
-                if (right == false)
+                if (vertical == false)
                 {
-                    if (transform.position.x < triggerGroupOn[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                    if (right == false)
                     {
-                        triggerGroupOn[i].SetActive(false);
+                        if (transform.position.x < triggerGroupOn[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                        {
+                            triggerGroupOn[i].SetActive(false);
+                        }
                     }
+                    if (right)
+                    {
+                        if (transform.position.x > triggerGroupOn[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                        {
+                            triggerGroupOn[i].SetActive(false);
+                        }
+                    }
+
                 }
-                if (right)
+                if (vertical == true)
                 {
-                    if (transform.position.x > triggerGroupOn[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                    if (collision.transform.position.y > transform.position.y)
                     {
                         triggerGroupOn[i].SetActive(false);
                     }
                 }
 
             }
-            if (vertical == true)
-            {
-                if (collision.transform.position.y > transform.position.y)
-                {
-                    triggerGroupOn[i].SetActive(false);
-                }
-            }
+            
         }
 
     }
@@ -84,11 +93,17 @@ public class Door : MonoBehaviour
 
                 for (int i = 0; i < triggerGroupOff.Length; i++)
                 {
-                    triggerGroupOff[i].SetActive(false);
+                    if (triggerGroupOff[i] != null)
+                    {
+                        triggerGroupOff[i].SetActive(false);
+                    }
                 }
                 for (int i = 0; i < triggerGroupOn.Length; i++)
                 {
-                    triggerGroupOn[i].SetActive(true);
+                    if (triggerGroupOn[i] != null)
+                    {
+                        triggerGroupOn[i].SetActive(true);
+                    }
                 }
                 break;
             }

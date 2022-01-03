@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attacker: MonoBehaviour
+public class Defender: MonoBehaviour
 {
 
     [HideInInspector]

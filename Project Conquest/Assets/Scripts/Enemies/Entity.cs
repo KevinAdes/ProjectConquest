@@ -12,7 +12,6 @@ public class Entity : MonoBehaviour
 
     [Header("Components")]
     public Animator animator;
-    public Collider2D collider2;
     public Rigidbody2D rigidbody2;
 
 
@@ -93,13 +92,14 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                Destroy();
+                StartCoroutine(Destroy());
             }
         }
         StartCoroutine(invincibility());
     }
-    public void Destroy()
+    IEnumerator Destroy()
     {
+        yield return new WaitForSeconds(.2f);
         Destroy(gameObject);
     }
 

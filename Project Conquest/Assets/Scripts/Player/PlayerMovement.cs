@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             manager = FindObjectOfType<GameManager>();
         }
+        transform.position = manager.playerLevelTransform;
         pauseControl = FindObjectOfType<PauseControl>();
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
@@ -171,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
     private void Attack()
     {
         //Slide
+        //TODO REMOVE SLIDE IN EXCHANGE FOR CROUCH ATTACK
         if (Input.GetAxis("Fire1") != 0 && attack == false && animator.GetBool("Crouch") == true)
         {
             attack = true;
@@ -194,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") != 0 && drink == false)
         {
-            STATE = "Drink";
+            STATE = "Drinking";
             drink = true;
             //Gain extra exp from victim
             animator.SetTrigger("Drink");
@@ -225,24 +227,20 @@ public class PlayerMovement : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            //when theres more enemy types, add a switch-case for different types or add a base class with a vulnerable stat
-            //really need whatever I'm adding to field of view to automatically differentiate what type of thing were dealingwith
-
-            if(enemy.GetComponent<HumanController>() != null)
+            if(enemy.transform.parent.GetComponent<HumanController>() != null)
             {
-                HumanController human = enemy.GetComponent<HumanController>();
+                HumanController human = enemy.transform.parent.GetComponent<HumanController>();
                 if (human.vulerable == true)
                 {
                     human.TakeDamage(DamageCalculator(damage, human.Get_Def(), attackModifier));
 
                     Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
                     human.animator.SetTrigger("Hit");
-                     enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
+                    enemy.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
                 }
             }
             if (enemy.GetComponent<Entity>() != null)
             {
-                print("hello");
                 Entity entity = enemy.GetComponent<Entity>();
                 entity.TakeDamage(DamageCalculator(damage, entity.Get_Def(), attackModifier));
 
@@ -291,14 +289,22 @@ public class PlayerMovement : MonoBehaviour
         pauseControl.playerData.blood += gains;
     }
 
-    private void Damage(Rigidbody2D target, Vector3 knockback, float dmg, float def)
+    public void Damage(Rigidbody2D target, Vector2 knockback, float dmg, float def)
     {
-        target.velocity = knockback;
+        target.velocity += knockback;
+        //target.gameObject.GetComponent<HumanController>().health -= damage;
         health -= dmg;
     }
     //Engine Functions
     //
 
+
+    /// <summary>
+    /// WHAT!!! I HAVE NO IDEA WHAT I JUST DID
+    /// this needs a serious reworking though. Its confusing, only works for humans, 
+    /// and has half assed damage functions at the end. needs a full breakdown and rebuild, and soon
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<HumanController>() != null)
@@ -353,8 +359,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == 10)
         {
-            target = collision.gameObject.GetComponent<HumanController>();
-            StateSwitcher("Drink");
+            if(collision.transform.parent.gameObject.GetComponent<HumanController>() != null)
+            {
+                print("and i am ready to drink it");
+                target = collision.transform.parent.gameObject.GetComponent<HumanController>();
+                target.TakeDamage(target.health);
+            }
         }
     }
 

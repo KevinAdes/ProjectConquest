@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int dmg;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +20,18 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 13 || collision.gameObject.layer == 8 || collision.gameObject.layer == 9)
+        switch (collision.gameObject.layer)
         {
-            Destroy(gameObject);
+            case 13:
+                collision.gameObject.GetComponent<PlayerMovement>().Damage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, dmg, 0);
+                Destroy(gameObject);
+                break;
+            case 8:
+                Destroy(gameObject);
+                break;
+            case 0:
+                Destroy(gameObject);
+                break;
         }
     }
 }

@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
     GameManager manager;
     LevelData data;
 
-    Vector2[] levelExits;
+    public Vector2[] levelSpawns;
 
     SpriteRenderer levelIcon;
 
@@ -62,6 +62,8 @@ public class Level : MonoBehaviour
     void InitializeData(LevelData data)
     {
         data.levelID = SceneManager.GetActiveScene().name;
+        data.leftSpawn = levelSpawns[0];
+        data.rightSpawn = levelSpawns[1];
         int count = 0;
         HumanController[] humanControllers = FindObjectsOfType<HumanController>();
         data.Entities = new EnemyManager[humanControllers.Length];

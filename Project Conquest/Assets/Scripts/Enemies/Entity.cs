@@ -80,7 +80,6 @@ public class Entity : MonoBehaviour
 
     public void TakeDamage(float Dmg)
     {
-        print("check");
         detected = true;
         STATE = "Scared";
         health -= Dmg;

@@ -17,9 +17,12 @@ public class GameManager : MonoBehaviour
     public GameObject alertBox;
     LevelData temp;
 
-    Animator animator;
-
+    public Vector3 mapulaTransform;
     public MapMovement Mapula;
+
+    public Vector2 playerLevelTransform;
+
+    Animator animator;
 
     public static GameManager instance;
 
@@ -57,18 +60,26 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(target);
         if (target != "Map")
         {
-            Mapula.gameObject.SetActive(false);
-
+            mapulaTransform = Mapula.gameObject.transform.position;
+            StartCoroutine(PlayerTransformSet());
         }
         if (target == "Map")
         {
-            Mapula.gameObject.SetActive(true);
+
             StartCoroutine(CheckClouds());
         }
         animator.SetTrigger("Hide");
     }
 
+    IEnumerator PlayerTransformSet()
+    {
 
+        yield return new WaitForSeconds(.2f);
+        temp = (LevelData)table.Levels[target];
+        print(temp.leftSpawn);
+        playerLevelTransform = temp.leftSpawn;
+        print(playerLevelTransform);
+    }
     IEnumerator CheckClouds()
     {
         if (cloudChecking == false)
@@ -76,7 +87,7 @@ public class GameManager : MonoBehaviour
             cloudChecking = true;
 
             yield return new WaitForSeconds(.1f);
-            
+
             MapFog[] clouds = FindObjectsOfType<MapFog>();
             foreach (MapFog cloud in clouds)
             {
@@ -96,11 +107,9 @@ public class GameManager : MonoBehaviour
     {
         if (table.Levels.ContainsKey(Level.levelID))
         {
-            print("its already here...");
             temp = (LevelData)table.Levels[Level.levelID];
             foreach(EnemyManager human in Level.Entities)
             {
-                   
                 if (temp.Entities[human.EnemyID].dead == true)
                 {
                     Destroy(human.guy.gameObject);

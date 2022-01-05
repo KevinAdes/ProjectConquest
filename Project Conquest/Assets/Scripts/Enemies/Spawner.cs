@@ -31,7 +31,6 @@ public class Spawner : MonoBehaviour
 
     private void SpawnTimer()
     {
-        print("check");
         if (Time.time > shotSpacing)
         {
             shotSpacing = Time.time + 1 / fireRate;

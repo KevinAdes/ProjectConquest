@@ -8,13 +8,13 @@ public class Defender: MonoBehaviour
     [HideInInspector]
     public bool vulerable = true;
     Entity me;
-    PlayerMovement Dracula;
+    PlayerMovement player;
 
     // Start is called before the first frame update
     void Start()
     {
         me = GetComponent<Entity>();
-        Dracula = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame

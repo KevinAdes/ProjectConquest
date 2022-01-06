@@ -29,7 +29,7 @@ public class PauseControl : MonoBehaviour
 
 
     public void Awake()
-    {
+    {  
         manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
         Dracula = FindObjectOfType<PlayerMovement>();

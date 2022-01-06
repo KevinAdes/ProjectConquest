@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-    [Header("Player Stats")]
     public float maxHealth;
     public float damage;
     public float defense;
@@ -14,16 +12,13 @@ public class PlayerMovement : MonoBehaviour
     public float jump;
     public float attackModifier;
 
-    [Header("Calculation Variables")]
     public float health;
     public float speedCap;
     public float acceleration;
-    public float attackRange;
 
     [Header("Components")]
     public Rigidbody2D body;
     public Animator animator;
-    public Transform attackPoint;
     public Collider2D collider2;
 
     [Header("Extras")]
@@ -66,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             manager = FindObjectOfType<GameManager>();
         }
-        transform.position = manager.playerLevelTransform;
+        StartCoroutine(SpawnPoint());
         pauseControl = FindObjectOfType<PauseControl>();
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
@@ -75,6 +70,12 @@ public class PlayerMovement : MonoBehaviour
         speedCache = speed;
         speedCapCache = speedCap;
         scaleCache = transform.localScale.x;
+    }
+    IEnumerator SpawnPoint()
+    {
+        yield return new WaitForEndOfFrame();
+
+        transform.position = manager.playerLevelTransform;
     }
 
     void Update()
@@ -92,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
             case "Default":
                 Run();
                 Jumping();
-                Attack();
                 Crouch();
                 Direction();
                 break;
@@ -169,29 +169,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Attack()
-    {
-        //Slide
-        //TODO REMOVE SLIDE IN EXCHANGE FOR CROUCH ATTACK
-        if (Input.GetAxis("Fire1") != 0 && attack == false && animator.GetBool("Crouch") == true)
-        {
-            attack = true;
-            animator.SetTrigger("Attack");
-            velocity.x = speedCapCache * right;
-            velocity.y = body.velocity.y;
-            body.velocity = velocity;
-        }
-
-        //Attack
-        if (Input.GetAxis("Fire1") != 0 && attack == false)
-        {
-            speed = speed / 2;
-            attack = true;
-            animator.SetTrigger("Attack");
-        }
-
-    }
-
     private void Drink()
     {
         if (Input.GetAxis("Fire1") != 0 && drink == false)
@@ -221,134 +198,23 @@ public class PlayerMovement : MonoBehaviour
     //Animation Functions
     //
 
-    private void AttackCall()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemies);
-
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            if(enemy.transform.parent.GetComponent<HumanController>() != null)
-            {
-                HumanController human = enemy.transform.parent.GetComponent<HumanController>();
-                if (human.vulerable == true)
-                {
-                    human.TakeDamage(DamageCalculator(damage, human.Get_Def(), attackModifier));
-
-                    Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
-                    human.animator.SetTrigger("Hit");
-                    enemy.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
-                }
-            }
-            if (enemy.GetComponent<Entity>() != null)
-            {
-                Entity entity = enemy.GetComponent<Entity>();
-                entity.TakeDamage(DamageCalculator(damage, entity.Get_Def(), attackModifier));
-
-                Vector2 knockback = (enemy.transform.position - transform.position) + Vector3.up;
-                entity.animator.SetTrigger("Hit");
-                enemy.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
-            }
-        }
-    }
-
-    private void AttackDone()
-    {
-        attack = false;
-    }
-
     private void DrinkDone()
     {
         STATE = "Default";
         drink = false;
     }
 
-    private void SlideDone()
-    {
-        velocity.x = 0;
-        velocity.y = body.velocity.y;
-        body.velocity = velocity;
-    }
-
-    private void StateSwitcher(string State)
+    public void StateSwitcher(string State)
     {
         STATE = State;
     }
     
-    //Calculation Functions
-    //
-
-    private float DamageCalculator(float dmg, float def, float modifier)
-    {
-        dmg += modifier;
-        float DMG = dmg/def + 1;
-        return DMG;
-    }
 
     public void AddXP(int gains)
     {
         pauseControl.playerData.blood += gains;
     }
 
-    public void Damage(Rigidbody2D target, Vector2 knockback, float dmg, float def)
-    {
-        target.velocity += knockback;
-        //target.gameObject.GetComponent<HumanController>().health -= damage;
-        health -= dmg;
-    }
-    //Engine Functions
-    //
-
-
-    /// <summary>
-    /// WHAT!!! I HAVE NO IDEA WHAT I JUST DID
-    /// this needs a serious reworking though. Its confusing, only works for humans, 
-    /// and has half assed damage functions at the end. needs a full breakdown and rebuild, and soon
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<HumanController>() != null)
-        {
-            if (collision.gameObject.layer == 10 && collision.gameObject.GetComponent<HumanController>().vulerable == true)
-            {
-                HumanController human = collision.gameObject.GetComponent<HumanController>();
-                //Enemy Damage is greater than player defense
-                if (human.Get_Dmg() > defense)
-                {
-                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                    //Damage(body, knockback, human.Get_Dmg());
-                    body.velocity = knockback * 15;
-                    health -= 1;
-                    //print("enemy damage is greater than player defense, player takes knockback and damage");
-                }
-                //Enemy Damage is less than player defense
-                else
-                {
-                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 10;
-                    //print("enemy damage is <||= player defense, enemy takes knockback");
-
-
-                }
-                //Player Damage is greater than Enemy Defense
-                if (damage > collision.gameObject.GetComponent<HumanController>().Get_Def())
-                {
-                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = knockback * 15;
-                    //print("player damage is greater than enemy defense, enemy takes knockback and damage");
-                    collision.gameObject.GetComponent<HumanController>().TakeDamage(1);
-                }
-                //Player Damage is less than Enemy Defense
-                else
-                {
-                    Vector3 knockback = collision.transform.position - transform.position + Vector3.up * 0.33f;
-                    body.velocity = knockback * 10;
-                    //print("player damage is <||= enemy defense, player takes knockback");
-                }
-            }
-        }
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -376,10 +242,4 @@ public class PlayerMovement : MonoBehaviour
             StateSwitcher("Default");
         }
     }
-    
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
 }

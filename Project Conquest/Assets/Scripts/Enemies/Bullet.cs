@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         switch (collision.gameObject.layer)
         {
             case 13:
-                collision.gameObject.GetComponent<PlayerMovement>().Damage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, dmg, 0);
+                collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, dmg);
                 Destroy(gameObject);
                 break;
             case 8:

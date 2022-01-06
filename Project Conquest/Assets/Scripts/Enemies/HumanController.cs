@@ -38,7 +38,7 @@ public class HumanController : MonoBehaviour
     int flip;
     public int ID;
 
-    PlayerMovement Dracula;
+    PlayerMovement player;
 
     string STATE;
 
@@ -66,7 +66,7 @@ public class HumanController : MonoBehaviour
             courage = Random.Range(0, 10);
         }
         scaleCache = transform.localScale.x;
-        Dracula = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<PlayerMovement>();
         STATE = "Default";
         waypoints = new Vector3[Path.childCount];
 
@@ -150,7 +150,7 @@ public class HumanController : MonoBehaviour
             courageRolled = true;
 
         }
-        bool facingdirection = (transform.position.x - Dracula.transform.position.x >= 0);
+        bool facingdirection = (transform.position.x - player.transform.position.x >= 0);
         if (!facingdirection)
         {
             transform.localScale = new Vector3(scaleCache * -1 * flip, transform.localScale.y, transform.localScale.z);
@@ -226,7 +226,7 @@ public class HumanController : MonoBehaviour
         manager.markDead(ID, SceneManager.GetActiveScene().name);
         STATE = "dead";
         vulerable = false;
-        Physics2D.IgnoreCollision(collider2, Dracula.collider2);
+        Physics2D.IgnoreCollision(collider2, player.collider2);
         StartCoroutine(Decomposing());
     }
 

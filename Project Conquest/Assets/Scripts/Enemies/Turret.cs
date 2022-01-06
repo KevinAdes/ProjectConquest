@@ -17,7 +17,7 @@ public class Turret : MonoBehaviour
     public Transform target;
     public bool detected = false;
     Vector2 direction = new Vector2(0, 0);
-    PlayerMovement Dracula;
+    PlayerMovement player;
 
     Entity me;
 
@@ -25,7 +25,7 @@ public class Turret : MonoBehaviour
     void Start()
     {
         me = GetComponent<Entity>();
-        Dracula = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class Turret : MonoBehaviour
 
     private void Seek()
     {
-        target = Dracula.transform;
+        target = player.transform;
         Vector2 targetPosition = target.position;
         direction = targetPosition - (Vector2)transform.position;
         transform.up = -direction;

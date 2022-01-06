@@ -12,14 +12,14 @@ public class Chaser : MonoBehaviour
     [HideInInspector]
     public bool vulerable = true;
     Entity me;
-    PlayerMovement Dracula;
+    PlayerMovement player;
     float scaleCache;
 
     // Start is called before the first frame update
     void Start()
     {
         me = GetComponent<Entity>();
-        Dracula = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<PlayerMovement>();
         scaleCache = transform.localScale.x;
     }
 
@@ -39,8 +39,7 @@ public class Chaser : MonoBehaviour
     private void Run()
     {
         bool right;
-        print(transform.position.x);
-        if (transform.position.x > Dracula.transform.position.x)
+        if (transform.position.x > player.transform.position.x)
         {
             right = false;
         }

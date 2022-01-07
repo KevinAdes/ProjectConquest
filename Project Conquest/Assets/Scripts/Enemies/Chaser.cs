@@ -50,16 +50,16 @@ public class Chaser : MonoBehaviour
 
         if (right == true)
         {
-            direction = 1;
-            transform.localScale = new Vector3(scaleCache * direction, transform.localScale.y, transform.localScale.z);
+            me.direction = 1;
+            transform.localScale = new Vector3(scaleCache * me.direction, transform.localScale.y, transform.localScale.z);
         }
         if (right == false)
         {
-            direction = -1;
-            transform.localScale = new Vector3(scaleCache * direction, transform.localScale.y, transform.localScale.z);
+            me.direction = -1;
+            transform.localScale = new Vector3(scaleCache * me.direction, transform.localScale.y, transform.localScale.z);
         }
         
-        velocity.x = speed * direction;
+        velocity.x = speed * me.direction;
         velocity.y = body.velocity.y;
         body.velocity = velocity;
         

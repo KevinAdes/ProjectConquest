@@ -8,7 +8,7 @@ public class PlayerData : ScriptableObject
 {
     public float maxHealth = 66;
     public float damage = 30;
-    public float defense = 26;
+    public float defense = 200;
     public float attackModifier = 0;
 
     public float speed = 2;

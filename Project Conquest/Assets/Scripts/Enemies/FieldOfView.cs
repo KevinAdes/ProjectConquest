@@ -21,15 +21,8 @@ public class FieldOfView : MonoBehaviour
     string TYPE;
 
     Entity entity;
-    HumanController human;
-
     public void Start()
     {
-        if (GetComponent<HumanController>() != null)
-        {
-            human = GetComponent<HumanController>();
-            TYPE = "HUMAN";
-        }
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
@@ -39,11 +32,6 @@ public class FieldOfView : MonoBehaviour
 
     public void Update()
     {
-        if (human != null)
-        {
-            direction = GetComponent<HumanController>().direction;
-
-        }
         if (entity != null)
         {
             direction = GetComponent<Entity>().direction;
@@ -83,8 +71,6 @@ public class FieldOfView : MonoBehaviour
             {
                 switch (TYPE)
                 {
-                    case "HUMAN":
-                        break;
                     case "ENTITY":
                         entity.detected = false;
                         break;
@@ -97,13 +83,6 @@ public class FieldOfView : MonoBehaviour
     {
         switch (TYPE)
         {
-            case "HUMAN":
-                if (human.detected == false)
-                {
-                    human.detected = true;
-                    GetComponent<Animator>().SetTrigger("Spooked");
-                }
-                break;
             case "ENTITY":
                 if (entity.detected == false)
                 {

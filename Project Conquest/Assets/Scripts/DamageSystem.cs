@@ -5,7 +5,6 @@ using UnityEngine;
 public class DamageSystem : MonoBehaviour
 {
     Entity entity;
-    HumanController human;
     PlayerMovement Dracula;
 
     public Rigidbody2D body;
@@ -15,20 +14,13 @@ public class DamageSystem : MonoBehaviour
     public float defense;
     public int expYield;
 
-    public bool vulerable = true;
+    public bool vulnerable = true;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        body = gameObject.GetComponent<Rigidbody2D>();
-        if (GetComponent<HumanController>() != null)
-        {
-            human = GetComponent<HumanController>();
-            health = human.health;
-            damage = human.damage;
-            defense = human.defense;
-        }
+        body = GetComponent<Rigidbody2D>();
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
@@ -69,9 +61,11 @@ public class DamageSystem : MonoBehaviour
         }
         if (health <= 0)
         {
-            if (GetComponent<HumanController>() != null)
+            if (GetComponent<Entity>() != null)
             {
-                GetComponent<HumanController>().Death();
+                print("fuck");
+                entity.dead = true;
+                GetComponent<Entity>().Death();
             }
             else
             {
@@ -86,7 +80,7 @@ public class DamageSystem : MonoBehaviour
         if (collision.gameObject.GetComponent<DamageSystem>() != null)
         {
             DamageSystem target = collision.gameObject.GetComponent<DamageSystem>();
-            if (target.vulerable == true)
+            if (target.vulnerable == true)
             {
                 if (target.damage > defense)
                 {
@@ -100,11 +94,11 @@ public class DamageSystem : MonoBehaviour
 
     IEnumerator invincibility()
     {
-        vulerable = false;
+        vulnerable = false;
         yield return new WaitForSeconds(1);
         if (health > 0)
         {
-            vulerable = true;
+            vulnerable = true;
         }
     }
     IEnumerator Destroy()

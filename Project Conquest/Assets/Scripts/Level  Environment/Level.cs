@@ -26,6 +26,7 @@ public class Level : MonoBehaviour
             {
                 data = (LevelData)manager.table.Levels[ID];
                 reinitializeEntities(data);
+                print("huh");
                 manager.CheckData(data);
             }
             else
@@ -45,38 +46,45 @@ public class Level : MonoBehaviour
     {
         data.levelID = SceneManager.GetActiveScene().name;
         int count = 0;
-        HumanController[] humanControllers = FindObjectsOfType<HumanController>();
-        foreach (HumanController human in humanControllers)
+        Entity[] entities = FindObjectsOfType<Entity>();
+        foreach (Entity entity in entities)
         {
-            EnemyManager guy = data.Entities[count];
-            guy.guy = human.gameObject;
-            human.ID = count;
-            data.Entities[count] = guy;
-            count++;
+            if(entity.important == true)
+            {
+                EnemyManager guy = data.Entities[count];
+                guy.guy = entity.gameObject;
+                entity.ID = count;
+                data.Entities[count] = guy;
+                count++;
 
+
+            }
         }
 
     }
 
     // Start is called before the first frame update
-    void InitializeData(LevelData data)
+    private void InitializeData(LevelData data)
     {
         data.levelID = SceneManager.GetActiveScene().name;
         data.leftSpawn = levelSpawns[0];
         data.rightSpawn = levelSpawns[1];
         int count = 0;
-        HumanController[] humanControllers = FindObjectsOfType<HumanController>();
-        data.Entities = new EnemyManager[humanControllers.Length];
-        foreach (HumanController human in humanControllers)
+        Entity[] entities = FindObjectsOfType<Entity>();
+        data.Entities = new EnemyManager[entities.Length];
+        foreach (Entity entity in entities)
         {
-            EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
-            guy.guy = human.gameObject;
-            guy.EnemyID = count;
-            human.ID = count;
-            guy.dead = false;
-            data.Entities[count] = guy;
-            count++;
+            if(entity.important == true)
+            {
+                EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
+                guy.guy = entity.gameObject;
+                guy.EnemyID = count;
+                entity.ID = count;
+                guy.dead = false;
+                data.Entities[count] = guy;
+                count++;
 
+            }
         }
     }
 

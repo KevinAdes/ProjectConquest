@@ -46,7 +46,12 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
+        StartCoroutine(reload());
+    }
+    IEnumerator reload()
+    {
+        yield return new WaitForSeconds(.2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadLevel(string ID)
@@ -73,12 +78,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerTransformSet()
     {
-
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.1f);
         temp = (LevelData)table.Levels[target];
-        print(temp.leftSpawn);
         playerLevelTransform = temp.leftSpawn;
-        print(playerLevelTransform);
     }
     IEnumerator CheckClouds()
     {
@@ -108,11 +110,11 @@ public class GameManager : MonoBehaviour
         if (table.Levels.ContainsKey(Level.levelID))
         {
             temp = (LevelData)table.Levels[Level.levelID];
-            foreach(EnemyManager human in Level.Entities)
+            foreach(EnemyManager entity in Level.Entities)
             {
-                if (temp.Entities[human.EnemyID].dead == true)
+                if (temp.Entities[entity.EnemyID].dead == true)
                 {
-                    Destroy(human.guy.gameObject);
+                    Destroy(entity.guy.gameObject);
                 }
             }
         }   

@@ -29,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool attack;
     bool drink;
-    //functionally a bool that alternates between -1 and 1.
-    int right = 1;
 
     public float speedCache;
     public float speedCapCache;
@@ -38,10 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
     string STATE;
 
-    HumanController target;
+    Entity target;
     GameManager manager;
     Camera mainCamera;
-    PauseControl pauseControl;
 
     //^^^^VARIABLES^^^^
     //############################################################################
@@ -62,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         StartCoroutine(SpawnPoint());
-        pauseControl = FindObjectOfType<PauseControl>();
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
         STATE = "Default";
@@ -73,8 +69,8 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator SpawnPoint()
     {
-        yield return new WaitForEndOfFrame();
-
+        yield return new WaitForSeconds(.2f);
+        print(manager.playerLevelTransform);
         transform.position = manager.playerLevelTransform;
     }
 
@@ -96,15 +92,6 @@ public class PlayerMovement : MonoBehaviour
                 Crouch();
                 Direction();
                 break;
-            case "Drink":
-                Run();
-                Jumping();
-                Drink();
-                Direction();
-                Crouch();
-                break;
-            case "Drinking":
-                break;
         }
         
 
@@ -120,12 +107,10 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Horizontal") < 0)
             {
                 transform.localScale = new Vector3(scaleCache * -1, transform.localScale.y, transform.localScale.z);
-                right = -1;
             }
             if (Input.GetAxis("Horizontal") > 0)
             {
                 transform.localScale = new Vector3(scaleCache, transform.localScale.y, transform.localScale.z);
-                right = 1;
             }
         }
     }
@@ -168,21 +153,6 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = velocity;
         }
     }
-
-    private void Drink()
-    {
-        if (Input.GetAxis("Fire1") != 0 && drink == false)
-        {
-            STATE = "Drinking";
-            drink = true;
-            //Gain extra exp from victim
-            animator.SetTrigger("Drink");
-            AddXP(target.expYield);
-            target.animator.SetTrigger("Eaten");
-        }
-
-    }
-
     private void Crouch()
     {
         if (Input.GetAxis("Vertical") < 0 && isGrounded == true && animator.GetBool("Crouch") == false)
@@ -198,48 +168,4 @@ public class PlayerMovement : MonoBehaviour
     //Animation Functions
     //
 
-    private void DrinkDone()
-    {
-        STATE = "Default";
-        drink = false;
-    }
-
-    public void StateSwitcher(string State)
-    {
-        STATE = State;
-    }
-    
-
-    public void AddXP(int gains)
-    {
-        pauseControl.playerData.blood += gains;
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 8)
-        {
-            manager.LoadLevel("Map");
-        }
-
-        if (collision.gameObject.layer == 10)
-        {
-            if(collision.transform.parent.gameObject.GetComponent<HumanController>() != null)
-            {
-                print("and i am ready to drink it");
-                target = collision.transform.parent.gameObject.GetComponent<HumanController>();
-                target.TakeDamage(target.health);
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 10)
-        {
-            target = null;
-            StateSwitcher("Default");
-        }
-    }
 }

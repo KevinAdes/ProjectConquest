@@ -23,7 +23,7 @@ public class PauseControl : MonoBehaviour
     public GameObject pauseScreen;
 
     //extra
-    PlayerMovement Dracula;
+    Dracula dracula;
     bool isAxisInUse = false;
     bool pause = false;
 
@@ -32,7 +32,7 @@ public class PauseControl : MonoBehaviour
     {  
         manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
-        Dracula = FindObjectOfType<PlayerMovement>();
+        dracula = FindObjectOfType<Dracula>();
         Calibrate();
     }
 
@@ -137,18 +137,18 @@ public class PauseControl : MonoBehaviour
         Health.text = "HEALTH " + playerData.maxHealth;
         Experience.text = playerData.blood.ToString();
 
-        if (Dracula != null)
+        if (dracula != null)
         {
-            Dracula.maxHealth = playerData.maxHealth;
-            Dracula.damage = playerData.damage;
-            Dracula.defense = playerData.defense;
-            Dracula.attackModifier = playerData.attackModifier;
+            dracula.maxHealth = playerData.maxHealth;
+            dracula.damage = playerData.damage;
+            dracula.defense = playerData.defense;
+            dracula.attackModifier = playerData.attackModifier;
 
-            Dracula.speed = playerData.speed;
-            Dracula.speedCache = Dracula.speed;
-            Dracula.speedCap = playerData.speedCap;
-            Dracula.speedCapCache = Dracula.speedCap;
-            Dracula.jump = playerData.jump;
+            dracula.speed = playerData.speed;
+            dracula.speedCache = dracula.speed;
+            dracula.speedCap = playerData.speedCap;
+            dracula.speedCapCache = dracula.speedCap;
+            dracula.jump = playerData.jump;
         }
 
     }

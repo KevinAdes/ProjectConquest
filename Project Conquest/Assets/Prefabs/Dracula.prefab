@@ -316,12 +316,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a72ca082a41ef4ab575ee21da13966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
   damage: 0
   defense: 0
+  speed: 0
+  jump: 0
+  attackModifier: 0
+  health: 0
+  speedCap: 0
+  acceleration: 2
+  speedCache: 0
+  speedCapCache: 0
   animator: {fileID: 4287634147431147329}
   attackPoint: {fileID: 4287634147269342008}
   attackRange: 0
-  attackModifier: 0
   enemies:
     serializedVersion: 2
     m_Bits: 17408

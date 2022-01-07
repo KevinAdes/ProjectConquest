@@ -27,6 +27,7 @@ public class Wanderer : MonoBehaviour
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
+            speed = entity.speed;
         }
         waypoints = new Vector3[Path.childCount];
 

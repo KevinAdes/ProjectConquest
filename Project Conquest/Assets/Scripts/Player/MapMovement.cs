@@ -37,6 +37,7 @@ public class MapMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mainCamera = FindObjectOfType<Camera>();
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 5);
         Movement();
         Select();

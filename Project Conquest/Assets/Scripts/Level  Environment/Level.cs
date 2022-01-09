@@ -25,8 +25,7 @@ public class Level : MonoBehaviour
             if (manager.table.Levels.Contains(SceneManager.GetActiveScene().name))
             {
                 data = (LevelData)manager.table.Levels[ID];
-                reinitializeEntities(data);
-                print("huh");
+                reinitializeEntities(data);  
                 manager.CheckData(data);
             }
             else
@@ -49,15 +48,16 @@ public class Level : MonoBehaviour
         Entity[] entities = FindObjectsOfType<Entity>();
         foreach (Entity entity in entities)
         {
+            print(entity.name);
             if(entity.important == true)
             {
                 EnemyManager guy = data.Entities[count];
                 guy.guy = entity.gameObject;
+                guy.important = entity.important;
                 entity.ID = count;
                 data.Entities[count] = guy;
+
                 count++;
-
-
             }
         }
 

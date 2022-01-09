@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Extras")]
     public LayerMask enemies;
+    public LayerMask ground;
 
     Vector2 velocity;
 
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator SpawnPoint()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.3f);
         print(manager.playerLevelTransform);
         transform.position = manager.playerLevelTransform;
     }
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         }
         mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z - 5);
 
-        isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), LayerMask.GetMask("Ground"));
+        isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), ground);
         
         switch (STATE)
         {
@@ -91,6 +92,9 @@ public class PlayerMovement : MonoBehaviour
                 Jumping();
                 Crouch();
                 Direction();
+                break;
+            case "Scavenging":
+                Freeze();
                 break;
         }
         
@@ -163,6 +167,16 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Crouch", false);
         }
+    }
+    private void Freeze()
+    {
+        velocity = new Vector2(0, 0);
+        body.velocity = velocity;
+    }
+
+    public void StateSwitcher(string State)
+    {
+        STATE = State;
     }
 
     //Animation Functions

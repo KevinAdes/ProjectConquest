@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class RoboGuy : MonoBehaviour
 {
+    //TODO Check for unneeded code 
     [Header("Stats")]
     public int expYield;
 
@@ -16,16 +17,15 @@ public class RoboGuy : MonoBehaviour
     public Rigidbody2D body;
 
     [Header("Calculation Variables")]
-    public float speed;
     public float wait;
     [Range(0, 10)]
     public float courage;
     float suspicion = 0;
+    public float alertRange;
 
     [HideInInspector]
     bool courageRolled = false;
-    public bool stunned = false;
-    bool alerted;
+    bool alerted = false;
     public bool dead = false;
 
     [HideInInspector]
@@ -46,7 +46,6 @@ public class RoboGuy : MonoBehaviour
 
     Entity entity;
 
-    bool enumerator = false;
 
     public void Awake()
     {
@@ -83,33 +82,54 @@ public class RoboGuy : MonoBehaviour
         switch (STATE)
         {
             case "Default":
+                CheckThings();
                 break;
             case "Scared":
                 Run();
+                CheckThings();
                 break;
             case "Dead":
+                StopCoroutine(ChangeMove());
+                GetComponent<Wanderer>().enabled = false;
+                GetComponent<ContinuousMovement>().enabled = false;
                 break;
+        }
+    }
+    private void CheckThings()
+    {
+        if (entity.detected)
+        {
+            suspicion = 1;
+            Alert();
+        }
+        if (entity.dead)
+        {
+            StateSwitcher("Dead");
+        }
+    }
+    public void Alert()
+    {;
+        if(alerted == false)
+        {
+            StateSwitcher("Scared");
+            StopAllCoroutines();
+            alerted = true;
+            Collider2D[] friends = Physics2D.OverlapCircleAll(transform.position, alertRange);
+
+            foreach (Collider2D guy in friends)
+            {
+                if (guy.GetComponent<DefenseSystem>() != null)
+                {
+                    guy.GetComponent<DefenseSystem>().PowerOn();
+                }
+                if (guy.transform.parent != null && guy.transform.parent.GetComponent<RoboGuy>() != null)
+                {
+                    guy.transform.parent.GetComponent<RoboGuy>().Alert();
+                }
+            }
         }
     }
 
-    IEnumerator ChangeMove()
-    {
-        yield return new WaitForSeconds(60f);
-        if (GetComponent<ContinuousMovement>().enabled == true)
-        {
-            GetComponent<Wanderer>().enabled = true;
-            GetComponent<ContinuousMovement>().enabled = false;
-            StartCoroutine(ChangeMove());
-            yield break;
-        }
-        if (GetComponent<Wanderer>().enabled == true)
-        {
-            GetComponent<Wanderer>().enabled = false;
-            GetComponent<ContinuousMovement>().enabled = true;
-            StartCoroutine(ChangeMove());
-            yield break;
-        }
-    }
 
     public float Get_Exp()
     {
@@ -143,20 +163,56 @@ public class RoboGuy : MonoBehaviour
             transform.localScale = new Vector3(scaleCache * flip, transform.localScale.y, transform.localScale.z);
             direction = 1;
         }
-        if (!stunned)
-        {
-            velocity.x = speed * direction * flip;
-            velocity.y = body.velocity.y;
-            body.velocity = velocity;
-        }
+        velocity.x = entity.speed * direction * flip * Time.deltaTime * 10;
+        velocity.y = body.velocity.y;
+        body.velocity = velocity;
     }
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 13)
+        if (collision.gameObject.layer == 13 && suspicion < 1)
         {
             suspicion += .1f * Time.deltaTime;
-            print(suspicion);
+            if (suspicion >= .9)
+            {
+                Alert();
+            }
         }
+    }
+
+    IEnumerator ChangeMove()
+    {
+        if (GetComponent<ContinuousMovement>().enabled == true)
+        {
+            float var = Random.Range(50, 70);
+            yield return new WaitForSeconds(var);
+            GetComponent<Wanderer>().enabled = true;
+            GetComponent<Wanderer>().active = true;
+            GetComponent<Wanderer>().Gas();
+            GetComponent<ContinuousMovement>().enabled = false;
+            StartCoroutine(ChangeMove());
+            yield break;
+        }
+        if (GetComponent<Wanderer>().enabled == true)
+        {
+            float iable = Random.Range(4, 8);
+            yield return new WaitForSeconds(iable);
+            GetComponent<Wanderer>().active = false;
+            GetComponent<Wanderer>().enabled = false;
+            GetComponent<ContinuousMovement>().enabled = true;
+            StartCoroutine(ChangeMove());
+            yield break;
+        }
+    }
+
+
+    public void StateSwitcher(string State)
+    {
+        STATE = State;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, alertRange);
     }
 }

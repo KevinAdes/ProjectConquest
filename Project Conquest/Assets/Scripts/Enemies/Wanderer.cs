@@ -15,12 +15,12 @@ public class Wanderer : MonoBehaviour
     Entity entity;
 
     int currentPoint = 0;
+    public bool active = true;
 
     float scaleCache;
-    Vector3[] waypoints;
+    public Vector3[] waypoints;
     Vector2 velocity = new Vector2(0, 0);
 
-    // Start is called before the first frame update
     void Start()
     {
         scaleCache = transform.localScale.x;
@@ -60,16 +60,16 @@ public class Wanderer : MonoBehaviour
         }
     }
 
-    IEnumerator Wander(Vector3[] waypoints)
+    public IEnumerator Wander(Vector3[] waypoints)
     {
         transform.position = waypoints[0];
         currentPoint = 1;
         Vector3 targetWaypoint = waypoints[currentPoint];
-        while (true)
+        while (active)
         {
             Vector3 positionStore = transform.position;
             var dist = Vector3.Distance(positionStore, targetWaypoint);
-            transform.position = Vector2.Lerp(transform.position, targetWaypoint, speed * (Time.deltaTime / dist));
+            transform.position = Vector2.Lerp(transform.position, targetWaypoint, speed * .5f * (Time.deltaTime / dist));
             if (GetComponent<Entity>().detected) { break; }
             if (Mathf.Abs(transform.position.x - targetWaypoint.x) < .1)
             {
@@ -80,5 +80,12 @@ public class Wanderer : MonoBehaviour
             yield return null;
         }
     }
-
+    public void Gas()
+    {
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            waypoints[i] = Path.GetChild(i).position;
+        }
+        StartCoroutine(Wander(waypoints));
+    }
 }

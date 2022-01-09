@@ -69,7 +69,7 @@ public class Dracula : MonoBehaviour
     void Update()
     {
         Attack();
-        Drink();
+        Scavenge();
     }
     private void Attack()
     {
@@ -97,7 +97,7 @@ public class Dracula : MonoBehaviour
                 DamageSystem damageSystem = enemy.transform.parent.GetComponent<DamageSystem>();
                 if (damageSystem.vulnerable == true)
                 {
-                    Vector2 knockback = ((enemy.transform.position - transform.position) + Vector3.up) * 5;
+                    Vector2 knockback = ((enemy.transform.position - transform.position) + Vector3.up);
                     damageSystem.TakeDamage(damageSystem.body, knockback, damageSystem.DamageCalculator(damage, target.defense, attackModifier));
 
                     target.animator.SetTrigger("Hit");
@@ -113,20 +113,19 @@ public class Dracula : MonoBehaviour
     }
 
 
-    private void Drink()
+    private void Scavenge()
     {
         if (target != null && target.dead == true)
         {
 
             if (Input.GetAxis("Fire1") != 0 && drink == false)
             {
-                print("hello");
-                STATE = "Drinking";
+                me.StateSwitcher("Scavenging");
                 drink = true;
                 //Gain extra exp from victim
                 animator.SetTrigger("Drink");
                 AddXP(target.expYield);
-                target.animator.SetTrigger("Eaten");
+                target.animator.SetTrigger("Destroy");
             }
         }
 

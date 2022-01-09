@@ -29,11 +29,12 @@ public class Door : MonoBehaviour
 
                 if (vertical == false)
                 {
-                    if (transform.position.x < triggerGroupOff[i].transform.position.x && collision.transform.position.x < transform.position.x)
+                    if (right == false && collision.transform.position.x < transform.position.x)
                     {
+                        print(triggerGroupOff[i].name);
                         triggerGroupOff[i].SetActive(true);
                     }
-                    if (transform.position.x > triggerGroupOff[i].transform.position.x && collision.transform.position.x > transform.position.x)
+                    if (right == true && collision.transform.position.x > transform.position.x)
                     {
                         triggerGroupOff[i].SetActive(true);
                     }

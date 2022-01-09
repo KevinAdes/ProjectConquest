@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print("im colliding at least");
+        if (collision.transform.tag == "Attack")
+        {
+            print("check");
+            Destroy(gameObject);
+        }
     }
 }

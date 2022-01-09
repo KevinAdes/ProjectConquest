@@ -58,12 +58,12 @@ public class DamageSystem : MonoBehaviour
         if (entity != null)
         {
             entity.detected = true;
+            entity.health -= dmg;
         }
         if (health <= 0)
         {
             if (GetComponent<Entity>() != null)
             {
-                print("fuck");
                 entity.dead = true;
                 GetComponent<Entity>().Death();
             }
@@ -77,7 +77,7 @@ public class DamageSystem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<DamageSystem>() != null)
+        if (collision.gameObject.GetComponent<DamageSystem>() != null && collision.transform.tag == "attack")
         {
             DamageSystem target = collision.gameObject.GetComponent<DamageSystem>();
             if (target.vulnerable == true)

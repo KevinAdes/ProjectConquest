@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        StartCoroutine(reload());
     }
     IEnumerator reload()
     {
@@ -66,7 +65,7 @@ public class GameManager : MonoBehaviour
         if (target != "Map")
         {
             mapulaTransform = Mapula.gameObject.transform.position;
-            StartCoroutine(PlayerTransformSet());
+            //StartCoroutine(PlayerTransformSet());
         }
         if (target == "Map")
         {
@@ -110,11 +109,18 @@ public class GameManager : MonoBehaviour
         if (table.Levels.ContainsKey(Level.levelID))
         {
             temp = (LevelData)table.Levels[Level.levelID];
-            foreach(EnemyManager entity in Level.Entities)
+            foreach(EnemyManager guy in Level.Entities)
             {
-                if (temp.Entities[entity.EnemyID].dead == true)
+                print("if it breaks its me");
+                print(guy);
+                if (guy.important == true)
                 {
-                    Destroy(entity.guy.gameObject);
+                    if (temp.Entities[guy.EnemyID].dead == true)
+                    {
+                        print("this man is dead, i am killing him" + guy.guy.gameObject.name);
+                        Destroy(guy.guy.gameObject);
+                    }
+
                 }
             }
         }   
@@ -122,6 +128,8 @@ public class GameManager : MonoBehaviour
         {
             table.Levels.Add(Level.levelID, Level);
         }
+        target = Level.levelID;
+        StartCoroutine(PlayerTransformSet());
     }
 
     public void markDead(int ID, string levelID)

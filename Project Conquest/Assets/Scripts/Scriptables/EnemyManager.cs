@@ -6,5 +6,6 @@ public class EnemyManager : ScriptableObject
 {
     public GameObject guy;
     public int EnemyID;
+    public bool important = false;
     public bool dead;
 }

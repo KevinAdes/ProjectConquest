@@ -26,8 +26,8 @@ public class TownSpawner : MonoBehaviour
 
     private void Shoot()
     {
-        print(transform.position);
         GameObject EntityInst = Instantiate(spawn, position, Quaternion.identity);
+        EntityInst.transform.parent = gameObject.transform;
         EntityInst.transform.GetChild(0).transform.position = position;
     }
 }

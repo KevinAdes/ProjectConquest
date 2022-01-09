@@ -9,19 +9,19 @@ public class ContinuousMovement : MonoBehaviour
     public float speed;
 
     Entity entity;
-
+    Rigidbody2D body;
     float scaleCache;
-    Vector3[] waypoints;
-    Vector2 velocity = new Vector2(0, 0);
+    Vector2 moveVector = new Vector2(0,0);
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scaleCache = transform.localScale.x;
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
             speed = entity.speed;
+            body = GetComponent<Rigidbody2D>();
         }
 
     }
@@ -35,8 +35,8 @@ public class ContinuousMovement : MonoBehaviour
     private void Direction()
     {
         transform.localScale = new Vector3(scaleCache * entity.direction, transform.localScale.y, transform.localScale.z);
-        Vector3 moveVector = new Vector3(entity.speed * entity.direction * Time.deltaTime, 0);
-        transform.position += moveVector;
+        moveVector.x = speed * entity.direction * Time.deltaTime * 1.5f;
+        body.velocity += moveVector;
     }
 
 

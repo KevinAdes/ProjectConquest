@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4287634147050619308}
   m_Layer: 13
   m_Name: Slash
-  m_TagString: Untagged
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +228,9 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 16896
   speedCache: 0
   speedCapCache: 0
 --- !u!50 &4287634147431147343
@@ -303,7 +306,7 @@ MonoBehaviour:
   damage: 0
   defense: 0
   expYield: 0
-  vulerable: 1
+  vulnerable: 1
 --- !u!114 &4287634147431147339
 MonoBehaviour:
   m_ObjectHideFlags: 0

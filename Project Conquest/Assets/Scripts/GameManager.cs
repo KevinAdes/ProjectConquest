@@ -10,12 +10,15 @@ using UnityEngine.SocialPlatforms.Impl;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    public EnemyDictionary enemies;
     public PlayerData playerData;
     public LevelTable table;
     public MapFogTable mapFogTable;
     public GameObject LoadHider;
     public GameObject alertBox;
     LevelData temp;
+
+    public EnemySkills skillsList;
 
     public Vector3 mapulaTransform;
     public MapMovement Mapula;
@@ -33,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        playerData = ScriptableObject.CreateInstance<PlayerData>();
+        //playerData = ScriptableObject.CreateInstance<PlayerData>();
+        enemies = ScriptableObject.CreateInstance<EnemyDictionary>();
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
         animator = GetComponent<Animator>();
@@ -111,8 +115,6 @@ public class GameManager : MonoBehaviour
             temp = (LevelData)table.Levels[Level.levelID];
             foreach(EnemyManager guy in Level.Entities)
             {
-                print("if it breaks its me");
-                print(guy);
                 if (guy.important == true)
                 {
                     if (temp.Entities[guy.EnemyID].dead == true)
@@ -135,6 +137,10 @@ public class GameManager : MonoBehaviour
     public void markDead(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
+        if (enemies.Enemies.ContainsKey(temp.Entities[ID].myName) == false)
+        {
+            enemies.Enemies.Add(temp.Entities[ID].myName, temp.Entities[ID].skills);
+        }
         temp.Entities[ID].dead = true;
         table.Levels[levelID] = temp;
     }

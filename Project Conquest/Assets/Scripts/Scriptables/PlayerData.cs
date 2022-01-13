@@ -6,14 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
-    public float maxHealth = 66;
-    public float damage = 30;
-    public float defense = 200;
-    public float attackModifier = 0;
+    public float maxHealth;
+    public float currentHealth;
+    public float damage;
+    public float defense;
+    public float attackModifier;
 
-    public float speed = 2;
-    public float speedCap = 7;
-    public float jump = 5;
+    public float speed;
+    public float speedCap;
+    public float jump;
 
-    public float blood = 0;
+    public float blood;
 }

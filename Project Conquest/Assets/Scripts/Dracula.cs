@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyManager;
 
 public class Dracula : MonoBehaviour
 {
@@ -36,9 +37,9 @@ public class Dracula : MonoBehaviour
 
     GameManager manager;
 
-
     Entity target;
 
+    public func checking;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,23 +47,17 @@ public class Dracula : MonoBehaviour
         {
             manager = FindObjectOfType<GameManager>();
         }
-        me = GetComponent<PlayerMovement>();
         pauseControl = FindObjectOfType<PauseControl>();
-        me.maxHealth = maxHealth;
-        me.damage = damage;
-        me.defense = defense;
+        health = manager.playerData.currentHealth;
+        me = GetComponent<PlayerMovement>();
         me.speed = speed;
         me.jump = jump;
-        me.attackModifier = attackModifier;
-        me.health = health;
         me.speedCap = speedCap;
         me.acceleration = acceleration;
         me.speedCache = speedCache;
         me.speedCapCache = speedCapCache;
         
         animator = GetComponent<Animator>();
-        damage = me.damage;
-        defense = me.defense;
     }
 
     // Update is called once per frame
@@ -70,7 +65,14 @@ public class Dracula : MonoBehaviour
     {
         Attack();
         Scavenge();
+        if (checking != null)
+        {
+            print("...");
+            checking.Invoke();
+        }
     }
+
+
     private void Attack()
     {
 
@@ -151,8 +153,9 @@ public class Dracula : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 17)
         {
+            manager.playerData.currentHealth = health;
             manager.LoadLevel("Map");
         }
 

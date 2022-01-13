@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using static EnemyManager;
+using Random = UnityEngine.Random;
 
 public class RoboGuy : MonoBehaviour
 {
@@ -45,7 +47,8 @@ public class RoboGuy : MonoBehaviour
     GameManager manager;
 
     Entity entity;
-
+    
+    func dele;
 
     public void Awake()
     {
@@ -54,8 +57,11 @@ public class RoboGuy : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         entity = GetComponent<Entity>();
-
+        entity.myName = "RoboGuy";
+        dele = manager.skillsList.SmallHop;
+        entity.AddSkill(dele);
     }
+
     // Start is called before the first frame update
     void Start()
     {

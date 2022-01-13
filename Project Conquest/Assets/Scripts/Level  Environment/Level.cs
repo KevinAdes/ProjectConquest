@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static EnemyManager;
 
 public class Level : MonoBehaviour
 {
@@ -48,13 +49,13 @@ public class Level : MonoBehaviour
         Entity[] entities = FindObjectsOfType<Entity>();
         foreach (Entity entity in entities)
         {
-            print(entity.name);
             if(entity.important == true)
             {
                 EnemyManager guy = data.Entities[count];
                 guy.guy = entity.gameObject;
                 guy.important = entity.important;
                 entity.ID = count;
+                guy.myName = entity.myName;
                 data.Entities[count] = guy;
 
                 count++;
@@ -80,6 +81,8 @@ public class Level : MonoBehaviour
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;
                 entity.ID = count;
+                guy.myName = entity.myName;
+                guy.skills = entity.skills;
                 guy.dead = false;
                 data.Entities[count] = guy;
                 count++;

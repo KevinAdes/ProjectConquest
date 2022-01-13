@@ -3,15 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using static EnemyManager;
 
 public class PauseControl : MonoBehaviour
 {
     public PlayerData playerData;
     public GameManager manager;
+    public GameObject mainTab;
+    public GameObject itemsTab;
+    public GameObject equipmentTab;
+    public GameObject upgradesTab;
+    public GameObject journalTab;
+    public GameObject optionsTab;
+
     //buttons
     public GameObject focusButton;
-    public GameObject itemsTab;
-
+    public GameObject itemsButton;
+    public GameObject equipmentButton;
+    public GameObject upgradesButton;
+    public GameObject journalButton;
+    public GameObject optionsButton;
     //texts
     public Text Power;
     public Text Defense;
@@ -24,8 +35,10 @@ public class PauseControl : MonoBehaviour
 
     //extra
     Dracula dracula;
+    public GameObject upgradesButtonListContent;
     bool isAxisInUse = false;
     bool pause = false;
+    public List<func> functionHolder = new List<func>();
 
 
     public void Awake()
@@ -81,8 +94,83 @@ public class PauseControl : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    //upgrade functions
+    public void Return()
+    {
+        itemsTab.SetActive(false);
+        //equipmentTab.SetActive(false);
+        upgradesTab.SetActive(false);
+        //journalTab.SetActive(false);
+        //optionsTab.SetActive(false);
+        mainTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(focusButton);
+    }
 
+    public void Items()
+    {
+        mainTab.SetActive(false);
+        itemsTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(itemsButton);
+    }
+
+    public void Equipment()
+    {
+        mainTab.SetActive(false);
+        equipmentTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(equipmentButton);
+    }
+
+    public void Uprgrades()
+    {
+        mainTab.SetActive(false);
+        upgradesTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(upgradesButton);
+        for (int i = 0; i < upgradesButtonListContent.gameObject.transform.childCount; i++)
+        {
+            Destroy(upgradesButtonListContent.transform.GetChild(i));
+        }
+        List<func> funcs;
+        foreach (string name in manager.enemies.Enemies.Keys)
+        {
+            Button enemyButton = new Button;
+            funcs = (List<func>)manager.enemies.Enemies[name];
+            dracula.checking = funcs[0];
+        }
+    }
+
+    public void Journal()
+    {
+        mainTab.SetActive(false);
+        journalTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(journalButton);
+    }
+
+    public void Options()
+    {
+        mainTab.SetActive(false);
+        optionsTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsButton);
+    }
+
+    public void Save()
+    {
+        //Save player data
+    }
+
+    public void BackToMain()
+    {
+        //brings player back to main menu
+    }
+
+    //upgrade functions
+    //TO BE MOVED TO A DIFFERENT SCRIPT
+    //THIS FILE SHOULD BE FOR PAUSE FUNCTIONS ONLU
+    //THESE SHOULD BE MOVED TO A DRACULA RELATED SCRIPT
     public void UpgradeDamage()
     {
         print("call");

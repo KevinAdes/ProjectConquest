@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2945e3d889b4eceae28d77fc95a9fa, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  maxHealth: 66
-  damage: 25
-  defense: 26
+  maxHealth: 1000
+  currentHealth: 993.93994
+  damage: 1000
+  defense: 400
   attackModifier: 0
   speed: 2
   speedCap: 7
   jump: 5
-  blood: 0
+  blood: 3

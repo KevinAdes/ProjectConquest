@@ -48,12 +48,10 @@ public class DefenseSystem : MonoBehaviour
     {
         for (int i = 0; i < Powering.Length; i++)
         {
-            print("hello");
             if (Powering[i] != null)
             {
                 if (Powering[i].GetComponent<Turret>() != null)
                 {
-                    print("this should turn on the turret...");
                     Powering[i].GetComponent<Turret>().enabled = true;
                 }
                 if (Powering[i].GetComponent<Spawner>() != null)

@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static EnemyManager;
 
 public class Entity : MonoBehaviour
 {
+    public string myName;
+    public List<func> skills = new List<func>();
+
     [Header("Stats")]
     public float health;
     public float damage;
@@ -35,6 +39,11 @@ public class Entity : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         animator = GetComponent<Animator>();
+    }
+
+    public void AddSkill(func skillToAdd)
+    {
+        skills.Add(skillToAdd);
     }
 
     public float Get_Exp()

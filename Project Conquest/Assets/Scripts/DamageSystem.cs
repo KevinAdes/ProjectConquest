@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageSystem : MonoBehaviour
 {
     Entity entity;
-    PlayerMovement Dracula;
+    Dracula dracula;
 
     public Rigidbody2D body;
 
@@ -28,12 +28,12 @@ public class DamageSystem : MonoBehaviour
             damage = entity.damage;
             defense = entity.defense;
         }
-        if (GetComponent<PlayerMovement>() != null)
+        if (GetComponent<Dracula>() != null)
         {
-            Dracula = GetComponent<PlayerMovement>();
-            health = Dracula.health;
-            damage = Dracula.damage;
-            defense = Dracula.defense;
+            dracula = GetComponent<Dracula>();
+            health = dracula.health;
+            damage = dracula.damage;
+            defense = dracula.defense;
         }
     }
 
@@ -55,6 +55,11 @@ public class DamageSystem : MonoBehaviour
     {
         target.velocity += knockback;
         health -= dmg;
+
+        if(dracula != null)
+        {
+            dracula.health -= dmg;
+        }
         if (entity != null)
         {
             entity.detected = true;

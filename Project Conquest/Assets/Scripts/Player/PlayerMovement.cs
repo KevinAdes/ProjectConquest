@@ -5,14 +5,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float maxHealth;
-    public float damage;
-    public float defense;
     public float speed;
     public float jump;
-    public float attackModifier;
 
-    public float health;
     public float speedCap;
     public float acceleration;
 
@@ -29,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     bool isGrounded;
     bool attack;
-    bool drink;
 
     public float speedCache;
     public float speedCapCache;
@@ -63,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
         STATE = "Default";
-        health = maxHealth;
         speedCache = speed;
         speedCapCache = speedCap;
         scaleCache = transform.localScale.x;
@@ -71,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator SpawnPoint()
     {
         yield return new WaitForSeconds(.3f);
-        print(manager.playerLevelTransform);
         transform.position = manager.playerLevelTransform;
     }
 

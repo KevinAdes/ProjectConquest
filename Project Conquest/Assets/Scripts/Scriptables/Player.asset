@@ -19,5 +19,5 @@ MonoBehaviour:
   attackModifier: 0
   speed: 2
   speedCap: 7
-  jump: 5
-  blood: 3
+  jump: 20
+  blood: 123

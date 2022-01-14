@@ -51,11 +51,6 @@ public class Entity : MonoBehaviour
         return expYield;
     }
 
-    public void SmallHop()
-    {
-        transform.GetComponent<Rigidbody2D>().velocity += new Vector2(.33f, 0f);
-    }
-
     public void Death()
     {
         animator.SetTrigger("PowerDown");

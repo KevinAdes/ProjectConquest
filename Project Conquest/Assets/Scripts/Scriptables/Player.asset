@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxHealth: 1000
-  currentHealth: 993.93994
+  currentHealth: 970.7097
   damage: 1000
   defense: 400
   attackModifier: 0
   speed: 2
   speedCap: 7
-  jump: 20
-  blood: 123
+  jump: 5
+  blood: 240

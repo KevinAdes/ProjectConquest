@@ -39,7 +39,9 @@ public class Dracula : MonoBehaviour
 
     Entity target;
 
-    public func checking;
+    public func process1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,31 +60,33 @@ public class Dracula : MonoBehaviour
         me.speedCapCache = speedCapCache;
         
         animator = GetComponent<Animator>();
+        if (process1 == null)
+        {
+            process1 = Attack;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        ExecuteProcessOne();
         Scavenge();
-        if (checking != null)
-        {
-            print("...");
-            checking.Invoke();
-        }
     }
 
+    private void ExecuteProcessOne()
+    {
+        if (Input.GetAxis("Fire1") != 0 && attack == false)
+        {
+            attack = true;
+            process1.Invoke();
+        }
+    }
 
     private void Attack()
     {
 
-        //Attack
-        if (Input.GetAxis("Fire1") != 0 && attack == false)
-        {
-            me.speed = me.speed / 2;
-            attack = true;
-            animator.SetTrigger("Attack");
-        }
+        me.speed = me.speed / 2;
+        animator.SetTrigger("Attack");
 
     }
 

@@ -12,4 +12,7 @@ public class EnemyManager : ScriptableObject
     public bool dead;
     public delegate void func();
     public List<func> skills = new List<func>();
+
+    //skills is created here
+    //instantiated in level, where it is given the values of entity.skills. 
 }

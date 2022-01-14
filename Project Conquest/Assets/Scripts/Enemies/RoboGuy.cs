@@ -114,9 +114,10 @@ public class RoboGuy : MonoBehaviour
         }
     }
     public void Alert()
-    {;
+    {
         if(alerted == false)
         {
+            SmallHop();
             StateSwitcher("Scared");
             StopAllCoroutines();
             alerted = true;
@@ -209,6 +210,11 @@ public class RoboGuy : MonoBehaviour
             StartCoroutine(ChangeMove());
             yield break;
         }
+    }
+
+    public void SmallHop()
+    {
+        transform.GetComponent<Rigidbody2D>().velocity += new Vector2(0f, 3f);
     }
 
 

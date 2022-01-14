@@ -10,6 +10,8 @@ public class PauseEditor : Editor
     SerializedProperty journalTab;
     SerializedProperty optionsTab;
 
+    SerializedProperty defaultButton;
+    SerializedProperty displayButton;
     SerializedProperty focusButton;
     SerializedProperty itemsButton;
     SerializedProperty equipmentButton;
@@ -23,6 +25,9 @@ public class PauseEditor : Editor
     SerializedProperty Health;
     SerializedProperty Experience;
 
+    SerializedProperty upgradesButtonListContent;
+    SerializedProperty upgradesButtonListContentContent;
+
     bool showTabs, showButtons, showTexts = false;
 
     public void OnEnable()
@@ -34,6 +39,8 @@ public class PauseEditor : Editor
         journalTab = serializedObject.FindProperty("journalTab");
         optionsTab = serializedObject.FindProperty("optionsTab");
 
+        defaultButton = serializedObject.FindProperty("defaultButton");
+        displayButton = serializedObject.FindProperty("displayButton");
         focusButton = serializedObject.FindProperty("focusButton");
         itemsButton = serializedObject.FindProperty("itemsButton");
         equipmentButton = serializedObject.FindProperty("equipmentButton");
@@ -46,6 +53,9 @@ public class PauseEditor : Editor
         Speed = serializedObject.FindProperty("Speed");
         Health = serializedObject.FindProperty("Health");
         Experience = serializedObject.FindProperty("Experience");
+
+        upgradesButtonListContent = serializedObject.FindProperty("upgradesButtonListContent");
+        upgradesButtonListContentContent = serializedObject.FindProperty("upgradesButtonListContentContent");
     }
 
     public override void OnInspectorGUI()
@@ -66,6 +76,8 @@ public class PauseEditor : Editor
         showButtons = EditorGUILayout.Foldout(showButtons, "Buttons");
         if (showButtons)
         {
+            EditorGUILayout.PropertyField(defaultButton);
+            EditorGUILayout.PropertyField(displayButton);
             EditorGUILayout.PropertyField(focusButton);
             EditorGUILayout.PropertyField(itemsButton);
             EditorGUILayout.PropertyField(equipmentButton);
@@ -83,6 +95,9 @@ public class PauseEditor : Editor
             EditorGUILayout.PropertyField(Health);
             EditorGUILayout.PropertyField(Experience);
         }
+
+        EditorGUILayout.PropertyField(upgradesButtonListContent);
+        EditorGUILayout.PropertyField(upgradesButtonListContentContent);
         serializedObject.ApplyModifiedProperties();
     }
 }

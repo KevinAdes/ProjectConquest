@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static EnemyManager;
+using System;
 
 public class PauseControl : MonoBehaviour
 {
     public PlayerData playerData;
     public GameManager manager;
+
+    //tabs
     public GameObject mainTab;
     public GameObject itemsTab;
     public GameObject equipmentTab;
@@ -17,6 +20,8 @@ public class PauseControl : MonoBehaviour
     public GameObject optionsTab;
 
     //buttons
+    public GameObject defaultButton;
+    public GameObject displayButton;
     public GameObject focusButton;
     public GameObject itemsButton;
     public GameObject equipmentButton;
@@ -30,16 +35,19 @@ public class PauseControl : MonoBehaviour
     public Text Health;
     public Text Experience;
 
+    [SerializeField]
+    public GameObject upgradesButtonListContent;
+    public GameObject upgradesButtonListContentContent;
+
     //screens
     public GameObject pauseScreen;
 
     //extra
     Dracula dracula;
-    public GameObject upgradesButtonListContent;
     bool isAxisInUse = false;
     bool pause = false;
     public List<func> functionHolder = new List<func>();
-
+    XButton xButton;
 
     public void Awake()
     {  
@@ -65,9 +73,7 @@ public class PauseControl : MonoBehaviour
                 isAxisInUse = true;
                 if (pause)
                 {
-                    pause = false;
-                    pauseScreen.SetActive(false);
-                    Time.timeScale = 1;
+                    Unpause();
                 }
                 else
                 {
@@ -88,7 +94,16 @@ public class PauseControl : MonoBehaviour
     }
 
     public void Unpause()
-    { 
+    {
+        itemsTab.SetActive(false);
+        //equipmentTab.SetActive(false);
+        upgradesTab.SetActive(false);
+        //journalTab.SetActive(false);
+        //optionsTab.SetActive(false);
+        mainTab.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(focusButton);
+        print("excuse me");
         pause = false;
         pauseScreen.SetActive(false);
         Time.timeScale = 1;
@@ -130,15 +145,42 @@ public class PauseControl : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(upgradesButton);
         for (int i = 0; i < upgradesButtonListContent.gameObject.transform.childCount; i++)
         {
-            Destroy(upgradesButtonListContent.transform.GetChild(i));
+            upgradesButtonListContent.transform.GetChild(i).gameObject.SetActive(false);
         }
-        List<func> funcs;
         foreach (string name in manager.enemies.Enemies.Keys)
         {
-            Button enemyButton = new Button;
-            funcs = (List<func>)manager.enemies.Enemies[name];
-            dracula.checking = funcs[0];
+            GameObject newButton = Instantiate(defaultButton);
+            newButton.transform.SetParent(upgradesButtonListContent.transform);
+            newButton.GetComponent<XButton>().scroller = true;
+            newButton.GetComponent<XButton>().Init(name);
+            newButton.GetComponent<XButton>().control = this;
         }
+
+    }
+
+    public void DisplayUpgrades(string name)
+    {
+
+        for (int i = 0; i < upgradesButtonListContentContent.gameObject.transform.childCount; i++)
+        {
+            upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        foreach (func skill in (List<func>)manager.enemies.Enemies[name])
+        {
+            GameObject newButton = Instantiate(displayButton);
+            newButton.transform.SetParent(upgradesButtonListContentContent.transform);
+            xButton = newButton.GetComponent<XButton>();
+            xButton.scroller = false;
+            xButton.control = this;
+            xButton.skill = skill;
+            xButton.SetNameAndText(skill.Method.Name, "eventually i will need to figure out where to store all the text");
+
+        }
+    }
+
+    public void GetSkillName(Action method)
+    {
+
     }
 
     public void Journal()
@@ -168,9 +210,12 @@ public class PauseControl : MonoBehaviour
     }
 
     //upgrade functions
-    //TO BE MOVED TO A DIFFERENT SCRIPT
-    //THIS FILE SHOULD BE FOR PAUSE FUNCTIONS ONLU
-    //THESE SHOULD BE MOVED TO A DRACULA RELATED SCRIPT
+
+    public void AssignDracula(func skill)
+    {
+        dracula.process1 = skill;
+    }
+
     public void UpgradeDamage()
     {
         print("call");

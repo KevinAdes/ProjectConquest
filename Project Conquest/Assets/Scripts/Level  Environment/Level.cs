@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -71,12 +71,27 @@ public class Level : MonoBehaviour
         data.leftSpawn = levelSpawns[0];
         data.rightSpawn = levelSpawns[1];
         int count = 0;
-        Entity[] entities = FindObjectsOfType<Entity>();
+        Entity[] entities = FindObjectsOfType<Entity>(true);
+        List<Entity> temp = new List<Entity>(entities);
+        int i = 0;
+        while (i < temp.Count)
+        {
+            if(temp[i].important == false)
+            {
+                temp.Remove(temp[i]);
+            }
+            else
+            {
+                i++;
+            }
+        }
+        entities = temp.ToArray();
         data.Entities = new EnemyManager[entities.Length];
         foreach (Entity entity in entities)
         {
             if(entity.important == true)
             {
+                print("i have found an important entity");
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;

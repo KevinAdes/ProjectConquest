@@ -31,7 +31,6 @@ public class Door : MonoBehaviour
                 {
                     if (right == false && collision.transform.position.x < transform.position.x)
                     {
-                        print(triggerGroupOff[i].name);
                         triggerGroupOff[i].SetActive(true);
                     }
                     if (right == true && collision.transform.position.x > transform.position.x)

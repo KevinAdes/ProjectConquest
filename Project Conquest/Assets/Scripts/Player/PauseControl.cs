@@ -28,6 +28,9 @@ public class PauseControl : MonoBehaviour
     public GameObject upgradesButton;
     public GameObject journalButton;
     public GameObject optionsButton;
+
+    Button temp;
+    
     //texts
     public Text Power;
     public Text Defense;
@@ -154,6 +157,16 @@ public class PauseControl : MonoBehaviour
             newButton.GetComponent<XButton>().scroller = true;
             newButton.GetComponent<XButton>().Init(name);
             newButton.GetComponent<XButton>().control = this;
+            if (temp == null)
+            {
+                newButton.GetComponent<XButton>().InitAbove(upgradesButton.GetComponent<Button>());
+            }
+            else
+            {
+                temp.GetComponent<XButton>().InitBelow(newButton.GetComponent<Button>());
+                newButton.GetComponent<XButton>().InitAbove(temp);
+            }
+            temp = newButton.GetComponent<Button>();
         }
 
     }

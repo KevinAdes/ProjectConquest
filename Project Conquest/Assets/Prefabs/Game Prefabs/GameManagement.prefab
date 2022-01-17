@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 7738306762641248461}
   - component: {fileID: 7738306762641248462}
   - component: {fileID: 1875154967}
+  - component: {fileID: 979472448778667263}
   m_Layer: 0
   m_Name: GameManagement
   m_TagString: Untagged
@@ -658,13 +659,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a2b44f0e4b9a4f649613c384c95617f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: {fileID: 0}
   playerData: {fileID: 11400000, guid: 27d9f70750afd4f14b1fa654929bacec, type: 2}
   table: {fileID: 11400000, guid: e4a346cf38b8b461aace30161dc711ac, type: 2}
   mapFogTable: {fileID: 0}
   LoadHider: {fileID: 7738306763269551206}
   alertBox: {fileID: 1334470732}
+  skillsList: {fileID: 979472448778667263}
   mapulaTransform: {x: 0, y: 0, z: 0}
   Mapula: {fileID: 0}
+  playerLevelTransform: {x: 0, y: 0}
 --- !u!95 &1875154967
 Animator:
   serializedVersion: 3
@@ -684,6 +688,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &979472448778667263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738306762641248460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec240bbbfe634e259845891361fb259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7738306763269551206
 GameObject:
   m_ObjectHideFlags: 0

@@ -138,7 +138,6 @@ public class GameManager : MonoBehaviour
     public void markDead(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
-        print(temp.Entities.Count());
         if (enemies.Enemies.ContainsKey(temp.Entities[ID].myName) == false)
         {
             enemies.Enemies.Add(temp.Entities[ID].myName, temp.Entities[ID].skills);

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -44,9 +44,23 @@ public class Level : MonoBehaviour
 
     private void reinitializeEntities(LevelData data)
     {
-        data.levelID = SceneManager.GetActiveScene().name;
         int count = 0;
-        Entity[] entities = FindObjectsOfType<Entity>();
+
+        Entity[] entities = FindObjectsOfType<Entity>(true);
+        List<Entity> temp = new List<Entity>(entities);
+        int i = 0;
+        while (i < temp.Count)
+        {
+            if (temp[i].important == false)
+            {
+                temp.Remove(temp[i]);
+            }
+            else
+            {
+                i++;
+            }
+        }
+        entities = temp.ToArray();
         foreach (Entity entity in entities)
         {
             if(entity.important == true)

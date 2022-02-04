@@ -11,6 +11,6 @@ public class LevelData : ScriptableObject
     public Vector2 rightSpawn;
 
     public EnemyManager[] Entities;
-    public GameObject[] Interactables;
+    public EnemyManager[] Interactables;
 
 }

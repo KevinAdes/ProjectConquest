@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
-
+    enum Types {}
     public float viewRadius;
     [Range(0,360)]
     public float viewAngle;
@@ -21,6 +21,7 @@ public class FieldOfView : MonoBehaviour
     string TYPE;
 
     Entity entity;
+    Interactable interactable;
     public void Start()
     {
         if (GetComponent<Entity>() != null)
@@ -28,6 +29,12 @@ public class FieldOfView : MonoBehaviour
             entity = GetComponent<Entity>();
             TYPE = "ENTITY";
         }
+        if (GetComponent<Interactable>() != null)
+        {
+            interactable = GetComponent<Interactable>();
+            TYPE = "INTERACTABLE";
+        }
+
     }
 
     public void Update()
@@ -74,6 +81,9 @@ public class FieldOfView : MonoBehaviour
                     case "ENTITY":
                         entity.detected = false;
                         break;
+                    case "INTERACTABLE":
+                        interactable.detected = false;
+                        break;
                 }
             }
         }
@@ -87,6 +97,12 @@ public class FieldOfView : MonoBehaviour
                 if (entity.detected == false)
                 {
                     entity.detected = true;
+                }
+                break;
+            case "INTERACTABLE":
+                if (interactable.detected == false)
+                {
+                    interactable.detected = true;
                 }
                 break;
         }

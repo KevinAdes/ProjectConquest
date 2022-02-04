@@ -45,8 +45,8 @@ public class Level : MonoBehaviour
     private void reinitializeEntities(LevelData data)
     {
         int count = 0;
-
         Entity[] entities = FindObjectsOfType<Entity>(true);
+        Interactable[] interactables = FindObjectsOfType<Interactable>(true);
         List<Entity> temp = new List<Entity>(entities);
         int i = 0;
         while (i < temp.Count)
@@ -75,7 +75,16 @@ public class Level : MonoBehaviour
                 count++;
             }
         }
-
+        count = 0;
+        foreach (Interactable interactable in interactables)
+        {
+            EnemyManager inter = data.Interactables[count];
+            inter.guy = interactable.gameObject;
+            inter.EnemyID = count;
+            interactable.ID = count;
+            data.Interactables[count] = inter;
+            count++;
+        }
     }
 
     // Start is called before the first frame update
@@ -86,6 +95,7 @@ public class Level : MonoBehaviour
         data.rightSpawn = levelSpawns[1];
         int count = 0;
         Entity[] entities = FindObjectsOfType<Entity>(true);
+        Interactable[] interactables = FindObjectsOfType<Interactable>(true);
         List<Entity> temp = new List<Entity>(entities);
         int i = 0;
         while (i < temp.Count)
@@ -101,11 +111,11 @@ public class Level : MonoBehaviour
         }
         entities = temp.ToArray();
         data.Entities = new EnemyManager[entities.Length];
+        data.Interactables = new EnemyManager[interactables.Length];
         foreach (Entity entity in entities)
         {
             if(entity.important == true)
             {
-                print("i have found an important entity");
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;
@@ -117,6 +127,17 @@ public class Level : MonoBehaviour
                 count++;
 
             }
+        }
+        count = 0;
+        foreach (Interactable interactable in interactables)
+        {
+            EnemyManager inter = ScriptableObject.CreateInstance<EnemyManager>();
+            inter.guy = interactable.gameObject;
+            inter.EnemyID = count;
+            interactable.ID = count;
+            inter.dead = false;
+            data.Interactables[count] = inter;
+            count++;
         }
     }
 

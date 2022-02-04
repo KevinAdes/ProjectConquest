@@ -106,7 +106,6 @@ public class PauseControl : MonoBehaviour
         mainTab.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(focusButton);
-        print("excuse me");
         pause = false;
         pauseScreen.SetActive(false);
         Time.timeScale = 1;
@@ -154,6 +153,7 @@ public class PauseControl : MonoBehaviour
         {
             GameObject newButton = Instantiate(defaultButton);
             newButton.transform.SetParent(upgradesButtonListContent.transform);
+            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
             newButton.GetComponent<XButton>().scroller = true;
             newButton.GetComponent<XButton>().Init(name);
             newButton.GetComponent<XButton>().control = this;
@@ -182,6 +182,7 @@ public class PauseControl : MonoBehaviour
         {
             GameObject newButton = Instantiate(displayButton);
             newButton.transform.SetParent(upgradesButtonListContentContent.transform);
+            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
             xButton = newButton.GetComponent<XButton>();
             xButton.scroller = false;
             xButton.control = this;
@@ -222,8 +223,19 @@ public class PauseControl : MonoBehaviour
         //brings player back to main menu
     }
 
-    //upgrade functions
+    public void AddCash(int gains)
+    {
+        playerData.cash += gains;
+        print(playerData.cash);
+    }
 
+    public void MinCash(int loss)
+    {
+        playerData.cash -= loss;
+    }
+
+    //upgrade functions
+    //add an  int paramater and a switch case to  handle  which  button the skill is getting assigned to
     public void AssignDracula(func skill)
     {
         dracula.process1 = skill;

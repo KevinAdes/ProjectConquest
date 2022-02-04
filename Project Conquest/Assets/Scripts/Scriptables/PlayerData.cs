@@ -17,4 +17,6 @@ public class PlayerData : ScriptableObject
     public float jump;
 
     public float blood;
+
+    public int cash;
 }

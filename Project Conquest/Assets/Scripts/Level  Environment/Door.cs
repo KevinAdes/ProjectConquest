@@ -54,19 +54,13 @@ public class Door : MonoBehaviour
             {
                 if (vertical == false)
                 {
-                    if (right == false)
+                    if (right == false && collision.transform.position.x < transform.position.x)
                     {
-                        if (transform.position.x < triggerGroupOn[i].transform.position.x && collision.transform.position.x < transform.position.x)
-                        {
-                            triggerGroupOn[i].SetActive(false);
-                        }
+                        triggerGroupOn[i].SetActive(false);
                     }
-                    if (right)
+                    if (right == true && collision.transform.position.x > transform.position.x)
                     {
-                        if (transform.position.x > triggerGroupOn[i].transform.position.x && collision.transform.position.x > transform.position.x)
-                        {
-                            triggerGroupOn[i].SetActive(false);
-                        }
+                        triggerGroupOn[i].SetActive(false);
                     }
 
                 }

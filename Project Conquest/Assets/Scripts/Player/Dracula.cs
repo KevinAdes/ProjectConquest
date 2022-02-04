@@ -25,7 +25,6 @@ public class Dracula : MonoBehaviour
     PlayerMovement me;
     PauseControl pauseControl;
 
-
     string STATE;
 
     public Transform attackPoint;
@@ -109,6 +108,10 @@ public class Dracula : MonoBehaviour
                     target.animator.SetTrigger("Hit");
                     enemy.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
                 }
+            }
+            if (enemy.GetComponent<Interactable>() != null)
+            {
+                enemy.GetComponent<Interactable>().Death();
             }
         }
     }

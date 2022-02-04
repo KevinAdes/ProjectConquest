@@ -76,8 +76,8 @@ public class GameManager : MonoBehaviour
         {
 
             StartCoroutine(CheckClouds());
+            animator.SetTrigger("Hide");
         }
-        animator.SetTrigger("Hide");
     }
 
     IEnumerator PlayerTransformSet()
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         temp = (LevelData)table.Levels[target];
         playerLevelTransform = temp.leftSpawn;
+        animator.SetTrigger("Hide");
     }
     IEnumerator CheckClouds()
     {
@@ -106,9 +107,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-
     public void CheckData(LevelData Level)
     {
         if (table.Levels.ContainsKey(Level.levelID))
@@ -123,7 +121,15 @@ public class GameManager : MonoBehaviour
                         print("this man is dead, i am killing him" + guy.guy.gameObject.name);
                         Destroy(guy.guy.gameObject);
                     }
+                }
+            }
+            foreach (EnemyManager inter in Level.Interactables)
+            {
 
+                if (temp.Interactables[inter.EnemyID].dead == true)
+                {
+                    print("this man is dead, i am killing him" + inter.guy.gameObject.name);
+                    Destroy(inter.guy.gameObject);
                 }
             }
         }   
@@ -135,6 +141,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PlayerTransformSet());
     }
 
+
+
     public void markDead(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
@@ -145,6 +153,16 @@ public class GameManager : MonoBehaviour
         temp.Entities[ID].dead = true;
         table.Levels[levelID] = temp;
     }
+
+    public void markDestroyed(int ID, string levelID)
+    { 
+        temp = (LevelData)table.Levels[levelID];
+        temp.Interactables[ID].dead = true;
+        table.Levels[levelID] = temp;
+    }
+
+
+
 
     public void LoadAlert(string levelID)
     {

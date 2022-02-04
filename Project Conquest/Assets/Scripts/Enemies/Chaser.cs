@@ -26,13 +26,16 @@ public class Chaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (me.detected)
+        if (me.dead == false)
         {
-            case true:
-                Run();
-                break;
-            case false:
-                break;
+            switch (me.detected)
+            {
+                case true:
+                    Run();
+                    break;
+                case false:
+                    break;
+            }
         }
     }
 

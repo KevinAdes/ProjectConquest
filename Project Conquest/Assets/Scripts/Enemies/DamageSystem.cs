@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageSystem : MonoBehaviour
 {
     Entity entity;
+    Interactable interactable;
     Dracula dracula;
 
     public Rigidbody2D body;
@@ -53,7 +54,10 @@ public class DamageSystem : MonoBehaviour
     //Add knockback modifier
     public void TakeDamage(Rigidbody2D target, Vector2 knockback, float dmg)
     {
-        target.velocity += knockback;
+        if (target.bodyType != RigidbodyType2D.Static)
+        {
+            target.velocity += knockback;
+        }
         health -= dmg;
 
         if(dracula != null)
@@ -67,11 +71,11 @@ public class DamageSystem : MonoBehaviour
         }
         if (health <= 0)
         {
-            if (GetComponent<Entity>() != null)
+            if (entity != null)
             {
                 entity.dead = true;
                 GetComponent<Entity>().Death();
-            }
+            } 
             else
             {
                 StartCoroutine(Destroy());

@@ -10,10 +10,10 @@ public class Spawner : MonoBehaviour
 
     public bool detected = false;
 
-    Entity me;
+    Interactable me;
     public void Start()
     {
-        me = GetComponent<Entity>();
+        me = GetComponent<Interactable>();
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject EntityInst = Instantiate(spawn, transform.position, Quaternion.identity);
+        GameObject EntityInst = Instantiate(spawn, transform.position, Quaternion.identity, transform.parent);
     }
 }
 

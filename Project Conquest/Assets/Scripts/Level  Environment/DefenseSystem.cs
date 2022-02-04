@@ -15,7 +15,6 @@ public class DefenseSystem : MonoBehaviour
             {
                 if (Powering[i].GetComponent<Turret>() != null)
                 {
-                    print("beep");
                     Powering[i].GetComponent<Turret>().enabled = false;
                     Powering[i].GetComponent<Animator>().SetTrigger("PowerDown");
                 }
@@ -66,12 +65,10 @@ public class DefenseSystem : MonoBehaviour
                 {
                     Powering[i].GetComponent<Defender>().enabled = true;
                 }
-
                 if (Powering[i].GetComponent<Wanderer>() != null)
                 {
                     Powering[i].GetComponent<Wanderer>().enabled = true;
                 }
-
             }
         }
     }

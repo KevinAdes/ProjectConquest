@@ -45,6 +45,7 @@ public class Interactable : MonoBehaviour
         if (cash != 0)
         {
             control.AddCash(cash);
+            cash = 0;
         }
         //Destroy(gameObject);
     }

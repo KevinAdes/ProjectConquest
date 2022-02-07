@@ -51,6 +51,14 @@ public class Entity : MonoBehaviour
         return expYield;
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 17)
+        {
+            StartCoroutine(Decomposing());
+        }
+    }
+
     public void Death()
     {
         animator.SetTrigger("PowerDown");

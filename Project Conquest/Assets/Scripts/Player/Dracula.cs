@@ -39,7 +39,8 @@ public class Dracula : MonoBehaviour
     Entity target;
 
     public func process1;
-
+    public func process2;
+    public func process3;
 
     // Start is called before the first frame update
     void Start()

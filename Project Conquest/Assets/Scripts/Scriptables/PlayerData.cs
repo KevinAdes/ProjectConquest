@@ -18,5 +18,6 @@ public class PlayerData : ScriptableObject
 
     public float blood;
 
+    public InventoryObject inventory;
     public int cash;
 }

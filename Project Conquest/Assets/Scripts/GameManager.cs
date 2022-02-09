@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
         }   
         else
         {
+            print("this is happening");
             table.Levels.Add(Level.levelID, Level);
         }
         target = Level.levelID;

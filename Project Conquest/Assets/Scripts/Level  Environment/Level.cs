@@ -19,14 +19,16 @@ public class Level : MonoBehaviour
     SpriteRenderer levelIcon;
 
     public void Awake()
-    {
+    { 
         manager = FindObjectOfType<GameManager>();
         if (icon != true)
         {
-            if (manager.table.Levels.Contains(SceneManager.GetActiveScene().name))
+            if (manager.table.Levels.Contains(ID))
             {
+                print(ID);
                 data = (LevelData)manager.table.Levels[ID];
-                reinitializeEntities(data);  
+                reinitializeEntities(data);
+                print(data);
                 manager.CheckData(data);
             }
             else

@@ -24,6 +24,7 @@ public class Dracula : MonoBehaviour
     public Animator animator;
     PlayerMovement me;
     PauseControl pauseControl;
+    InventoryObject inventory;
 
     string STATE;
 
@@ -50,6 +51,7 @@ public class Dracula : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         pauseControl = FindObjectOfType<PauseControl>();
+        inventory = pauseControl.inventory;
         health = manager.playerData.currentHealth;
         me = GetComponent<PlayerMovement>();
         me.speed = speed;
@@ -173,6 +175,13 @@ public class Dracula : MonoBehaviour
             {
                 target = collision.transform.parent.gameObject.GetComponent<Entity>();
             }
+        }
+
+        if (collision.gameObject.layer == 18)
+        {
+            inventory.AddItem(collision.gameObject.GetComponent<GameItem>().item, 1);
+            pauseControl.UpdateInventory();
+            Destroy(collision.gameObject);
         }
     }
 

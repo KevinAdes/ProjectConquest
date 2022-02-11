@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b10660a8dbc04c238df864744e50967, type: 3}
   m_Name: Scrap Metal
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 5829096086672757026, guid: bc81bdfe2c6e347b4ad0747d27df590f, type: 3}
   type: 3
-  description: 
+  description: Salvaged pieces from dead machines.

@@ -21,3 +21,5 @@ MonoBehaviour:
   speedCap: 7
   jump: 5
   blood: 0
+  inventory: {fileID: 11400000, guid: 689b71e4bae3c4af882e80534a1d4dec, type: 2}
+  cash: 0

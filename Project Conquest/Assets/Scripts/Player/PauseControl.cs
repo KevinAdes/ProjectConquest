@@ -47,6 +47,8 @@ public class PauseControl : MonoBehaviour
 
     //extra
     Dracula dracula;
+    public InventoryObject inventory;
+
     bool isAxisInUse = false;
     bool pause = false;
     public List<func> functionHolder = new List<func>();
@@ -56,6 +58,7 @@ public class PauseControl : MonoBehaviour
     {  
         manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
+        inventory = playerData.inventory;
         dracula = FindObjectOfType<Dracula>();
         Calibrate();
     }
@@ -309,6 +312,17 @@ public class PauseControl : MonoBehaviour
             dracula.jump = playerData.jump;
         }
 
+    }
+
+    public void UpdateInventory()
+    {
+        GetComponentInChildren<DisplayInventory>(true).UpdateDisplay();
+    }
+
+    public void OnApplicationQuit()
+    {
+        print("ah");
+        //inventory.Container.Clear();
     }
 
 }

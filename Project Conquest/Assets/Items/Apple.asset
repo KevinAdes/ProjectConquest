@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cc3a342ee9743918d0cb8370477bfe, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8219649453296751973, guid: cc76c41d3054a457297c69410faeb6fb, type: 3}
   type: 0
-  description: 
-  restoreValue: 0
+  description: An ordinary apple.
+  restoreValue: 5

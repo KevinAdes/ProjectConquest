@@ -321,8 +321,7 @@ public class PauseControl : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        print("ah");
-        //inventory.Container.Clear();
+        inventory.Container.Clear();
     }
 
 }

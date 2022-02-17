@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1630047c3acf42bab8dce9dadc302ec, type: 3}
-  m_Name: Shop Bot(NRTNSPKR)
+  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
+  m_Name: Choice1
   m_EditorClassIdentifier: 
-  m_CharacterName: Shop Bot
+  m_speaker: {fileID: 11400000, guid: 8c1dcffb3e051499f91de9a6a8698a6e, type: 2}
+  m_text: doesn't matter what you pick

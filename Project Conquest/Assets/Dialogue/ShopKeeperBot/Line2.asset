@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186e64cdeb5ff40b69b02712911bbf9d, type: 3}
-  m_Name: ShopKeepDialogue
+  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
+  m_Name: Line2
   m_EditorClassIdentifier: 
-  m_firstNode: {fileID: 11400000, guid: 27be6e9fe48e04871bbceee4c4425373, type: 2}
+  m_speaker: {fileID: 11400000, guid: 8c1dcffb3e051499f91de9a6a8698a6e, type: 2}
+  m_text: This is the second Line

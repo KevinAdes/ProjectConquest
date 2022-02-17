@@ -14,8 +14,14 @@ public class DialogueInstigator : MonoBehaviour
     private DialogueSequencer m_DialogueSequencer;
     //private FlowState m_CachedFlowState
 
+    Dracula dracula;
+    PlayerMovement playerMovement;
+    public Interactable target;
+
     public void Awake()
     {
+        dracula = FindObjectOfType<Dracula>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
         m_DialogueSequencer = new DialogueSequencer();
 
         m_DialogueSequencer.OnDialogueStart += OnDialogueStart;
@@ -43,17 +49,22 @@ public class DialogueInstigator : MonoBehaviour
 
     private void OnDialogueStart(Dialogue dialogue)
     {
-        m_DialogueChannel.RaiseDialogueStart(dialogue);
+        if(dracula.STATE == states.DIALOGUE)
+        {
+            return;
+        }
+        dracula.StateSwitcher(states.DIALOGUE);
+        playerMovement.StateSwitcher(states.DIALOGUE);
 
-        //m_CachedFlowState = FlowStateMachine.Instance.CurrentState;
-        //m_FlowChannel.RaiseFlowStateRequest(m_DialogueState);
+        m_DialogueChannel.RaiseDialogueStart(dialogue);
     }
 
     private void OnDialogueEnd(Dialogue dialogue)
     {
-        //m_FlowChannel.RaiseFlowStateRequest(m_CachedFlowState);
-        //m_CachedFlowState = null;
-
         m_DialogueChannel.RaiseDialogueEnd(dialogue);
+        target.undoAdditionalAction();
+        dracula.StateSwitcher(states.DEFAULT);
+        playerMovement.StateSwitcher(states.DEFAULT);
+
     }
 }

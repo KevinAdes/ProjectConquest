@@ -21,7 +21,7 @@ public class Wanderer : MonoBehaviour
     public Vector3[] waypoints;
     Vector2 velocity = new Vector2(0, 0);
 
-    void Start()
+    void Awake()
     {
         scaleCache = transform.localScale.x;
         if (GetComponent<Entity>() != null)

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static EnemyManager;
 
+public enum states
+{
+    DEFAULT,
+    DIALOGUE,
+    SCAVENGING
+}
+
 public class Dracula : MonoBehaviour
 {
     public float maxHealth;
@@ -26,7 +33,7 @@ public class Dracula : MonoBehaviour
     PauseControl pauseControl;
     InventoryObject inventory;
 
-    string STATE;
+    public states STATE;
 
     public Transform attackPoint;
     public float attackRange;
@@ -60,7 +67,8 @@ public class Dracula : MonoBehaviour
         me.acceleration = acceleration;
         me.speedCache = speedCache;
         me.speedCapCache = speedCapCache;
-        
+
+        STATE = states.DEFAULT;
         animator = GetComponent<Animator>();
         if (process1 == null)
         {
@@ -71,8 +79,16 @@ public class Dracula : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ExecuteProcessOne();
-        Scavenge();
+        switch (STATE)
+        {
+            case states.DEFAULT:
+
+                ExecuteProcessOne();
+                Scavenge();
+                break;
+            case states.DIALOGUE:
+                break;
+        }
     }
 
     private void ExecuteProcessOne()
@@ -132,7 +148,7 @@ public class Dracula : MonoBehaviour
 
             if (Input.GetAxis("Fire1") != 0 && drink == false)
             {
-                me.StateSwitcher("Scavenging");
+                me.StateSwitcher(states.SCAVENGING);
                 drink = true;
                 //Gain extra exp from victim
                 animator.SetTrigger("Drink");
@@ -145,11 +161,11 @@ public class Dracula : MonoBehaviour
 
     private void DrinkDone()
     {
-        STATE = "Default";
+        STATE = states.DEFAULT;
         drink = false;
     }
 
-    public void StateSwitcher(string State)
+    public void StateSwitcher(states State)
     {
         STATE = State;
     }
@@ -190,7 +206,7 @@ public class Dracula : MonoBehaviour
         if (collision.gameObject.layer == 10)
         {
             target = null;
-            StateSwitcher("Default");
+            StateSwitcher(states.DEFAULT);
         }
     }
     private void OnDrawGizmosSelected()

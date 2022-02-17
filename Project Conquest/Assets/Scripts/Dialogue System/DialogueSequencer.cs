@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class DialogueException : System.Exception
 {
     public DialogueException(string message)
@@ -29,7 +31,7 @@ public class DialogueSequencer
         }
         else
         {
-            throw new DialogueException("cant start a dialogue when another is already running");
+            //("cant start a dialogue when another is already running");
         }
     }
 

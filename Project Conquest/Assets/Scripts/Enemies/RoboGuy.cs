@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static EnemyManager;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class RoboGuy : MonoBehaviour
@@ -25,10 +26,12 @@ public class RoboGuy : MonoBehaviour
     float suspicion = 0;
     public float alertRange;
 
+
     [HideInInspector]
     bool courageRolled = false;
     bool alerted = false;
     public bool dead = false;
+    bool talking = false;
 
     [HideInInspector]
     public int direction = 1;
@@ -105,7 +108,7 @@ public class RoboGuy : MonoBehaviour
     {
         if (entity.detected)
         {
-            suspicion = 1;
+            suspicion = 5;
             Alert();
         }
         if (entity.dead)
@@ -180,7 +183,7 @@ public class RoboGuy : MonoBehaviour
         if (collision.gameObject.layer == 13 && suspicion < 1)
         {
             suspicion += .1f * Time.deltaTime;
-            if (suspicion >= .9)
+            if (suspicion >= 5f)
             {
                 Alert();
             }
@@ -210,6 +213,22 @@ public class RoboGuy : MonoBehaviour
             StartCoroutine(ChangeMove());
             yield break;
         }
+    }
+
+    public void Freeze()
+    {
+        StopCoroutine(ChangeMove());
+        GetComponent<Wanderer>().active = false;
+        GetComponent<Wanderer>().enabled = false;
+        GetComponent<ContinuousMovement>().enabled = false;
+    }
+
+    public void UnFreeze()
+    {
+        GetComponent<Wanderer>().active = true;
+        GetComponent<Wanderer>().enabled = true;
+        GetComponent<Wanderer>().Gas();
+        StopCoroutine(ChangeMove());
     }
 
     public void SmallHop()

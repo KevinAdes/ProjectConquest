@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public float speedCapCache;
     float scaleCache;
 
-    string STATE;
+    states STATE;
 
     Entity target;
     GameManager manager;
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(SpawnPoint());
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
-        STATE = "Default";
+        STATE = states.DEFAULT;
         speedCache = speed;
         speedCapCache = speedCap;
         scaleCache = transform.localScale.x;
@@ -79,13 +79,16 @@ public class PlayerMovement : MonoBehaviour
         
         switch (STATE)
         {
-            case "Default":
+            case states.DEFAULT:
                 Run();
                 Jumping();
                 Crouch();
                 Direction();
                 break;
-            case "Scavenging":
+            case states.SCAVENGING:
+                Freeze();
+                break;
+            case states.DIALOGUE:
                 Freeze();
                 break;
         }
@@ -166,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = velocity;
     }
 
-    public void StateSwitcher(string State)
+    public void StateSwitcher(states State)
     {
         STATE = State;
     }

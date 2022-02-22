@@ -31,7 +31,6 @@ public class RoboGuy : MonoBehaviour
     bool courageRolled = false;
     bool alerted = false;
     public bool dead = false;
-    bool talking = false;
 
     [HideInInspector]
     public int direction = 1;

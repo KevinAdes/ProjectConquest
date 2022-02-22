@@ -30,6 +30,10 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    public void OnDestroy()
+    {
+        FindObjectOfType<InteractionInstigation>().nearbyInteractables.Remove(this);
+    }
     //if the object being interacted on needs to be frozen, changed, etc
     public void AdditionalAction()
     {

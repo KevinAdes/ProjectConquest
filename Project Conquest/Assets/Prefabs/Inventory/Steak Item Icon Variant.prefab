@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1426869193484032618, guid: cc76c41d3054a457297c69410faeb6fb,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: e93e06bf906bc4ed6a07e49e0b16a99b,
+        type: 2}
     - target: {fileID: 6614238326628313950, guid: cc76c41d3054a457297c69410faeb6fb,
         type: 3}
       propertyPath: m_Pivot.x
@@ -45,12 +51,12 @@ PrefabInstance:
     - target: {fileID: 6614238326628313950, guid: cc76c41d3054a457297c69410faeb6fb,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.95767
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6614238326628313950, guid: cc76c41d3054a457297c69410faeb6fb,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 6.08872
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6614238326628313950, guid: cc76c41d3054a457297c69410faeb6fb,
         type: 3}
@@ -130,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 8219649453296751973, guid: cc76c41d3054a457297c69410faeb6fb,
         type: 3}
       propertyPath: m_Name
-      value: Steak Item Icon
+      value: Steak Item Icon Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc76c41d3054a457297c69410faeb6fb, type: 3}

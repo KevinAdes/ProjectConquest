@@ -24,6 +24,10 @@ public class DisplayInventory : MonoBehaviour
 
     public void CreateDisplay()
     {
+        if (inventory.name != "Player Inventory")
+        {
+            inventory.Load();
+        }
         for (int i = 0; i < inventory.Container.Count; i++)
         {
             var obj = Instantiate(inventory.Container[i].item.prefab, transform);

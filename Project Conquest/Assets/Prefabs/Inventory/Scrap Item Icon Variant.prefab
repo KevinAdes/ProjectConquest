@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5670456612336153053, guid: b2a17e0be17564513bfe2c8c01d40615,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 3aa93fda3aacd4001ad844361427f584,
+        type: 2}
     - target: {fileID: 5697314806074162328, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}
       propertyPath: m_Color.b
@@ -25,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 5805478128090120494, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}
       propertyPath: m_Name
-      value: Scrap Item Icon
+      value: Scrap Item Icon Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8739589735037828885, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}
@@ -65,12 +71,12 @@ PrefabInstance:
     - target: {fileID: 8739589735037828885, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.95767
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8739589735037828885, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 6.08872
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8739589735037828885, guid: b2a17e0be17564513bfe2c8c01d40615,
         type: 3}

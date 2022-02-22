@@ -17,12 +17,14 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     private UIDialogueChoiceController m_ChoiceControllerPrefab;
 
     [SerializeField]
+    private RectTransform m_ShopBoxTransform;
+
+    [SerializeField]
     private DialogueChannel m_DialogueChannel;
 
     private bool m_ListenToInput = false;
     private DialogueNode m_NextNode = null;
 
-    // Start is called before the first frame update
     void Awake()
     {
         m_DialogueChannel.OnDialogueNodeStart += OnDialogueNodeStart;
@@ -30,6 +32,7 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
         gameObject.SetActive(false);
         m_ChoicesBoxTransform.gameObject.SetActive(false);
+        m_ShopBoxTransform.gameObject.SetActive(false);
     }
 
     public void OnDestroy()
@@ -68,9 +71,15 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
         {
             Destroy(child.gameObject);
         }
+        foreach(Transform child in m_ShopBoxTransform)
+        {
+            Destroy(child.gameObject);
+        }
 
         gameObject.SetActive(false);
         m_ChoicesBoxTransform.gameObject.SetActive(false);
+        m_ShopBoxTransform.gameObject.SetActive(false);
+        FindObjectOfType<DialogueInstigator>().enabled = true;
     }
 
     public void Visit(BasicDialogueNode node)
@@ -87,5 +96,11 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
             UIDialogueChoiceController newChoice = Instantiate(m_ChoiceControllerPrefab, m_ChoicesBoxTransform);
             newChoice.Choice = choice;
         }
+    }
+    public void Visit(ShopDialogueNode node)
+    {
+        m_ListenToInput = true;
+        m_ShopBoxTransform.gameObject.SetActive(true);
+        m_ShopBoxTransform.GetComponent<DisplayInventory>().inventory = node.shopInventory;
     }
 }

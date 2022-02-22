@@ -45,12 +45,12 @@ PrefabInstance:
     - target: {fileID: 75260679799617848, guid: 1e20e3fc0840d4c1d980c4a227e3a813,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.95767
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 75260679799617848, guid: 1e20e3fc0840d4c1d980c4a227e3a813,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 6.08872
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 75260679799617848, guid: 1e20e3fc0840d4c1d980c4a227e3a813,
         type: 3}
@@ -115,7 +115,68 @@ PrefabInstance:
     - target: {fileID: 2941712739322185475, guid: 1e20e3fc0840d4c1d980c4a227e3a813,
         type: 3}
       propertyPath: m_Name
-      value: Apple Item Icon
+      value: Apple Item Icon Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e20e3fc0840d4c1d980c4a227e3a813, type: 3}
+--- !u!1 &8219649453296751973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2941712739322185475, guid: 1e20e3fc0840d4c1d980c4a227e3a813,
+    type: 3}
+  m_PrefabInstance: {fileID: 6539542795839263334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2673743284167265731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219649453296751973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7343693930700327825}
+          m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
+          m_MethodName: onClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &-1426869193484032618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219649453296751973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbadd484cf944dab929b3bad915178e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 310c2906fee464ae3b56bfa8d660bc96, type: 2}
+--- !u!114 &7343693930700327825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219649453296751973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5babcb3d74147129e8acdafbe84e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 11400000, guid: 689b71e4bae3c4af882e80534a1d4dec, type: 2}

@@ -49,10 +49,6 @@ public class DialogueInstigator : MonoBehaviour
 
     private void OnDialogueStart(Dialogue dialogue)
     {
-        if(dracula.STATE == states.DIALOGUE)
-        {
-            return;
-        }
         dracula.StateSwitcher(states.DIALOGUE);
         playerMovement.StateSwitcher(states.DIALOGUE);
 

@@ -18,6 +18,18 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
         database = (InventoryDatabase)Resources.Load("Database");
     }
 
+    public void RemoveItem(Item item)
+    {
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == item)
+            {
+                Container[i].UpdateSlot(1);
+                return;
+            }
+        }
+    }
+
     public void AddItem(Item item, int count)
     {
         for(int  i = 0; i < Container.Count; i++)
@@ -75,6 +87,15 @@ public class InventorySlot
         ID = _id;
         item = _item;
         count = _count;
+    }
+
+    public void UpdateSlot(int amount)
+    {
+        count -= amount;
+        if(count == 0)
+        {
+            item = null;
+        }
     }
 
     public void addAmount(int amount)

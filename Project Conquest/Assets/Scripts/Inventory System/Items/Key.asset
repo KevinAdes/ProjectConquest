@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 8728061174728036218, guid: cff44fda5de024b75b8a9fb0d555e4eb, type: 3}
   type: 2
   description: A key. It probably unlocks a door...
+  price: 30

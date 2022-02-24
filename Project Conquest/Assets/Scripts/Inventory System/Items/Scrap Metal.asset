@@ -15,3 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 5829096086672757026, guid: bc81bdfe2c6e347b4ad0747d27df590f, type: 3}
   type: 3
   description: Salvaged pieces from dead machines.
+  price: 4

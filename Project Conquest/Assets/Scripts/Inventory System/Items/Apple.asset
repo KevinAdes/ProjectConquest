@@ -15,4 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 8219649453296751973, guid: cc76c41d3054a457297c69410faeb6fb, type: 3}
   type: 0
   description: An ordinary apple.
+  price: 2
   restoreValue: 5

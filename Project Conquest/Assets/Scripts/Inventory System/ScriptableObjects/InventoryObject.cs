@@ -5,6 +5,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
@@ -73,6 +74,17 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
+    }
+
+    public List<InventorySlot> Copy()
+    {
+        List<InventorySlot> newContainer = new List<InventorySlot>();
+
+        for (int i = 0; i < Container.Count; i++)
+        {
+            newContainer.Add(new InventorySlot(Container[i].ID, Container[i].item, Container[i].count));
+        }
+        return newContainer;
     }
 }
 

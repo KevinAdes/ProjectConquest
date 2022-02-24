@@ -16,4 +16,5 @@ MonoBehaviour:
   type: 0
   description: A nice meaty steak for Dracula to consume. It aint blood, but it gets
     the job done.
+  price: 10
   restoreValue: 15

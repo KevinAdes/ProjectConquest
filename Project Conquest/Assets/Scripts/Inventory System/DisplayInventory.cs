@@ -24,15 +24,13 @@ public class DisplayInventory : MonoBehaviour
 
     public void CreateDisplay()
     {
-        if (inventory.name != "Player Inventory")
-        {
-            inventory.Load();
-        }
         for (int i = 0; i < inventory.Container.Count; i++)
         {
+
             var obj = Instantiate(inventory.Container[i].item.prefab, transform);
             obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
             obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Container[i].count.ToString("n0");
+            itemsDisplayed.Add(inventory.Container[i], obj);
         }
     }
 

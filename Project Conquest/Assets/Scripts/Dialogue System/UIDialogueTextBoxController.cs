@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,6 +102,13 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     {
         m_ListenToInput = true;
         m_ShopBoxTransform.gameObject.SetActive(true);
-        m_ShopBoxTransform.GetComponent<DisplayInventory>().inventory = node.shopInventory;
+        InventoryObject dummyInventory = ScriptableObject.CreateInstance<InventoryObject>();
+        dummyInventory.Container = node.shopInventory.Copy();
+        m_ShopBoxTransform.GetComponent<DisplayInventory>().inventory = dummyInventory;
+    }
+
+    public void SetText(string input)
+    {
+        m_DialogueText.text = input;
     }
 }

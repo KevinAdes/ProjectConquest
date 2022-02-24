@@ -51,7 +51,6 @@ public class DialogueInstigator : MonoBehaviour
     {
         dracula.StateSwitcher(states.DIALOGUE);
         playerMovement.StateSwitcher(states.DIALOGUE);
-
         m_DialogueChannel.RaiseDialogueStart(dialogue);
     }
 

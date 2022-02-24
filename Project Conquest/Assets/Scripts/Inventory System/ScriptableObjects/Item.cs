@@ -16,5 +16,5 @@ public abstract class Item : ScriptableObject
     public itemType type;
     [TextArea(15,20)]
     public string description;
-
+    public int price;
 }

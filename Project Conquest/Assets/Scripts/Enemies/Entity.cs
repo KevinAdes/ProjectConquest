@@ -32,6 +32,14 @@ public class Entity : MonoBehaviour
 
     GameManager manager;
 
+    public void OnEnable()
+    {
+        if (dead == true)
+        {
+            animator.Play("Off");
+        }
+    }
+
     void Start()
     {
         if (manager == null)

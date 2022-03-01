@@ -26,8 +26,8 @@ public class RoboGuy : MonoBehaviour
     float suspicion = 0;
     public float alertRange;
 
-
-    [HideInInspector]
+    [SerializeField]
+    private bool wanderer;
     bool courageRolled = false;
     bool alerted = false;
     public bool dead = false;
@@ -80,8 +80,11 @@ public class RoboGuy : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>();
         STATE = "Default";
         expYield = expYield + Mathf.RoundToInt(courage / 5);
-
-        StartCoroutine(ChangeMove());
+        if (!wanderer)
+        {
+            print("check");
+            StartCoroutine(ChangeMove());
+        }
     }
 
     // Update is called once per frame

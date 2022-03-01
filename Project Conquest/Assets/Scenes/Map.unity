@@ -34049,7 +34049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1104698443
 Transform:
   m_ObjectHideFlags: 0
@@ -53397,7 +53397,7 @@ GameObject:
   - component: {fileID: 1730966336}
   - component: {fileID: 1730966337}
   m_Layer: 8
-  m_Name: House
+  m_Name: Hidden House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

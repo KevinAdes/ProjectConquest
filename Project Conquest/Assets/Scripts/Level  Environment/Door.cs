@@ -16,67 +16,91 @@ public class Door : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         active = true;
-        StartCoroutine(OpenDoor());
+        if (collision.gameObject.layer == 13)
+        {
+
+            StartCoroutine(OpenDoor());
+
+        }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        active = false;
-        for (int i = 0; i < triggerGroupOff.Length; i++)
+        print("collision leaving");
+        if (collision.gameObject.layer == 13)
         {
-            if (triggerGroupOff[i] != null)
+            active = false;
+            for (int i = 0; i < triggerGroupOff.Length; i++)
             {
-
-                if (vertical == false)
+                if (triggerGroupOff[i] != null)
                 {
-                    if (right == false && collision.transform.position.x < transform.position.x)
-                    {
-                        triggerGroupOff[i].SetActive(true);
-                    }
-                    if (right == true && collision.transform.position.x > transform.position.x)
-                    {
-                        triggerGroupOff[i].SetActive(true);
-                    }
 
-                }
-                if (vertical == true)
-                {
-                    if (collision.transform.position.y > transform.position.y)
+                    if (vertical == false)
                     {
-                        triggerGroupOff[i].SetActive(true);
+                        if (right == false && collision.transform.position.x < transform.position.x)
+                        {
+                            triggerGroupOff[i].SetActive(true);
+                        }
+                        if (right == true && collision.transform.position.x > transform.position.x)
+                        {
+                            triggerGroupOff[i].SetActive(true);
+                        }
+
+                    }
+                    if (vertical == true)
+                    {
+                        if (collision.transform.position.y > transform.position.y)
+                        {
+                            triggerGroupOff[i].SetActive(true);
+                        }
                     }
                 }
             }
-        }
-        for (int i = 0; i < triggerGroupOn.Length; i++)
-        {
-            if (triggerGroupOn[i] != null)
+            for (int i = 0; i < triggerGroupOn.Length; i++)
             {
-                if (vertical == false)
+                if (triggerGroupOn[i] != null)
                 {
-                    if (right == false && collision.transform.position.x < transform.position.x)
+                    if (vertical == false)
                     {
-                        triggerGroupOn[i].SetActive(false);
+                        if (right == false && collision.transform.position.x < transform.position.x)
+                        {
+                            triggerGroupOn[i].SetActive(false);
+                        }
+                        if (right == true && collision.transform.position.x > transform.position.x)
+                        {
+                            triggerGroupOn[i].SetActive(false);
+                        }
+
                     }
-                    if (right == true && collision.transform.position.x > transform.position.x)
+                    if (vertical == true)
                     {
-                        triggerGroupOn[i].SetActive(false);
+                        if (collision.transform.position.y > transform.position.y)
+                        {
+                            triggerGroupOn[i].SetActive(false);
+                        }
                     }
 
-                }
-                if (vertical == true)
-                {
-                    if (collision.transform.position.y > transform.position.y)
-                    {
-                        triggerGroupOn[i].SetActive(false);
-                    }
                 }
 
             }
-            
         }
 
+        if (collision.gameObject.layer == 10)
+        {
+            print("enemy exiting door");
+            if (right == false && collision.transform.position.x < transform.position.x)
+            {
+                //collision is the child of the gameobject we wish to reparent
+                collision.gameObject.transform.parent.transform.parent = FindObjectOfType<ParentalRedirect>(true).transform;
+            }
+            if (right == true && collision.transform.position.x > transform.position.x)
+            {
+
+                collision.gameObject.transform.parent.transform.parent = FindObjectOfType<ParentalRedirect>(true).transform;
+            }
+        }
     }
+
     IEnumerator OpenDoor()
     {
         while (active)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   currentHealth: 970.7097
-  damage: 1000
+  damage: 12
   defense: 400
   attackModifier: 0
   speed: 2

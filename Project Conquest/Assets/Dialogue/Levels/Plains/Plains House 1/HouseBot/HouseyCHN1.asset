@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3922fa800201544a286d1acf8273b8da, type: 3}
+  m_Name: HouseyCHN1
+  m_EditorClassIdentifier: 
+  m_DialogueLine: {fileID: 11400000, guid: 67de30e84c0199644a1bfeef26e6ace9, type: 2}
+  m_Choices:
+  - m_ChoicePreview: Murder
+    m_ChoiceNode: {fileID: 11400000, guid: bb16fe92afba88c4cb9c1604464bcfef, type: 2}
+  - m_ChoicePreview: Not Murder
+    m_ChoiceNode: {fileID: 11400000, guid: 5905aeaeae6bcd3429a6c4e2eb84621d, type: 2}

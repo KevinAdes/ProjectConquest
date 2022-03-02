@@ -51,7 +51,11 @@ public class DefenseSystem : MonoBehaviour
             {
                 if (Powering[i].GetComponent<Turret>() != null)
                 {
-                    Powering[i].GetComponent<Turret>().enabled = true;
+                    Turret temp = Powering[i].GetComponent<Turret>();
+                    temp.enabled = true;
+                    temp.detected = true;
+                    temp.target = FindObjectOfType<Dracula>().transform;
+
                 }
                 if (Powering[i].GetComponent<Spawner>() != null)
                 {

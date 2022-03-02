@@ -66,9 +66,12 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        for (int i = 0; i < Container.Count; i++)
+        if(Container != null)
         {
-            Container[i].item = database.getItem[Container[i].ID];
+            for (int i = 0; i < Container.Count; i++)
+            {
+                Container[i].item = database.getItem[Container[i].ID];
+            }
         }
     }
 

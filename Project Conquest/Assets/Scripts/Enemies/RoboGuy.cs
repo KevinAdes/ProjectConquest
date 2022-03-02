@@ -130,6 +130,7 @@ public class RoboGuy : MonoBehaviour
 
             foreach (Collider2D guy in friends)
             {
+                print("there are friends");
                 if (guy.GetComponent<DefenseSystem>() != null)
                 {
                     guy.GetComponent<DefenseSystem>().PowerOn();
@@ -220,17 +221,26 @@ public class RoboGuy : MonoBehaviour
     public void Freeze()
     {
         StopCoroutine(ChangeMove());
-        GetComponent<Wanderer>().active = false;
-        GetComponent<Wanderer>().enabled = false;
-        GetComponent<ContinuousMovement>().enabled = false;
+        if(GetComponent<Wanderer>() != null)
+        {
+            GetComponent<Wanderer>().active = false;
+            GetComponent<Wanderer>().enabled = false;
+        }
+        if(GetComponent<ContinuousMovement>() != null)
+        {
+            GetComponent<ContinuousMovement>().enabled = false;
+        }
     }
 
     public void UnFreeze()
     {
-        GetComponent<Wanderer>().active = true;
-        GetComponent<Wanderer>().enabled = true;
-        GetComponent<Wanderer>().Gas();
-        StopCoroutine(ChangeMove());
+        if (GetComponent<Wanderer>() != null)
+        {
+            GetComponent<Wanderer>().active = true;
+            GetComponent<Wanderer>().enabled = true;
+            GetComponent<Wanderer>().Gas();
+            StopCoroutine(ChangeMove());
+        }
     }
 
     public void SmallHop()

@@ -22,7 +22,7 @@ public class Turret : MonoBehaviour
     Entity me;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         me = GetComponent<Entity>();
         player = FindObjectOfType<PlayerMovement>();
@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (me.detected)
+        switch (detected)
         {
             case true:
                 Seek();

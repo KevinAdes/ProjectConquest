@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class MapMovement : MonoBehaviour
 {
     public float speed;
+    public GameObject prompt;
 
     string target = null;
 
@@ -46,7 +47,7 @@ public class MapMovement : MonoBehaviour
 
     private void Select()
     {
-        if (Input.GetAxisRaw("Fire1") != 0)
+        if (Input.GetAxisRaw("Submit") != 0)
         {
             if (target != null && Time.timeScale > 0)
             {
@@ -96,7 +97,8 @@ public class MapMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 8)
-        { 
+        {
+            prompt.SetActive(true);
             target = collision.gameObject.GetComponent<Level>().ID;
         }
     }
@@ -105,6 +107,7 @@ public class MapMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 8)
         {
+            prompt.SetActive(false);
             target = null;
         }
     }

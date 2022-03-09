@@ -11,6 +11,7 @@ using JetBrains.Annotations;
 public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 {
     public string savePath;
+    [SerializeField]
     private InventoryDatabase database;
     public List<InventorySlot> Container = new List<InventorySlot>();
 
@@ -26,6 +27,10 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
             if (Container[i].item == item)
             {
                 Container[i].UpdateSlot(1);
+                if(Container[i].count == 0)
+                {
+                    Container.Remove(Container[i]);
+                }
                 return;
             }
         }
@@ -66,12 +71,10 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        if(Container != null)
+
+        for (int i = 0; i < Container.Count; i++)
         {
-            for (int i = 0; i < Container.Count; i++)
-            {
-                Container[i].item = database.getItem[Container[i].ID];
-            }
+             Container[i].item = database.getItem[Container[i].ID];
         }
     }
 

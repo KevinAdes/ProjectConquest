@@ -25,6 +25,10 @@ public class Interactable : MonoBehaviour
     {
         if (Interaction != null)
         {
+            if (GetComponent<RoboGuy>() != null && GetComponent<RoboGuy>().alerted == true)
+            {
+                return;
+            }
             Interaction?.Invoke();
             AdditionalAction();
         }
@@ -32,7 +36,10 @@ public class Interactable : MonoBehaviour
 
     public void OnDestroy()
     {
-        FindObjectOfType<InteractionInstigation>().nearbyInteractables.Remove(this);
+        if (FindObjectOfType<InteractionInstigation>() != null && FindObjectOfType<InteractionInstigation>().nearbyInteractables.Contains(this))
+        {
+            FindObjectOfType<InteractionInstigation>().nearbyInteractables.Remove(this);
+        }
     }
     //if the object being interacted on needs to be frozen, changed, etc
     public void AdditionalAction()
@@ -67,6 +74,11 @@ public class Interactable : MonoBehaviour
 
     public void Death()
     {
+        if (cash != 0)
+        {
+            control.AddCash(cash);
+            cash = 0;
+        }
         if (destructable == true)
         {
 
@@ -75,12 +87,7 @@ public class Interactable : MonoBehaviour
                 GetComponent<Generator>().PowerDown();
             }
             manager.markDestroyed(ID, SceneManager.GetActiveScene().name);
-            if (cash != 0)
-            {
-                control.AddCash(cash);
-                cash = 0;
-            }
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

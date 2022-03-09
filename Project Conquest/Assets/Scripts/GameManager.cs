@@ -69,8 +69,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(target);
         if (target != "Map")
         {
-            mapulaTransform = Mapula.gameObject.transform.position;
-            //StartCoroutine(PlayerTransformSet());
+            if(Mapula != null)
+            {
+                mapulaTransform = Mapula.gameObject.transform.position;
+            }
         }
         if (target == "Map")
         {
@@ -84,7 +86,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         temp = (LevelData)table.Levels[target];
-        playerLevelTransform = temp.leftSpawn;
+        if (temp.GetRight())
+        {
+            playerLevelTransform = temp.rightSpawn;
+        }
+        else
+        {
+            playerLevelTransform = temp.leftSpawn;
+        }
         animator.SetTrigger("Hide");
     }
     IEnumerator CheckClouds()
@@ -111,6 +120,7 @@ public class GameManager : MonoBehaviour
     {
         if (table.Levels.ContainsKey(Level.levelID))
         {
+            //TODO check if this redundance is necessary
             temp = (LevelData)table.Levels[Level.levelID];
             foreach(EnemyManager guy in Level.Entities)
             {
@@ -118,7 +128,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (temp.Entities[guy.EnemyID].dead == true)
                     {
-                        print("this man is dead, i am killing him" + guy.guy.gameObject.name);
                         Destroy(guy.guy.gameObject);
                     }
                 }
@@ -128,8 +137,14 @@ public class GameManager : MonoBehaviour
 
                 if (temp.Interactables[inter.EnemyID].dead == true)
                 {
-                    print("this man is dead, i am killing him" + inter.guy.gameObject.name);
                     Destroy(inter.guy.gameObject);
+                }
+            }
+            foreach(LockManager locked in Level.Doors)
+            {
+                if (temp.Doors[locked.GetID()].GetClosed() == false)
+                {
+                    locked.GetGuy().GetComponent<Door>().SetClosed(false);
                 }
             }
         }   
@@ -161,7 +176,12 @@ public class GameManager : MonoBehaviour
         table.Levels[levelID] = temp;
     }
 
-
+    public void MarkOpened(int ID, string levelID)
+    {
+        temp = (LevelData)table.Levels[levelID];
+        temp.Doors[ID].SetClosed(false);
+        table.Levels[levelID] = temp;
+    }
 
 
     public void LoadAlert(string levelID)

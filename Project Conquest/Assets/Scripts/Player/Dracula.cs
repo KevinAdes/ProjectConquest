@@ -181,8 +181,17 @@ public class Dracula : MonoBehaviour
     {
         if (collision.gameObject.layer == 17)
         {
-            manager.playerData.currentHealth = health;
-            manager.LoadLevel("Map");
+            //this shit is why i hate getters and setters. why cant i just make this shit public Oh nO yOu CAnt HaVE GlobBal VaRiaAbLEs why. why not. i did it until now and its been fine. f this shit. 
+            FindObjectOfType<Level>().GetData().SetRight(collision.GetComponent<LevelLoader>().GetRight());
+            if (collision.GetComponent<LevelLoader>().GetID() == "Map")
+            {
+                manager.playerData.currentHealth = health;
+                manager.LoadLevel("Map");
+            }
+            else
+            {
+                manager.LoadLevel(collision.GetComponent<LevelLoader>().GetID());
+            }
         }
 
         if (collision.gameObject.layer == 10)
@@ -212,6 +221,13 @@ public class Dracula : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    //Setters and Getters
+
+    public InventoryObject GetInventory()
+    {
+        return inventory;
     }
 
 }

@@ -65,7 +65,10 @@ public class PauseControl : MonoBehaviour
 
     void Update()
     {
-        Pause();
+        if(dracula != null)
+        {
+            Pause();
+        }
     }
 
     //Pause Functions
@@ -74,7 +77,6 @@ public class PauseControl : MonoBehaviour
     {
         if (dracula.STATE == states.DEFAULT && Input.GetAxisRaw("Pause") != 0)
         {
-            print(dracula.STATE);
             if(isAxisInUse == false)
             {
                 isAxisInUse = true;

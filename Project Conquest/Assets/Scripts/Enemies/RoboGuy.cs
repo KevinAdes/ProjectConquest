@@ -29,7 +29,7 @@ public class RoboGuy : MonoBehaviour
     [SerializeField]
     private bool wanderer;
     bool courageRolled = false;
-    bool alerted = false;
+    public bool alerted = false;
     public bool dead = false;
 
     [HideInInspector]

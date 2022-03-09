@@ -415,12 +415,14 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Arrow keys to move
 
-    Z to attack
+    Z: attack
 
-    Space to Jump
+    Space: Jump
 
-    pre alpha
-    beta release version 0.-5'
+    Return: Menu Interaction,
+    Enter Levels, Open Doors
+
+    pre alpha beta release version 0.0'
 --- !u!222 &374683605
 CanvasRenderer:
   m_ObjectHideFlags: 0

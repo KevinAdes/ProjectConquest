@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7747679615082091169}
   - component: {fileID: 7747679615082091171}
   - component: {fileID: 7747679615082091168}
+  - component: {fileID: 1427742085}
   m_Layer: 17
   m_Name: LevelBorder
   m_TagString: Untagged
@@ -80,6 +81,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1427742085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747679615082091174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapCoordinates: {x: 5, y: 7.5, z: -2.6}
+  ID: Map
+  right: 0
 --- !u!1 &7747679616001907147
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +107,7 @@ GameObject:
   - component: {fileID: 7747679616001907146}
   - component: {fileID: 7747679616001907140}
   - component: {fileID: 7747679616001907141}
+  - component: {fileID: 1792746224}
   m_Layer: 17
   m_Name: LevelBorder (1)
   m_TagString: Untagged
@@ -106,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7747679616001907147}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 96.3, y: 0, z: 0}
+  m_LocalPosition: {x: 23.3, y: -0.302, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7747679615082091169}
@@ -159,3 +176,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1792746224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747679616001907147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
+  ID: HEPP
+  right: 1

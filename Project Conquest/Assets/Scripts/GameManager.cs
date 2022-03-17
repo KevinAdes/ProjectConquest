@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     public EnemySkills skillsList;
 
-    public Vector3 mapulaTransform;
+    Vector3 mapulaTransform;
     public MapMovement Mapula;
 
     public Vector2 playerLevelTransform;
@@ -61,6 +61,13 @@ public class GameManager : MonoBehaviour
     public void LoadLevel(string ID)
     {
         target = ID;
+        animator.SetTrigger("Show");
+    }
+
+    public void LoadLevel(string ID, Vector3 Mapula)
+    {
+        target = ID;
+        mapulaTransform = Mapula;
         animator.SetTrigger("Show");
     }
 
@@ -201,6 +208,18 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         alertBox.SetActive(false);
+    }
+
+    //Setters And Getters
+
+    public void SetMapula(Vector3 vector)
+    {
+        mapulaTransform = vector;
+    }
+
+    public Vector3 GetMapula()
+    {
+        return mapulaTransform;
     }
 }
 

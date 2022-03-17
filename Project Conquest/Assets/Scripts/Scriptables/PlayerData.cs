@@ -20,4 +20,16 @@ public class PlayerData : ScriptableObject
 
     public InventoryObject inventory;
     public int cash;
+
+    //Setters and Getters
+
+    public void SetCurrentHealth(float f)
+    {
+        currentHealth = f;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 }

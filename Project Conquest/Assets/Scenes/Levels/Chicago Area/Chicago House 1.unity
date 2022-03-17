@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: {fileID: 0}
   triggerGroupOff: []
   triggerGroupOn: []
   vertical: 1
@@ -645,7 +646,7 @@ MonoBehaviour:
   ID: Test Level
   levelSpawns:
   - {x: -30, y: -4}
-  - {x: 0, y: 0}
+  - {x: 46, y: -4}
 --- !u!4 &285710558
 Transform:
   m_ObjectHideFlags: 0
@@ -1729,6 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: {fileID: 0}
   triggerGroupOff:
   - {fileID: 453850570}
   triggerGroupOn:
@@ -1907,6 +1909,7 @@ GameObject:
   - component: {fileID: 708750098}
   - component: {fileID: 708750100}
   - component: {fileID: 708750099}
+  - component: {fileID: 708750101}
   m_Layer: 17
   m_Name: LevelBorder (1)
   m_TagString: Untagged
@@ -1975,6 +1978,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1487246, y: 8.162411}
   m_EdgeRadius: 0
+--- !u!114 &708750101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708750097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
+  ID: Map
+  right: 1
 --- !u!1 &712824026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: {fileID: 0}
   triggerGroupOff:
   - {fileID: 453850570}
   - {fileID: 924568296}
@@ -4490,6 +4509,7 @@ GameObject:
   - component: {fileID: 1898516405}
   - component: {fileID: 1898516407}
   - component: {fileID: 1898516406}
+  - component: {fileID: 1898516408}
   m_Layer: 17
   m_Name: LevelBorder
   m_TagString: Untagged
@@ -4559,6 +4579,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1487246, y: 8.162411}
   m_EdgeRadius: 0
+--- !u!114 &1898516408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898516404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
+  ID: Map
+  right: 0
 --- !u!1 &1918509332
 GameObject:
   m_ObjectHideFlags: 0

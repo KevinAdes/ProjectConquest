@@ -42,7 +42,7 @@ public class Door : MonoBehaviour
             active = false;
             for (int i = 0; i < triggerGroupOff.Length; i++)
             {
-                if (triggerGroupOff[i] != null)
+                if (triggerGroupOff[i] != null && triggerGroupOff[i].activeSelf == true)
                 {
 
                     if (vertical == false)

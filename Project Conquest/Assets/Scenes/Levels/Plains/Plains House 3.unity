@@ -325,7 +325,7 @@ MonoBehaviour:
   ID: Test Level
   levelSpawns:
   - {x: -30, y: -4}
-  - {x: 0, y: 0}
+  - {x: 46, y: -4}
 --- !u!4 &285710558
 Transform:
   m_ObjectHideFlags: 0
@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
   ID: Map
   right: 0
 --- !u!50 &544351067
@@ -1072,6 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
   ID: Map
   right: 1
 --- !u!50 &1053095778

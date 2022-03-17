@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class DefenseSystem : MonoBehaviour
 {
+    bool powered = true;
 
     public GameObject[] Powering;
 
+    public void Awake()
+    {
+        if(powered == false)
+        {
+            PowerDown();
+        }
+    }
+
     public void PowerDown()
     {
+        powered = false;
         for (int i = 0; i < Powering.Length; i++)
         {
             if (Powering[i] != null)
@@ -45,35 +55,38 @@ public class DefenseSystem : MonoBehaviour
     }
     public void PowerOn()
     {
-        for (int i = 0; i < Powering.Length; i++)
+        if (powered == true)
         {
-            if (Powering[i] != null)
+            for (int i = 0; i < Powering.Length; i++)
             {
-                if (Powering[i].GetComponent<Turret>() != null)
+                if (Powering[i] != null)
                 {
-                    Turret temp = Powering[i].GetComponent<Turret>();
-                    temp.enabled = true;
-                    temp.detected = true;
-                    temp.target = FindObjectOfType<Dracula>().transform;
-
-                }
-                if (Powering[i].GetComponent<Spawner>() != null)
-                {
-                    Powering[i].GetComponent<Spawner>().enabled = true;
-                }
-                if (Powering[i].GetComponent<Chaser>() != null)
-                {
-                    Powering[i].GetComponent<Chaser>().enabled = true;
-                }
-                if (Powering[i].GetComponent<Defender>() != null)
-                {
-                    Powering[i].GetComponent<Defender>().enabled = true;
-                }
-                if (Powering[i].GetComponent<Wanderer>() != null)
-                {
-                    Powering[i].GetComponent<Wanderer>().enabled = true;
+                    if (Powering[i].GetComponent<Turret>() != null)
+                    {
+                        Turret temp = Powering[i].GetComponent<Turret>();
+                        temp.enabled = true;
+                        temp.detected = true;
+                        temp.target = FindObjectOfType<Dracula>().transform;
+                    }
+                    if (Powering[i].GetComponent<Spawner>() != null)
+                    {
+                        Powering[i].GetComponent<Spawner>().enabled = true;
+                    }
+                    if (Powering[i].GetComponent<Chaser>() != null)
+                    {
+                        Powering[i].GetComponent<Chaser>().enabled = true;
+                    }
+                    if (Powering[i].GetComponent<Defender>() != null)
+                    {
+                        Powering[i].GetComponent<Defender>().enabled = true;
+                    }
+                    if (Powering[i].GetComponent<Wanderer>() != null)
+                    {
+                        Powering[i].GetComponent<Wanderer>().enabled = true;
+                    }
                 }
             }
         }
+       
     }
 }

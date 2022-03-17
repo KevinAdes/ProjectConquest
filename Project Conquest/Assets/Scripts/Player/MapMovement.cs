@@ -26,7 +26,7 @@ public class MapMovement : MonoBehaviour
         if (manager == null)
         {
             manager = FindObjectOfType<GameManager>();
-            transform.position = manager.mapulaTransform;
+            transform.position = manager.GetMapula();
             manager.Mapula = this;
         }
         if (mainCamera == null)

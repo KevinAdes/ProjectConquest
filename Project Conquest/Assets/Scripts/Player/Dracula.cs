@@ -183,13 +183,14 @@ public class Dracula : MonoBehaviour
         {
             //this shit is why i hate getters and setters. why cant i just make this shit public Oh nO yOu CAnt HaVE GlobBal VaRiaAbLEs why. why not. i did it until now and its been fine. f this shit. 
             FindObjectOfType<Level>().GetData().SetRight(collision.GetComponent<LevelLoader>().GetRight());
-            if (collision.GetComponent<LevelLoader>().GetID() == "Map")
+            if (collision.GetComponent<LevelLoader>().GetCoords() != Vector3.zero)
             {
                 manager.playerData.currentHealth = health;
-                manager.LoadLevel("Map");
+                manager.LoadLevel("Map", collision.GetComponent<LevelLoader>().GetCoords());
             }
             else
             {
+                manager.playerData.currentHealth = health;
                 manager.LoadLevel(collision.GetComponent<LevelLoader>().GetID());
             }
         }

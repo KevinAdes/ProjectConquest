@@ -557,6 +557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 726373001}
+  - component: {fileID: 726373002}
   m_Layer: 0
   m_Name: TownsPeople
   m_TagString: Untagged
@@ -581,6 +582,18 @@ Transform:
   m_Father: {fileID: 1207377257}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726373002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726373000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7875a74309aa4fb094aea2e40de6ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &914474650
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,7 +1012,7 @@ MonoBehaviour:
   ID: Test Town
   levelSpawns:
   - {x: -89.5, y: -2.4}
-  - {x: 0, y: 0}
+  - {x: 82.6, y: 0.9}
 --- !u!1001 &1309140192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1020,12 +1033,12 @@ PrefabInstance:
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -89.5
+      value: 82.6
       objectReference: {fileID: 0}
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
@@ -1469,6 +1482,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1614671187}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1618188838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 148197199296567504, guid: 6ae2d378f28a768448534b679b8aabbf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2599764007050398656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eba414b808e51141b7401debf29c0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1658803478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1681,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1979414357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8036343619237280899, guid: 6ae2d378f28a768448534b679b8aabbf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2599764007050398656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1979414366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979414357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891204e367e6a4b2197d3d417812ba75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  cash: 0
+  destructable: 1
+  detected: 0
+  Interaction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2026772184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1901,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 69524248}
     m_Modifications:
+    - target: {fileID: 148197198205422579, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 148197199043470278, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 848469771069264542, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: Powering.Array.data[0]
+      value: 
+      objectReference: {fileID: 1618188838}
     - target: {fileID: 2599764007869440171, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: Interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument

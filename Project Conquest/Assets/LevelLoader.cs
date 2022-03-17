@@ -5,6 +5,8 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     [SerializeField]
+    Vector3 MapCoordinates;
+    [SerializeField]
     string ID;
     [SerializeField]
     bool right;
@@ -19,5 +21,9 @@ public class LevelLoader : MonoBehaviour
     public bool GetRight()
     {
         return right;
+    }
+    public Vector3 GetCoords()
+    {
+        return MapCoordinates;
     }
 }

@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Chicago Area/Test Level.unity
     guid: 237006d758edb614696acd59365db0fc
   - enabled: 1
-    path: Assets/Scenes/Levels/Test Level 2.unity
+    path: Assets/Scenes/Levels/Extra/Test Level 2.unity
     guid: 322445877b2574d289e89d7db939f1ca
   - enabled: 1
     path: Assets/Scenes/Levels/Plains/Test Town.unity
@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Bridge/HEPP.unity
     guid: dfab9ae9f2289456095eab2a3b781beb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Bridge/Bridge Right Door.unity
+    guid: 8768f0fdbdb6c49d0876f48d03efad54
   m_configObjects: {}

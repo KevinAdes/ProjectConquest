@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Bridge/Bridge Right Door.unity
     guid: 8768f0fdbdb6c49d0876f48d03efad54
+  - enabled: 1
+    path: Assets/Scenes/Levels/Plains/Draculas Lair.unity
+    guid: 1a7c6fbe6e36f46fea02b16ec700fceb
   m_configObjects: {}

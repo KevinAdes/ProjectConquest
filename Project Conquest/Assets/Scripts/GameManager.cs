@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour
     bool right;
     bool cloudChecking = false;
 
+    public void Update()
+    {
+
+        print(table.Levels.Count);
+    }
+
     private void Awake()
     {
         //playerData = ScriptableObject.CreateInstance<PlayerData>();
@@ -91,8 +97,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerTransformSet()
     {
-        yield return new WaitForSeconds(.1f);
         temp = (LevelData)table.Levels[target];
+        yield return new WaitForSeconds(.1f);
+        print(temp.GetRight());
         if (temp.GetRight())
         {
             playerLevelTransform = temp.rightSpawn;
@@ -157,7 +164,9 @@ public class GameManager : MonoBehaviour
         }   
         else
         {
+            print("tthis?");
             table.Levels.Add(Level.levelID, Level);
+            print(table.Levels.Count);
         }
         target = Level.levelID;
         StartCoroutine(PlayerTransformSet());

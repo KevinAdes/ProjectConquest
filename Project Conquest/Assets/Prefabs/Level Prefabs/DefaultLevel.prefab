@@ -215,8 +215,8 @@ MonoBehaviour:
   icon: 0
   ID: 
   levelSpawns:
-  - {x: 10, y: 0}
-  - {x: 0, y: 0}
+  - {x: 4.1, y: -5.6}
+  - {x: 47, y: -5.6}
 --- !u!1 &5521853900620453213
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,12 +459,12 @@ PrefabInstance:
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5.6
       objectReference: {fileID: 0}
     - target: {fileID: 4287634147431147340, guid: 68df3e6175c3ffd40860ed1e5c3f2819,
         type: 3}
@@ -586,7 +586,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 33.8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1427742085, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
+    - {fileID: 1792746224, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
 --- !u!1 &2820618213655594946 stripped
 GameObject:
@@ -618,6 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
   ID: Bridge Left Door
   right: 0
 --- !u!114 &5772306532692757473
@@ -632,5 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32275eac90f354a36b039e349b90898d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCoordinates: {x: 0, y: 0, z: 0}
   ID: Bridge Right Door
   right: 1

@@ -42,7 +42,6 @@ public class InteractionInstigation : MonoBehaviour
         if (interactable != null)
         {
             nearbyInteractables.Add(interactable);
-            print("got one");
         }
     }
 

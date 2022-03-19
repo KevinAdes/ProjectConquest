@@ -26,7 +26,7 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
         {
             if (Container[i].item == item)
             {
-                Container[i].UpdateSlot(1);
+                Container[i].RemoveAmount(1);
                 if(Container[i].count == 0)
                 {
                     Container.Remove(Container[i]);
@@ -107,13 +107,9 @@ public class InventorySlot
         count = _count;
     }
 
-    public void UpdateSlot(int amount)
+    public void RemoveAmount(int amount)
     {
         count -= amount;
-        if(count == 0)
-        {
-            item = null;
-        }
     }
 
     public void addAmount(int amount)

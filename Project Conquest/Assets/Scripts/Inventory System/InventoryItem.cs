@@ -16,9 +16,14 @@ public class InventoryItem : MonoBehaviour
 
     public void OnHover()
     {
+        //these may be replaceable with one getcomponent to check if its a shop
         if (GetComponentInParent<PauseControl>() != null)
         {
-            //use the item
+            //pass
+        }
+        if (GetComponentInParent<StorageUnit>() != null)
+        {
+            //pass
         }
         else
         {
@@ -36,13 +41,21 @@ public class InventoryItem : MonoBehaviour
         {
             //use the item
         }
+        if (GetComponentInParent<StorageUnit>() != null)
+        {
+            print(GetComponentInParent<DisplayInventory>().GetTarget());
+            GetComponentInParent<DisplayInventory>().GetTarget().AddItem(GetComponent<GameItem>().item, 1);
+            GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().item);
+            StorageUnit storageUnit = GetComponentInParent<StorageUnit>();
+            storageUnit.UpdateDisplay();
+        }
         else
         {
-            if(FindObjectOfType<PauseControl>().playerData.cash >= thisItem.item.price)
+            if(FindObjectOfType<PauseControl>().GetPlayerData().cash >= thisItem.item.price)
             {
-                FindObjectOfType<PauseControl>().playerData.cash -= thisItem.item.price;
+                FindObjectOfType<PauseControl>().GetPlayerData().cash -= thisItem.item.price;
                 playerInventory.AddItem(GetComponent<GameItem>().item, 1);
-                GetComponentInParent<DisplayInventory>().inventory.RemoveItem(GetComponent<GameItem>().item);
+                GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().item);
                 GetComponentInParent<DisplayInventory>().UpdateDisplay();
             }
         }

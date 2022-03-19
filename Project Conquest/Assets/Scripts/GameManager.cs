@@ -164,7 +164,6 @@ public class GameManager : MonoBehaviour
         }   
         else
         {
-            print("tthis?");
             table.Levels.Add(Level.levelID, Level);
             print(table.Levels.Count);
         }

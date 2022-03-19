@@ -8,7 +8,8 @@ using System;
 
 public class PauseControl : MonoBehaviour
 {
-    public PlayerData playerData;
+    [SerializeField]
+    PlayerData playerData;
     public GameManager manager;
 
     //tabs
@@ -327,5 +328,9 @@ public class PauseControl : MonoBehaviour
         inventory.Container.Clear();
     }
 
-    
+    //Getters and Setters
+    public PlayerData GetPlayerData()
+    {
+        return playerData;
+    }
 }

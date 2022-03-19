@@ -173,7 +173,7 @@ public class Dracula : MonoBehaviour
 
     public void AddXP(int gains)
     {
-        pauseControl.playerData.blood += gains;
+        pauseControl.GetPlayerData().blood += gains;
     }
 
 

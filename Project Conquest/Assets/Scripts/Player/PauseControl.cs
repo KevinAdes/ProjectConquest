@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static EnemyManager;
+using static EnemySkills;
 using System;
 
 public class PauseControl : MonoBehaviour
@@ -52,7 +52,6 @@ public class PauseControl : MonoBehaviour
 
     bool isAxisInUse = false;
     bool pause = false;
-    public List<func> functionHolder = new List<func>();
     XButton xButton;
 
     public void Awake()
@@ -175,33 +174,6 @@ public class PauseControl : MonoBehaviour
             }
             temp = newButton.GetComponent<Button>();
         }
-
-    }
-
-    public void DisplayUpgrades(string name)
-    {
-
-        for (int i = 0; i < upgradesButtonListContentContent.gameObject.transform.childCount; i++)
-        {
-            upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        foreach (func skill in (List<func>)manager.enemies.Enemies[name])
-        {
-            GameObject newButton = Instantiate(displayButton);
-            newButton.transform.SetParent(upgradesButtonListContentContent.transform);
-            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
-            xButton = newButton.GetComponent<XButton>();
-            xButton.scroller = false;
-            xButton.control = this;
-            xButton.skill = skill;
-            xButton.SetNameAndText(skill.Method.Name, "eventually i will need to figure out where to store all the text");
-
-        }
-    }
-
-    public void GetSkillName(Action method)
-    {
-
     }
 
     public void Journal()
@@ -243,11 +215,6 @@ public class PauseControl : MonoBehaviour
 
     //upgrade functions
     //add an  int paramater and a switch case to  handle  which  button the skill is getting assigned to
-    public void AssignDracula(func skill)
-    {
-        dracula.process1 = skill;
-    }
-
     public void UpgradeDamage()
     {
         print("call");
@@ -328,9 +295,38 @@ public class PauseControl : MonoBehaviour
         inventory.Container.Clear();
     }
 
+    //SkillSystem
+
+    public void DisplayUpgrades(string name)
+    {
+        for (int i = 0; i < upgradesButtonListContentContent.gameObject.transform.childCount; i++)
+        {
+            upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        foreach (func skill in (List<func>)manager.enemies.Enemies[name])
+        {
+            GameObject newButton = Instantiate(displayButton);
+            newButton.transform.SetParent(upgradesButtonListContentContent.transform);
+            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            xButton = newButton.GetComponent<XButton>();
+            xButton.scroller = false;
+            xButton.control = this;
+            xButton.SetFunc(skill);
+            xButton.SetNameAndText(skill.Method.Name, "eventually i will need to figure out where to store all the text");
+        }
+    }
+
+    public void AssignDracula(func skill)
+    {
+        dracula.process1 = skill;
+    }
+
     //Getters and Setters
     public PlayerData GetPlayerData()
     {
         return playerData;
     }
+
+
+
 }

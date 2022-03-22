@@ -26,4 +26,5 @@ public class LevelData : ScriptableObject
     public EnemyManager[] Interactables;
     //could eventually apply to non-door locked things
     public LockManager[] Doors;
+
 }

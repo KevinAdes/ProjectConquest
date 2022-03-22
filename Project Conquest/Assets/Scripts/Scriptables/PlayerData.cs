@@ -23,6 +23,16 @@ public class PlayerData : ScriptableObject
 
     //Setters and Getters
 
+    public void SetBlood(float f)
+    {
+        blood = f;
+    }
+
+    public float GetBlood()
+    {
+        return blood;
+    }
+
     public void SetCurrentHealth(float f)
     {
         currentHealth = f;

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static EnemyManager;
+using static EnemySkills;
 
 public class Level : MonoBehaviour
 {
@@ -88,6 +88,11 @@ public class Level : MonoBehaviour
         {
             if(entity.important == true)
             {
+                if(entity.gameObject.name == "Turret")
+                {
+                    print("AHAHAHHAHA");
+                }
+
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;

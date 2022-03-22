@@ -19,7 +19,7 @@ public class DamageSystem : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         body = GetComponent<Rigidbody2D>();
         if (GetComponent<Entity>() != null)

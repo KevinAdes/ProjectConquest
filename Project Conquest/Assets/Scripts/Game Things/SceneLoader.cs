@@ -10,4 +10,14 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Map");
     }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void Respawn()
+    {
+        SceneManager.LoadScene("Draculas Lair");
+    }
 }

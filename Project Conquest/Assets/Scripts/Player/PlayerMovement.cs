@@ -174,7 +174,10 @@ public class PlayerMovement : MonoBehaviour
         STATE = State;
     }
 
-    //Animation Functions
-    //
+    //Setters and Getters
 
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static EnemyManager;
+using static EnemySkills;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
@@ -60,7 +60,9 @@ public class RoboGuy : MonoBehaviour
         }
         entity = GetComponent<Entity>();
         entity.myName = "RoboGuy";
-        dele = manager.skillsList.SmallHop;
+        dele = manager.GetSkills().SmallHop;
+        entity.AddSkill(dele);
+        dele = manager.GetSkills().BigHop;
         entity.AddSkill(dele);
     }
 

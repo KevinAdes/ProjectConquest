@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static EnemyManager;
+using static EnemySkills;
 
 public class Entity : MonoBehaviour
 {
     public string myName;
     public List<func> skills = new List<func>();
-
     [Header("Stats")]
     public float health;
     public float damage;
@@ -49,11 +48,6 @@ public class Entity : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void AddSkill(func skillToAdd)
-    {
-        skills.Add(skillToAdd);
-    }
-
     public float Get_Exp()
     {
         return expYield;
@@ -74,6 +68,10 @@ public class Entity : MonoBehaviour
         {
             manager.markDead(ID, SceneManager.GetActiveScene().name);
         }
+        if(skills.Count > 0)
+        {
+            manager.AddSkill(ID, SceneManager.GetActiveScene().name);
+        }
         GetComponent<DamageSystem>().vulnerable = false;
         StartCoroutine(Decomposing());
     }
@@ -87,5 +85,10 @@ public class Entity : MonoBehaviour
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public void AddSkill(func skillToAdd)
+    {
+        skills.Add(skillToAdd);
     }
 }

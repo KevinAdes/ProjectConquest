@@ -66781,6 +66781,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 979472448778667263, guid: 353f2833100b34054bd1f2cc6a58e580,
+        type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 5667906347488468831, guid: caaefdd604f964714977698b42073097,
+        type: 3}
+    - target: {fileID: 979472448778667263, guid: 353f2833100b34054bd1f2cc6a58e580,
+        type: 3}
+      propertyPath: bulletPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 979472448778667263, guid: 353f2833100b34054bd1f2cc6a58e580,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7738306761374759171, guid: 353f2833100b34054bd1f2cc6a58e580,
         type: 3}
       propertyPath: m_LocalPosition.z

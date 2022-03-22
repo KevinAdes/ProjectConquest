@@ -1,28 +1,21 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
-    public int dmg;
+    int dmg;
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetBullet(int i)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        dmg = i;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         switch (collision.gameObject.layer)
         {
-            case 13:
+            case 1:
                 collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, collision.gameObject.GetComponent<DamageSystem>().DamageCalculator(dmg, collision.gameObject.GetComponent<DamageSystem>().defense));
                 Destroy(gameObject);
                 break;
@@ -30,6 +23,9 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case 9:
+                Destroy(gameObject);
+                break;
+            case 14:
                 Destroy(gameObject);
                 break;
         }

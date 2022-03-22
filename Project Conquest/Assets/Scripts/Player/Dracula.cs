@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static EnemyManager;
+using static EnemySkills;
 
 public enum states
 {
@@ -49,6 +49,7 @@ public class Dracula : MonoBehaviour
     public func process1;
     public func process2;
     public func process3;
+    public func process4;
 
     // Start is called before the first frame update
     void Start()
@@ -93,18 +94,20 @@ public class Dracula : MonoBehaviour
 
     private void ExecuteProcessOne()
     {
-        if (Input.GetAxis("Fire1") != 0 && attack == false)
+        if (Input.GetAxis("Fire1") != 0)
         {
-            attack = true;
             process1.Invoke();
         }
     }
 
     private void Attack()
     {
-
-        me.speed = me.speed / 2;
-        animator.SetTrigger("Attack");
+        if(attack == false)
+        {
+            attack = true;
+            me.speed = me.speed / 2;
+            animator.SetTrigger("Attack");
+        }
 
     }
 
@@ -116,7 +119,6 @@ public class Dracula : MonoBehaviour
         {
             if (enemy.transform.parent.GetComponent<DamageSystem>() != null)
             {
-
                 Entity target = enemy.transform.parent.GetComponent<Entity>();
                 DamageSystem damageSystem = enemy.transform.parent.GetComponent<DamageSystem>();
                 if (damageSystem.vulnerable == true)
@@ -230,5 +232,9 @@ public class Dracula : MonoBehaviour
     {
         return inventory;
     }
-
+    public void OnDestroy()
+    {
+        manager.GetComponent<Animator>().SetTrigger("GameOver");
+        pauseControl.GetPlayerData().SetBlood(0);
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemySkills;
 
 public class Turret : MonoBehaviour
 {
@@ -10,9 +11,7 @@ public class Turret : MonoBehaviour
     public float force;
     float shotSpacing = 0;
 
-
-    //eventually this will be used to save which entities remain on level re-load and which ones dont.
-    public bool important;
+    GameManager manager;
 
     public Transform target;
     public bool detected = false;
@@ -21,11 +20,22 @@ public class Turret : MonoBehaviour
 
     Entity me;
 
-    // Start is called before the first frame update
+    func dele;
+
+    bool initialized = false;
+
     void OnEnable()
     {
         me = GetComponent<Entity>();
         player = FindObjectOfType<PlayerMovement>();
+    }
+    public void Awake()
+    {
+        print("Init");
+        me.myName = "Turret";
+        manager = FindObjectOfType<GameManager>();
+        dele = manager.GetSkills().Fire;
+        me.AddSkill(dele);
     }
 
     // Update is called once per frame

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class GameManager : MonoBehaviour
     public GameObject alertBox;
     LevelData temp;
 
-    public EnemySkills skillsList;
+    [SerializeField]
+    Transform gameOverScreen;
+
+    [SerializeField]
+    EnemySkills skillsList;
 
     Vector3 mapulaTransform;
     public MapMovement Mapula;
@@ -37,8 +42,6 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-
-        print(table.Levels.Count);
     }
 
     private void Awake()
@@ -99,7 +102,6 @@ public class GameManager : MonoBehaviour
     {
         temp = (LevelData)table.Levels[target];
         yield return new WaitForSeconds(.1f);
-        print(temp.GetRight());
         if (temp.GetRight())
         {
             playerLevelTransform = temp.rightSpawn;
@@ -165,21 +167,23 @@ public class GameManager : MonoBehaviour
         else
         {
             table.Levels.Add(Level.levelID, Level);
-            print(table.Levels.Count);
         }
         target = Level.levelID;
         StartCoroutine(PlayerTransformSet());
     }
 
-
-
-    public void markDead(int ID, string levelID)
+    public void AddSkill(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
         if (enemies.Enemies.ContainsKey(temp.Entities[ID].myName) == false)
         {
             enemies.Enemies.Add(temp.Entities[ID].myName, temp.Entities[ID].skills);
         }
+    }
+
+    public void markDead(int ID, string levelID)
+    {
+        temp = (LevelData)table.Levels[levelID];
         temp.Entities[ID].dead = true;
         table.Levels[levelID] = temp;
     }
@@ -218,6 +222,11 @@ public class GameManager : MonoBehaviour
         alertBox.SetActive(false);
     }
 
+    public void HideGameOver()
+    {
+        gameOverScreen.gameObject.SetActive(false);
+    }
+
     //Setters And Getters
 
     public void SetMapula(Vector3 vector)
@@ -228,6 +237,11 @@ public class GameManager : MonoBehaviour
     public Vector3 GetMapula()
     {
         return mapulaTransform;
+    }
+
+    public EnemySkills GetSkills()
+    {
+        return skillsList;
     }
 }
 

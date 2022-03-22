@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static EnemyManager;
+using static EnemySkills;
 
 public class XButton : MonoBehaviour
 {
@@ -10,7 +10,8 @@ public class XButton : MonoBehaviour
     Button button;
     Text text;
     public bool scroller;
-    public func skill;
+    func skill;
+
     public void Init(string name)
     {
         gameObject.name = name;
@@ -66,12 +67,16 @@ public class XButton : MonoBehaviour
 
     public void SetPlayerMove()
     {
-        print("ITS HAPPENING");
         control.AssignDracula(skill);
     }
 
     public void OnDisable()
     {
         Destroy(gameObject);
+    }
+
+    public void SetFunc(func f)
+    {
+        skill = f;
     }
 }

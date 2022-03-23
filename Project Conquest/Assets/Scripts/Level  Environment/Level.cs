@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,24 +20,11 @@ public class Level : MonoBehaviour
 
     SpriteRenderer levelIcon;
 
-    public void Awake()
+    public void Start()
     { 
-        manager = FindObjectOfType<GameManager>();
-        if (icon != true)
+        if(icon != true)
         {
-            ID = SceneManager.GetActiveScene().name;
-            if (manager.table.Levels.Contains(ID))
-            {
-                data = (LevelData)manager.table.Levels[ID];
-                reinitializeEntities(data);
-                manager.CheckData(data);
-            }
-            else
-            {
-                data = ScriptableObject.CreateInstance<LevelData>();
-                InitializeData(data);
-                manager.CheckData(data);
-            }
+            StartCoroutine(ManagerFinder());
         }
         if (icon == true)
         {
@@ -44,6 +32,24 @@ public class Level : MonoBehaviour
         }
     }
 
+    IEnumerator ManagerFinder()
+    {
+        yield return new WaitForSeconds(.2f);
+        manager = FindObjectOfType<GameManager>();
+        ID = SceneManager.GetActiveScene().name;
+        if (manager.table.Levels.Contains(ID))
+        {
+            data = (LevelData)manager.table.Levels[ID];
+            reinitializeEntities(data);
+            manager.CheckData(data);
+        }
+        else
+        {
+            data = ScriptableObject.CreateInstance<LevelData>();
+            InitializeData(data);
+            manager.CheckData(data);
+        }
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -88,23 +94,23 @@ public class Level : MonoBehaviour
         {
             if(entity.important == true)
             {
-                if(entity.gameObject.name == "Turret")
-                {
-                    print("AHAHAHHAHA");
-                }
-
+                print("check");
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
+                foreach (UnityEvent skill in entity.GetSkills())
+                {
+                    guy.AddSkill(skill);
+                }
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;
                 entity.ID = count;
-                guy.myName = entity.myName;
-                guy.skills = entity.skills;
+                guy.myName = entity.GetName();
                 guy.dead = false;
                 data.Entities[count] = guy;
                 count++;
 
             }
         }
+        print(data.Entities.Length);
         count = 0;
         foreach (Interactable interactable in interactables)
         {
@@ -159,7 +165,7 @@ public class Level : MonoBehaviour
                 guy.guy = entity.gameObject;
                 //
                 guy.important = entity.important;
-                guy.myName = entity.myName;
+                guy.myName = entity.GetName();
                 //
                 entity.ID = count;
                 data.Entities[count] = guy;

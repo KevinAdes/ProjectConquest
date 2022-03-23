@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 
@@ -21,6 +22,9 @@ public class PlayerData : ScriptableObject
     public InventoryObject inventory;
     public int cash;
 
+    [SerializeField]
+    UnityEvent[] skills;
+
     //Setters and Getters
 
     public void SetBlood(float f)
@@ -41,5 +45,10 @@ public class PlayerData : ScriptableObject
     public float GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    public UnityEvent[] GetSkills()
+    {
+        return skills;
     }
 }

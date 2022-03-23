@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySkills : MonoBehaviour
+[CreateAssetMenu(fileName = "EnemySkills", menuName = "ScriptableObjects/EnemySkills", order = 4)]
+public class EnemySkills : ScriptableObject
 {
     [SerializeField]
     GameObject bullet;
@@ -15,6 +17,7 @@ public class EnemySkills : MonoBehaviour
     GameObject minion;
 
     public delegate void func();
+
 
     public void SmallHop()
     {
@@ -35,12 +38,22 @@ public class EnemySkills : MonoBehaviour
     public void Fire()
     {
         bullet.GetComponent<PlayerBullet>().SetBullet(Mathf.RoundToInt(bulletPower * FindObjectOfType<Dracula>().damage));
-        GameObject BulletInst = Instantiate(bullet, transform.position, Quaternion.identity);
+        GameObject BulletInst = Instantiate(bullet, FindObjectOfType<PlayerMovement>().transform.position, Quaternion.identity);
         BulletInst.GetComponent<Rigidbody2D>().AddForce(Vector3.forward * bulletSpeed);
     }
 
     public void Spawn()
     {
 
+    }
+
+    public void Slash()
+    {
+        if (FindObjectOfType<Dracula>().GetAttack() == false)
+        {
+            FindObjectOfType<Dracula>().SetAttack(true);
+            //me.speed = me.speed / 2;
+            FindObjectOfType<Dracula>().animator.SetTrigger("Attack");
+        }
     }
 }

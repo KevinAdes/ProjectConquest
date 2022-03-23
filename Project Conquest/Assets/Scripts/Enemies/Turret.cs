@@ -20,22 +20,10 @@ public class Turret : MonoBehaviour
 
     Entity me;
 
-    func dele;
-
-    bool initialized = false;
-
     void OnEnable()
     {
         me = GetComponent<Entity>();
         player = FindObjectOfType<PlayerMovement>();
-    }
-    public void Awake()
-    {
-        print("Init");
-        me.myName = "Turret";
-        manager = FindObjectOfType<GameManager>();
-        dele = manager.GetSkills().Fire;
-        me.AddSkill(dele);
     }
 
     // Update is called once per frame

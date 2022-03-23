@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static EnemySkills;
 using System;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PauseControl : MonoBehaviour
 {
@@ -47,6 +49,7 @@ public class PauseControl : MonoBehaviour
     public GameObject pauseScreen;
 
     //extra
+    [SerializeField]
     Dracula dracula;
     public InventoryObject inventory;
 
@@ -54,18 +57,36 @@ public class PauseControl : MonoBehaviour
     bool pause = false;
     XButton xButton;
 
+    public static PauseControl instance;
+
+    [SerializeField]
+    UnityEvent process1;
+    UnityEvent process2;
+    UnityEvent process3;
+    UnityEvent process4;
+
+
     public void Awake()
-    {  
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
         inventory = playerData.inventory;
-        dracula = FindObjectOfType<Dracula>();
         Calibrate();
-    }
 
+    }
+    
     void Update()
     {
-        if(dracula != null)
+        if (dracula != null)
         {
             Pause();
         }
@@ -303,7 +324,7 @@ public class PauseControl : MonoBehaviour
         {
             upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
         }
-        foreach (func skill in (List<func>)manager.enemies.Enemies[name])
+        foreach (UnityEvent skill in (List<UnityEvent>)manager.enemies.Enemies[name])
         {
             GameObject newButton = Instantiate(displayButton);
             newButton.transform.SetParent(upgradesButtonListContentContent.transform);
@@ -312,13 +333,15 @@ public class PauseControl : MonoBehaviour
             xButton.scroller = false;
             xButton.control = this;
             xButton.SetFunc(skill);
-            xButton.SetNameAndText(skill.Method.Name, "eventually i will need to figure out where to store all the text");
+            xButton.SetNameAndText(skill.ToString(), "eventually i will need to figure out where to store all the text");
         }
     }
 
-    public void AssignDracula(func skill)
+    public void AssignDracula(UnityEvent skill)
     {
-        dracula.process1 = skill;
+        //display button setting prompt
+        print("setting process 1");
+        process1 = skill;
     }
 
     //Getters and Setters
@@ -327,6 +350,25 @@ public class PauseControl : MonoBehaviour
         return playerData;
     }
 
+    public void SetDracula(Dracula newDracula)
+    {
+        dracula = newDracula;
+    }
 
-
+    public UnityEvent GetProcess1()
+    {
+        return process1;
+    }
+    public UnityEvent GetProcess2()
+    {
+        return process2;
+    }
+    public UnityEvent GetProcess3()
+    {
+        return process3;
+    }
+    public UnityEvent GetProcess4()
+    {
+        return process4;
+    }
 }

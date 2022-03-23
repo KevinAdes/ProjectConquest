@@ -324,3 +324,43 @@ C# parse time         : 361ms
 candidates check time : 46ms
 console write time    : 1ms
 
+[api-updater (non-obsolete-error-filter)] 3/22/2022 5:57:36 PM : Starting /Users/kevinades/Desktop/UnityProjects/2020.3.30f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 178.855ms
+moved types parse time: 66ms
+candidates parse time : 2ms
+C# parse time         : 327ms
+candidates check time : 39ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 3/22/2022 5:58:17 PM : Starting /Users/kevinades/Desktop/UnityProjects/2020.3.30f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 57.46ms
+moved types parse time: 47ms
+candidates parse time : 1ms
+C# parse time         : 245ms
+candidates check time : 38ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 3/22/2022 5:58:51 PM : Starting /Users/kevinades/Desktop/UnityProjects/2020.3.30f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 126.9ms
+moved types parse time: 63ms
+candidates parse time : 1ms
+C# parse time         : 277ms
+candidates check time : 40ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 3/22/2022 8:16:59 PM : Starting /Users/kevinades/Desktop/UnityProjects/2020.3.30f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 140.146ms
+moved types parse time: 51ms
+candidates parse time : 1ms
+C# parse time         : 270ms
+candidates check time : 50ms
+console write time    : 0ms
+

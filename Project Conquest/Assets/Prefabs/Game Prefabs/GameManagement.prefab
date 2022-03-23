@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 785526030}
   - component: {fileID: 785526029}
   - component: {fileID: 785526028}
+  - component: {fileID: 1009657886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -162,6 +163,39 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785526027}
   m_Enabled: 1
+--- !u!114 &1009657886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785526027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1163869646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1102,6 @@ GameObject:
   - component: {fileID: 7738306762641248461}
   - component: {fileID: 7738306762641248462}
   - component: {fileID: 1875154967}
-  - component: {fileID: 979472448778667263}
   - component: {fileID: 2773306359915398683}
   m_Layer: 0
   m_Name: GameManagement
@@ -1113,7 +1146,7 @@ MonoBehaviour:
   LoadHider: {fileID: 7738306763269551206}
   alertBox: {fileID: 1334470732}
   gameOverScreen: {fileID: 3184127404731095073}
-  skillsList: {fileID: 979472448778667263}
+  skillsList: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c, type: 2}
   Mapula: {fileID: 0}
   playerLevelTransform: {x: 0, y: 0}
 --- !u!95 &1875154967
@@ -1135,18 +1168,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &979472448778667263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7738306762641248460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dec240bbbfe634e259845891361fb259, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2773306359915398683
 MonoBehaviour:
   m_ObjectHideFlags: 0

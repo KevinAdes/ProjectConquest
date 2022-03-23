@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Linq;
 using UnityEngine.Rendering;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,38 +34,51 @@ public class GameManager : MonoBehaviour
 
     Animator animator;
 
-    public static GameManager instance;
+    private static GameManager _instance;
+    public static GameManager Instance { get { return _instance; } }
+    bool singleton = false;
 
     string target;
 
     bool right;
     bool cloudChecking = false;
 
-    public void Update()
-    {
-    }
 
     private void Awake()
     {
-        //playerData = ScriptableObject.CreateInstance<PlayerData>();
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         enemies = ScriptableObject.CreateInstance<EnemyDictionary>();
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
         animator = GetComponent<Animator>();
-        if (instance != null)
+        foreach(Entity entity in FindObjectsOfType<Entity>())
         {
-            Destroy(gameObject);
+            entity.SetManager(this);
         }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        AddDraculaToEnemiesList();
     }
-    IEnumerator reload()
+
+    public void Update()
     {
-        yield return new WaitForSeconds(.2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        print(table.Levels.Count);
+    }
+
+    private void AddDraculaToEnemiesList()
+    {
+        List<UnityEvent> DraculaSkills = new List<UnityEvent>();
+        foreach(UnityEvent skill in playerData.GetSkills())
+        {
+            DraculaSkills.Add(skill);
+        }
+        enemies.Enemies.Add("Dracula", DraculaSkills);
     }
 
     public void LoadLevel(string ID)
@@ -98,20 +112,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator PlayerTransformSet()
-    {
-        temp = (LevelData)table.Levels[target];
-        yield return new WaitForSeconds(.1f);
-        if (temp.GetRight())
-        {
-            playerLevelTransform = temp.rightSpawn;
-        }
-        else
-        {
-            playerLevelTransform = temp.leftSpawn;
-        }
-        animator.SetTrigger("Hide");
-    }
+
     IEnumerator CheckClouds()
     {
         if (cloudChecking == false)
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
         {
             //TODO check if this redundance is necessary
             temp = (LevelData)table.Levels[Level.levelID];
-            foreach(EnemyManager guy in Level.Entities)
+            foreach (EnemyManager guy in Level.Entities)
             {
                 if (guy.important == true)
                 {
@@ -169,7 +170,17 @@ public class GameManager : MonoBehaviour
             table.Levels.Add(Level.levelID, Level);
         }
         target = Level.levelID;
-        StartCoroutine(PlayerTransformSet());
+
+        if (Level.GetRight())
+        {
+            playerLevelTransform = Level.rightSpawn;
+        }
+        else
+        {
+            playerLevelTransform = Level.leftSpawn;
+        }
+        animator.SetTrigger("Hide");
+        FindObjectOfType<PlayerMovement>().transform.position = playerLevelTransform;
     }
 
     public void AddSkill(int ID, string levelID)
@@ -202,7 +213,6 @@ public class GameManager : MonoBehaviour
         table.Levels[levelID] = temp;
     }
 
-
     public void LoadAlert(string levelID)
     {
         if (table.Levels.ContainsKey(levelID) == false)
@@ -211,9 +221,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(alertBox.GetComponentInChildren<Button>().gameObject);
-
-        }
-       
+        }       
     }
 
     public void HideAlert()
@@ -243,6 +251,12 @@ public class GameManager : MonoBehaviour
     {
         return skillsList;
     }
+
+    public bool GetSingleton()
+    {
+        return singleton;
+    }
+
 }
 
 

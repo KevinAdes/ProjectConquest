@@ -8,10 +8,127 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1246026964, guid: 7c6aea0a25a2f1149848e5482daae1d1, type: 3}
+      propertyPath: cash
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1246026964, guid: 7c6aea0a25a2f1149848e5482daae1d1, type: 3}
       propertyPath: Interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: 033988d703bb944ee9cddd22cb8baeaa,
         type: 2}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: myName
+      value: RoboGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c,
+        type: 2}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c,
+        type: 2}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c,
+        type: 2}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SmallHop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: BigHop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BigHop
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemySkills, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EnemySkills, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemySkills, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[0].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608930680588157249, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+        type: 3}
+      propertyPath: skillSet.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6608930680588157250, guid: 7c6aea0a25a2f1149848e5482daae1d1,
         type: 3}
       propertyPath: wanderer
@@ -35,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 6608930680588157256, guid: 7c6aea0a25a2f1149848e5482daae1d1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.2
+      value: -17.1
       objectReference: {fileID: 0}
     - target: {fileID: 6608930680588157256, guid: 7c6aea0a25a2f1149848e5482daae1d1,
         type: 3}
@@ -85,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 6608930680588157263, guid: 7c6aea0a25a2f1149848e5482daae1d1,
         type: 3}
       propertyPath: m_Name
-      value: FieldGuy
+      value: WanderingGuy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c6aea0a25a2f1149848e5482daae1d1, type: 3}

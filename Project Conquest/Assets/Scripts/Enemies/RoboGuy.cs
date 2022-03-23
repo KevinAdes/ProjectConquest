@@ -49,8 +49,6 @@ public class RoboGuy : MonoBehaviour
     GameManager manager;
 
     Entity entity;
-    
-    func dele;
 
     public void Awake()
     {
@@ -59,11 +57,6 @@ public class RoboGuy : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         entity = GetComponent<Entity>();
-        entity.myName = "RoboGuy";
-        dele = manager.GetSkills().SmallHop;
-        entity.AddSkill(dele);
-        dele = manager.GetSkills().BigHop;
-        entity.AddSkill(dele);
     }
 
     // Start is called before the first frame update

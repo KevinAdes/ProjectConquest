@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static EnemySkills;
 
 public enum states
@@ -46,10 +47,7 @@ public class Dracula : MonoBehaviour
 
     Entity target;
 
-    public func process1;
-    public func process2;
-    public func process3;
-    public func process4;
+    UnityEvent ProcessDefault = new UnityEvent();
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +57,8 @@ public class Dracula : MonoBehaviour
             manager = FindObjectOfType<GameManager>();
         }
         pauseControl = FindObjectOfType<PauseControl>();
+        pauseControl.SetDracula(this);
+        pauseControl.Calibrate();
         inventory = pauseControl.inventory;
         health = manager.playerData.currentHealth;
         me = GetComponent<PlayerMovement>();
@@ -71,10 +71,6 @@ public class Dracula : MonoBehaviour
 
         STATE = states.DEFAULT;
         animator = GetComponent<Animator>();
-        if (process1 == null)
-        {
-            process1 = Attack;
-        }
     }
 
     // Update is called once per frame
@@ -96,11 +92,11 @@ public class Dracula : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") != 0)
         {
-            process1.Invoke();
+            pauseControl.GetProcess1().Invoke();
         }
     }
-
-    private void Attack()
+    
+    public void Attack()
     {
         if(attack == false)
         {
@@ -232,6 +228,17 @@ public class Dracula : MonoBehaviour
     {
         return inventory;
     }
+
+    public bool GetAttack()
+    {
+        return attack;
+    }
+
+    public void SetAttack(bool b)
+    {
+        attack = b;
+    }
+
     public void OnDestroy()
     {
         manager.GetComponent<Animator>().SetTrigger("GameOver");

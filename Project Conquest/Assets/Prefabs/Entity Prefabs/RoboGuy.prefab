@@ -340,6 +340,8 @@ MonoBehaviour:
   wait: 0
   courage: 0
   alertRange: 5.75
+  wanderer: 0
+  alerted: 0
   dead: 0
   direction: 1
   ID: 0
@@ -355,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c20f8ba4aeb32a4d896e391bdd67166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myName: 
+  myName: RoboGuy
   health: 20.94
   damage: 8.4
   defense: 15.07
@@ -368,6 +370,35 @@ MonoBehaviour:
   stunned: 0
   dead: 0
   direction: 1
+  skillSet:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c, type: 2}
+        m_TargetAssemblyTypeName: EnemySkills, Assembly-CSharp
+        m_MethodName: SmallHop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c, type: 2}
+        m_TargetAssemblyTypeName: EnemySkills, Assembly-CSharp
+        m_MethodName: BigHop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6608930680588157248
 MonoBehaviour:
   m_ObjectHideFlags: 0

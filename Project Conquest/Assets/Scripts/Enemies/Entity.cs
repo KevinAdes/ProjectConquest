@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static EnemySkills;
+using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
 {
-    public string myName;
+    [SerializeField]
+    string myName;
+
     public List<func> skills = new List<func>();
     [Header("Stats")]
     public float health;
@@ -31,6 +34,9 @@ public class Entity : MonoBehaviour
 
     GameManager manager;
 
+    [SerializeField]
+    UnityEvent[] skillSet;
+
     public void OnEnable()
     {
         if (dead == true)
@@ -41,10 +47,6 @@ public class Entity : MonoBehaviour
 
     void Start()
     {
-        if (manager == null)
-        {
-            manager = FindObjectOfType<GameManager>();
-        }
         animator = GetComponent<Animator>();
     }
 
@@ -90,5 +92,20 @@ public class Entity : MonoBehaviour
     public void AddSkill(func skillToAdd)
     {
         skills.Add(skillToAdd);
+    }
+
+    public string GetName()
+    {
+        return myName;
+    }
+
+    public UnityEvent[] GetSkills()
+    {
+        return skillSet;
+    }
+
+    public void SetManager(GameManager gm)
+    {
+        manager = gm;
     }
 }

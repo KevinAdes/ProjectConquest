@@ -49,22 +49,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        if (manager == null)
-        {
-            manager = FindObjectOfType<GameManager>();
-        }
-        StartCoroutine(SpawnPoint());
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
         STATE = states.DEFAULT;
         speedCache = speed;
         speedCapCache = speedCap;
         scaleCache = transform.localScale.x;
-    }
-    IEnumerator SpawnPoint()
-    {
-        yield return new WaitForSeconds(.3f);
-        transform.position = manager.playerLevelTransform;
     }
 
     void Update()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static EnemySkills;
 
@@ -10,7 +11,7 @@ public class XButton : MonoBehaviour
     Button button;
     Text text;
     public bool scroller;
-    func skill;
+    UnityEvent skill;
 
     public void Init(string name)
     {
@@ -75,7 +76,7 @@ public class XButton : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetFunc(func f)
+    public void SetFunc(UnityEvent f)
     {
         skill = f;
     }

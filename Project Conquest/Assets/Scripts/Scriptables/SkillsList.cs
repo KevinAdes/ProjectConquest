@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemySkills", menuName = "ScriptableObjects/EnemySkills", order = 4)]
-public class EnemySkills : ScriptableObject
+[CreateAssetMenu(fileName = "SkillsList", menuName = "ScriptableObjects/SkillsList", order = 4)]
+public class SkillsList : ScriptableObject
 {
     [SerializeField]
     GameObject bullet;

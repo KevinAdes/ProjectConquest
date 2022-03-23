@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dec240bbbfe634e259845891361fb259, type: 3}
-  m_Name: EnemySkills
+  m_Name: SkillsList
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
   bulletSpeed: 0

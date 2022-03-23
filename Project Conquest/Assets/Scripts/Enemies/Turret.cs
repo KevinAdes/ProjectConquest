@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static EnemySkills;
+using static SkillsList;
 
 public class Turret : MonoBehaviour
 {

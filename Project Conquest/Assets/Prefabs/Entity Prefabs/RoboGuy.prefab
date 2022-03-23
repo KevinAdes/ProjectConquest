@@ -371,34 +371,8 @@ MonoBehaviour:
   dead: 0
   direction: 1
   skillSet:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c, type: 2}
-        m_TargetAssemblyTypeName: EnemySkills, Assembly-CSharp
-        m_MethodName: SmallHop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 75a5fc93de2634af7a487a2d8252e78c, type: 2}
-        m_TargetAssemblyTypeName: EnemySkills, Assembly-CSharp
-        m_MethodName: BigHop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  - {fileID: 11400000, guid: ea00c006008f54234943263f59b95358, type: 2}
+  - {fileID: 11400000, guid: 3baafe2eff74242fd88b0f4a19ef65c1, type: 2}
 --- !u!114 &6608930680588157248
 MonoBehaviour:
   m_ObjectHideFlags: 0

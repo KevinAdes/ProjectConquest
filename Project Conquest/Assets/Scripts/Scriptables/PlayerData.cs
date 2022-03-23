@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
-
 [CreateAssetMenu(fileName = "Player", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
@@ -23,15 +22,19 @@ public class PlayerData : ScriptableObject
     public int cash;
 
     [SerializeField]
-    UnityEvent[] skills;
+    EnemySkill[] skills;
 
     //Setters and Getters
+
+    public void AddBlood(float f)
+    {
+        blood += f;
+    }
 
     public void SetBlood(float f)
     {
         blood = f;
     }
-
     public float GetBlood()
     {
         return blood;
@@ -47,7 +50,7 @@ public class PlayerData : ScriptableObject
         return currentHealth;
     }
 
-    public UnityEvent[] GetSkills()
+    public EnemySkill[] GetSkills()
     {
         return skills;
     }

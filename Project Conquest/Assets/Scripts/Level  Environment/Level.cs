@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static EnemySkills;
+using static SkillsList;
 
 public class Level : MonoBehaviour
 {
@@ -94,11 +94,17 @@ public class Level : MonoBehaviour
         {
             if(entity.important == true)
             {
-                print("check");
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
-                foreach (UnityEvent skill in entity.GetSkills())
+                if(entity.GetSkills().Length > 0)
                 {
-                    guy.AddSkill(skill);
+                    print(entity.name);
+                    print(entity.GetSkills().Length);
+                    foreach (EnemySkill skill in entity.GetSkills())
+                    {
+                        print(skill.name);
+                        EnemySkill newSkill = Instantiate(skill);
+                        guy.AddSkill(newSkill);
+                    }
                 }
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;

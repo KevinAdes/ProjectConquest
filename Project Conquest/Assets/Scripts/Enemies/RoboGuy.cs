@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static EnemySkills;
+using static SkillsList;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 

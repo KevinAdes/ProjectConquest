@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static EnemySkills;
+using static SkillsList;
 using System;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -324,24 +324,49 @@ public class PauseControl : MonoBehaviour
         {
             upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
         }
-        foreach (UnityEvent skill in (List<UnityEvent>)manager.enemies.Enemies[name])
+        foreach (EnemySkill skill in (List<EnemySkill>)manager.enemies.Enemies[name])
         {
             GameObject newButton = Instantiate(displayButton);
             newButton.transform.SetParent(upgradesButtonListContentContent.transform);
+            //TODO FIX SCALING ISSUE WITH PAUSE MENU
             newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
             xButton = newButton.GetComponent<XButton>();
             xButton.scroller = false;
             xButton.control = this;
             xButton.SetFunc(skill);
-            xButton.SetNameAndText(skill.ToString(), "eventually i will need to figure out where to store all the text");
+            if (!skill.GetPurchased())
+            {
+                xButton.SetNameAndText(skill.GetPrice(), skill.GetSkill().GetPersistentMethodName(0).ToString(), skill.GetDescription());
+            }
+            else
+            {
+                xButton.DeactivatePrice();
+                xButton.SetNameAndText(skill.GetSkill().GetPersistentMethodName(0).ToString(), skill.GetDescription());
+            }
         }
     }
 
-    public void AssignDracula(UnityEvent skill)
+    public void AssignDracula(EnemySkill skill, XButton button)
     {
-        //display button setting prompt
-        print("setting process 1");
-        process1 = skill;
+        if (!skill.GetPurchased())
+        {
+            if(skill.GetPrice() <= playerData.GetBlood())
+            {
+                skill.SetPurchased(true);
+                process1 = skill.GetSkill();
+                button.DeactivatePrice();
+                playerData.AddBlood(-skill.GetPrice());
+                print("you have the blood and are buying it");
+            }
+            else
+            {
+                print("you do not have the blood");
+            }
+        }
+        else
+        {
+            process1 = skill.GetSkill();
+        }
     }
 
     //Getters and Setters

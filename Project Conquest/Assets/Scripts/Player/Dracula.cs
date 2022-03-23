@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static EnemySkills;
+using static SkillsList;
 
 public enum states
 {
@@ -171,7 +171,7 @@ public class Dracula : MonoBehaviour
 
     public void AddXP(int gains)
     {
-        pauseControl.GetPlayerData().blood += gains;
+        pauseControl.GetPlayerData().AddBlood(gains);
     }
 
 
@@ -241,7 +241,11 @@ public class Dracula : MonoBehaviour
 
     public void OnDestroy()
     {
-        manager.GetComponent<Animator>().SetTrigger("GameOver");
-        pauseControl.GetPlayerData().SetBlood(0);
+        if(health <= 0)
+        {
+
+            manager.GetComponent<Animator>().SetTrigger("GameOver");
+            pauseControl.GetPlayerData().SetBlood(0);
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEditor.Rendering;
-using static EnemySkills;
+using static SkillsList;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,16 +14,11 @@ public class EnemyManager : ScriptableObject
     public bool important = false;
     public bool dead;
 
-    public List<UnityEvent>skills = new List<UnityEvent>();
+    public List<EnemySkill>skills = new List<EnemySkill>();
 
-    public void AddSkill(UnityEvent skillToAdd)
+    public void AddSkill(EnemySkill skillToAdd)
     {
         skills.Add(skillToAdd);
     }
 
-    //create unity event list
-
-
-    //skills is created here
-    //instantiated in level, where it is given the values of entity.skills. 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static EnemySkills;
+using static SkillsList;
 using UnityEngine.Events;
 
 public class Entity : MonoBehaviour
@@ -10,7 +10,6 @@ public class Entity : MonoBehaviour
     [SerializeField]
     string myName;
 
-    public List<func> skills = new List<func>();
     [Header("Stats")]
     public float health;
     public float damage;
@@ -35,7 +34,7 @@ public class Entity : MonoBehaviour
     GameManager manager;
 
     [SerializeField]
-    UnityEvent[] skillSet;
+    EnemySkill[] skillSet;
 
     public void OnEnable()
     {
@@ -68,11 +67,11 @@ public class Entity : MonoBehaviour
         animator.SetTrigger("PowerDown");
         if(important == true)
         {
-            manager.markDead(ID, SceneManager.GetActiveScene().name);
+            FindObjectOfType<GameManager>().markDead(ID, SceneManager.GetActiveScene().name);
         }
-        if(skills.Count > 0)
+        if(skillSet.Length > 0)
         {
-            manager.AddSkill(ID, SceneManager.GetActiveScene().name);
+            FindObjectOfType<GameManager>().AddSkill(ID, SceneManager.GetActiveScene().name);
         }
         GetComponent<DamageSystem>().vulnerable = false;
         StartCoroutine(Decomposing());
@@ -89,23 +88,14 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void AddSkill(func skillToAdd)
-    {
-        skills.Add(skillToAdd);
-    }
-
     public string GetName()
     {
         return myName;
     }
 
-    public UnityEvent[] GetSkills()
+    public EnemySkill[] GetSkills()
     {
         return skillSet;
     }
 
-    public void SetManager(GameManager gm)
-    {
-        manager = gm;
-    }
 }

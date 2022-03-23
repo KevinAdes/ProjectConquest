@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     Transform gameOverScreen;
 
     [SerializeField]
-    EnemySkills skillsList;
+    SkillsList skillsList;
 
     Vector3 mapulaTransform;
     public MapMovement Mapula;
@@ -59,24 +59,16 @@ public class GameManager : MonoBehaviour
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
         animator = GetComponent<Animator>();
-        foreach(Entity entity in FindObjectsOfType<Entity>())
-        {
-            entity.SetManager(this);
-        }
         AddDraculaToEnemiesList();
-    }
-
-    public void Update()
-    {
-        print(table.Levels.Count);
     }
 
     private void AddDraculaToEnemiesList()
     {
-        List<UnityEvent> DraculaSkills = new List<UnityEvent>();
-        foreach(UnityEvent skill in playerData.GetSkills())
+        List<EnemySkill> DraculaSkills = new List<EnemySkill>();
+        foreach(EnemySkill skill in playerData.GetSkills())
         {
-            DraculaSkills.Add(skill);
+            EnemySkill newSkill = Instantiate(skill);
+            DraculaSkills.Add(newSkill);
         }
         enemies.Enemies.Add("Dracula", DraculaSkills);
     }
@@ -183,8 +175,10 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<PlayerMovement>().transform.position = playerLevelTransform;
     }
 
+    //MARKER FUNCTIONS////////////
     public void AddSkill(int ID, string levelID)
     {
+        print("this is happening");
         temp = (LevelData)table.Levels[levelID];
         if (enemies.Enemies.ContainsKey(temp.Entities[ID].myName) == false)
         {
@@ -212,7 +206,8 @@ public class GameManager : MonoBehaviour
         temp.Doors[ID].SetClosed(false);
         table.Levels[levelID] = temp;
     }
-
+    /////////////////////////////////
+    
     public void LoadAlert(string levelID)
     {
         if (table.Levels.ContainsKey(levelID) == false)
@@ -247,7 +242,7 @@ public class GameManager : MonoBehaviour
         return mapulaTransform;
     }
 
-    public EnemySkills GetSkills()
+    public SkillsList GetSkills()
     {
         return skillsList;
     }

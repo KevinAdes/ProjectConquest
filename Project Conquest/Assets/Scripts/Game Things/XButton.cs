@@ -33,38 +33,10 @@ public class XButton : MonoBehaviour
     {
         if (scroller == true)
         {
-            control.DisplayUpgrades(buttonName.text);
+            control.GetUpgradesTab().DisplayUpgrades(buttonName.text);
         }
     }
 
-    public void InitAbove(Button newButton)
-    {
-        Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnUp = newButton;
-        button.navigation = navigation;
-    }
-    public void InitBelow(Button newButton)
-    {
-        Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnDown = newButton;
-        button.navigation = navigation;
-    }
-    public void InitLeft(Button newButton)
-    {
-        Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnLeft = newButton;
-        button.navigation = navigation;
-    }
-    public void InitRight(Button newButton)
-    {
-         Navigation navigation = button.navigation;
-        navigation.mode = Navigation.Mode.Explicit;
-        navigation.selectOnRight = newButton;
-        button.navigation = navigation;
-    }
 
     public void DeactivatePrice()
     {

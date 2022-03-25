@@ -97,11 +97,8 @@ public class Level : MonoBehaviour
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
                 if(entity.GetSkills().Length > 0)
                 {
-                    print(entity.name);
-                    print(entity.GetSkills().Length);
                     foreach (EnemySkill skill in entity.GetSkills())
                     {
-                        print(skill.name);
                         EnemySkill newSkill = Instantiate(skill);
                         guy.AddSkill(newSkill);
                     }

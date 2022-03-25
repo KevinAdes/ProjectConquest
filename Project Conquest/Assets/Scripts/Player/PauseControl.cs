@@ -18,7 +18,9 @@ public class PauseControl : MonoBehaviour
     public GameObject mainTab;
     public GameObject itemsTab;
     public GameObject equipmentTab;
-    public GameObject upgradesTab;
+
+    UpgradesTab upgradesTab;
+    //public GameObject upgradesTab;
     public GameObject journalTab;
     public GameObject optionsTab;
 
@@ -55,9 +57,10 @@ public class PauseControl : MonoBehaviour
 
     bool isAxisInUse = false;
     bool pause = false;
-    XButton xButton;
 
     public static PauseControl instance;
+
+    EnemySkill heldSkill;
 
     [SerializeField]
     UnityEvent process1;
@@ -77,6 +80,7 @@ public class PauseControl : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        upgradesTab = FindObjectOfType<UpgradesTab>(true);
         manager = FindObjectOfType<GameManager>();
         playerData = manager.playerData;
         inventory = playerData.inventory;
@@ -127,7 +131,7 @@ public class PauseControl : MonoBehaviour
     {
         itemsTab.SetActive(false);
         //equipmentTab.SetActive(false);
-        upgradesTab.SetActive(false);
+        upgradesTab.gameObject.SetActive(false);
         //journalTab.SetActive(false);
         //optionsTab.SetActive(false);
         mainTab.SetActive(true);
@@ -142,7 +146,7 @@ public class PauseControl : MonoBehaviour
     {
         itemsTab.SetActive(false);
         //equipmentTab.SetActive(false);
-        upgradesTab.SetActive(false);
+        upgradesTab.gameObject.SetActive(false);
         //journalTab.SetActive(false);
         //optionsTab.SetActive(false);
         mainTab.SetActive(true);
@@ -164,37 +168,6 @@ public class PauseControl : MonoBehaviour
         equipmentTab.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(equipmentButton);
-    }
-
-    public void Uprgrades()
-    {
-        mainTab.SetActive(false);
-        upgradesTab.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(upgradesButton);
-        for (int i = 0; i < upgradesButtonListContent.gameObject.transform.childCount; i++)
-        {
-            upgradesButtonListContent.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        foreach (string name in manager.enemies.Enemies.Keys)
-        {
-            GameObject newButton = Instantiate(defaultButton);
-            newButton.transform.SetParent(upgradesButtonListContent.transform);
-            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
-            newButton.GetComponent<XButton>().scroller = true;
-            newButton.GetComponent<XButton>().Init(name);
-            newButton.GetComponent<XButton>().control = this;
-            if (temp == null)
-            {
-                newButton.GetComponent<XButton>().InitAbove(upgradesButton.GetComponent<Button>());
-            }
-            else
-            {
-                temp.GetComponent<XButton>().InitBelow(newButton.GetComponent<Button>());
-                newButton.GetComponent<XButton>().InitAbove(temp);
-            }
-            temp = newButton.GetComponent<Button>();
-        }
     }
 
     public void Journal()
@@ -316,56 +289,23 @@ public class PauseControl : MonoBehaviour
         inventory.Container.Clear();
     }
 
-    //SkillSystem
-
-    public void DisplayUpgrades(string name)
-    {
-        for (int i = 0; i < upgradesButtonListContentContent.gameObject.transform.childCount; i++)
-        {
-            upgradesButtonListContentContent.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        foreach (EnemySkill skill in (List<EnemySkill>)manager.enemies.Enemies[name])
-        {
-            GameObject newButton = Instantiate(displayButton);
-            newButton.transform.SetParent(upgradesButtonListContentContent.transform);
-            //TODO FIX SCALING ISSUE WITH PAUSE MENU
-            newButton.gameObject.transform.localScale = new Vector3(1, 1, 1);
-            xButton = newButton.GetComponent<XButton>();
-            xButton.scroller = false;
-            xButton.control = this;
-            xButton.SetFunc(skill);
-            if (!skill.GetPurchased())
-            {
-                xButton.SetNameAndText(skill.GetPrice(), skill.GetSkill().GetPersistentMethodName(0).ToString(), skill.GetDescription());
-            }
-            else
-            {
-                xButton.DeactivatePrice();
-                xButton.SetNameAndText(skill.GetSkill().GetPersistentMethodName(0).ToString(), skill.GetDescription());
-            }
-        }
-    }
-
     public void AssignDracula(EnemySkill skill, XButton button)
     {
         if (!skill.GetPurchased())
         {
             if(skill.GetPrice() <= playerData.GetBlood())
             {
+                heldSkill = skill;
+                upgradesTab.DisplayAssign();
                 skill.SetPurchased(true);
-                process1 = skill.GetSkill();
                 button.DeactivatePrice();
                 playerData.AddBlood(-skill.GetPrice());
-                print("you have the blood and are buying it");
-            }
-            else
-            {
-                print("you do not have the blood");
+
             }
         }
         else
         {
-            process1 = skill.GetSkill();
+            upgradesTab.DisplayAssign();
         }
     }
 
@@ -380,17 +320,46 @@ public class PauseControl : MonoBehaviour
         dracula = newDracula;
     }
 
+    public GameObject GetMainTab()
+    {
+        return mainTab;
+    }
+
+    public UpgradesTab GetUpgradesTab()
+    {
+        return upgradesTab;
+    }
+
+    public void SetProcess1()
+    {
+        process1 = heldSkill.GetSkill();
+    }
     public UnityEvent GetProcess1()
     {
         return process1;
+    }
+
+    public void SetProcess2()
+    {
+        process2 = heldSkill.GetSkill();
     }
     public UnityEvent GetProcess2()
     {
         return process2;
     }
+
+    public void SetProcess3()
+    {
+        process3 = heldSkill.GetSkill();
+    }
     public UnityEvent GetProcess3()
     {
         return process3;
+    }
+
+    public void SetProcess4()
+    {
+        process4 = heldSkill.GetSkill();
     }
     public UnityEvent GetProcess4()
     {

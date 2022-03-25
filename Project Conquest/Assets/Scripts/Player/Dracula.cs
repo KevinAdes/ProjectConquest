@@ -81,6 +81,9 @@ public class Dracula : MonoBehaviour
             case states.DEFAULT:
 
                 ExecuteProcessOne();
+                ExecuteProcessTwo();
+                ExecuteProcessThree();
+                ExecuteProcessFour();
                 Scavenge();
                 break;
             case states.DIALOGUE:
@@ -92,10 +95,34 @@ public class Dracula : MonoBehaviour
     {
         if (Input.GetAxis("Fire1") != 0)
         {
-            pauseControl.GetProcess1().Invoke();
+            pauseControl.GetProcess1()?.Invoke();
         }
     }
-    
+
+    private void ExecuteProcessTwo()
+    {
+        if (Input.GetAxis("Fire2") != 0)
+        {
+            pauseControl.GetProcess2()?.Invoke();
+        }
+    }
+
+    private void ExecuteProcessThree()
+    {
+        if (Input.GetAxis("Fire3") != 0)
+        {
+            pauseControl.GetProcess3()?.Invoke();
+        }
+    }
+
+    private void ExecuteProcessFour()
+    {
+        if (Input.GetAxis("Fire4") != 0)
+        {
+            pauseControl.GetProcess4()?.Invoke();
+        }
+    }
+
     public void Attack()
     {
         if(attack == false)

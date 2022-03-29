@@ -105,6 +105,11 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
         dummyInventory.Container = node.shopInventory.Copy();
         m_ShopBoxTransform.GetComponent<DisplayInventory>().SetInventory(dummyInventory);
     }
+    public void Visit(AnimationDialogueNode node)
+    {
+        m_ListenToInput = false;
+        node.playAnim();
+    }
 
     public void SetText(string input)
     {

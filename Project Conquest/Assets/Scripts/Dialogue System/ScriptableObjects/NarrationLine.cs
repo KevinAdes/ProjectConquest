@@ -8,6 +8,7 @@ public class NarrationLine : ScriptableObject
     [SerializeField]
     private NarrationSpeaker m_speaker;
     [SerializeField]
+    [TextArea(15, 20)]
     private string m_text;
 
     public NarrationSpeaker speaker => m_speaker;

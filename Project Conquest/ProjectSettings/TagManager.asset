@@ -8,6 +8,8 @@ TagManager:
   - Attack
   - Corpse
   - Enemy
+  - GameManager
+  - Cutscene
   layers:
   - Default
   - TransparentFX

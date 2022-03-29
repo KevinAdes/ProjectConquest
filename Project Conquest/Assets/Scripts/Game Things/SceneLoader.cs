@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
 
-   public void LoadMap()
+    public void LoadMap()
     {
         SceneManager.LoadScene("Map");
     }
@@ -14,6 +14,11 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void LoadIntro()
+    {
+        SceneManager.LoadScene("Intro Cutscene");
     }
 
     public void Respawn()

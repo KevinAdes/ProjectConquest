@@ -113,7 +113,6 @@ public class Level : MonoBehaviour
 
             }
         }
-        print(data.Entities.Length);
         count = 0;
         foreach (Interactable interactable in interactables)
         {

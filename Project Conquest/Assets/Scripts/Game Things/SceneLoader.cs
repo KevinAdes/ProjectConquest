@@ -18,7 +18,14 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadIntro()
     {
-        SceneManager.LoadScene("Intro Cutscene");
+        if(GetComponent<GameManager>().flags.GameStarted == false)
+        {
+            SceneManager.LoadScene("Intro Cutscene");
+        }
+        else
+        {
+            LoadMap();
+        }
     }
 
     public void Respawn()

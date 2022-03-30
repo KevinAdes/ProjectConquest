@@ -5,10 +5,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.SocialPlatforms.Impl;
-using System.Linq;
-using UnityEngine.Rendering;
-using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject LoadHider;
     public GameObject alertBox;
     LevelData temp;
+
+    public StoryFlags flags;
 
     [SerializeField]
     Transform gameOverScreen;
@@ -40,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     string target;
 
+    //A bool that determines whether the game should set draculas transform upon entering a level. if dracula is spawning/respawning, it should be deactivated
+    bool ignoreDraculaTransform;
     bool right;
     bool cloudChecking = false;
 
@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         enemies = ScriptableObject.CreateInstance<EnemyDictionary>();
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
+        flags = ScriptableObject.CreateInstance<StoryFlags>();
         animator = GetComponent<Animator>();
         AddDraculaToEnemiesList();
     }
@@ -162,17 +163,22 @@ public class GameManager : MonoBehaviour
             table.Levels.Add(Level.levelID, Level);
         }
         target = Level.levelID;
-
-        if (Level.GetRight())
+        if (!ignoreDraculaTransform)
         {
-            playerLevelTransform = Level.rightSpawn;
-        }
-        else
-        {
-            playerLevelTransform = Level.leftSpawn;
+            if (Level.GetRight())
+            {
+                playerLevelTransform = Level.rightSpawn;
+            }
+            else
+            {
+                playerLevelTransform = Level.leftSpawn;
+            }
+            if (FindObjectOfType<PlayerMovement>() != null)
+            {
+                FindObjectOfType<PlayerMovement>().transform.position = playerLevelTransform;
+            }
         }
         animator.SetTrigger("Hide");
-        FindObjectOfType<PlayerMovement>().transform.position = playerLevelTransform;
     }
 
     //MARKER FUNCTIONS////////////
@@ -232,6 +238,15 @@ public class GameManager : MonoBehaviour
 
     //Setters And Getters
 
+    public bool GetIgnore()
+    {
+        return ignoreDraculaTransform;
+    }
+
+    public void SetIgnore(bool b)
+    {
+        ignoreDraculaTransform = b;
+    }
     public void SetMapula(Vector3 vector)
     {
         mapulaTransform = vector;

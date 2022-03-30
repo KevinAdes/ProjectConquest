@@ -52,6 +52,10 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
     private void OnDialogueNodeStart(DialogueNode node)
     {
+        if(node.dialogueLine.text == "")
+        {
+            //print("Empty Dialogue Detected");
+        }
         gameObject.SetActive(true);
 
         m_DialogueText.text = node.dialogueLine.text;
@@ -109,6 +113,18 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     {
         m_ListenToInput = false;
         node.playAnim();
+        print("IS THIS RUNNING");
+        if (node.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            print("is this running");
+            m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
+        }
+    }
+    public void Visit(CameraDialogueNode node)
+    {
+        m_ListenToInput = false;
+        FindObjectOfType<Camera>().transform.position = node.coordinates;
+        m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
     }
 
     public void SetText(string input)

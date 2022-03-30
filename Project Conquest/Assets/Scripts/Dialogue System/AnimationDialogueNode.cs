@@ -36,4 +36,9 @@ public class AnimationDialogueNode : DialogueNode
         visitor.Visit(this);
     }
 
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+
 }

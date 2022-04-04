@@ -31,7 +31,7 @@ public class BloodBank : MonoBehaviour
 
     public void HideDisplay()
     {
-        FindObjectOfType<PlayerMovement>().StateSwitcher(states.DEFAULT);
+        FindObjectOfType<PlayerMovement>(true).StateSwitcher(states.DEFAULT);
         bankPanel.gameObject.SetActive(false);
     }
 

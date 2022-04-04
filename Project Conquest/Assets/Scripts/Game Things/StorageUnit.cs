@@ -30,7 +30,7 @@ public class StorageUnit : MonoBehaviour
 
     public void HideDisplay()
     {
-        FindObjectOfType<PlayerMovement>().StateSwitcher(states.DEFAULT);
+        FindObjectOfType<PlayerMovement>(true).StateSwitcher(states.DEFAULT);
         CloseButton.gameObject.SetActive(false);
         PlayerInventoryPanel.gameObject.SetActive(false);
         ChestInventoryPanel.gameObject.SetActive(false);

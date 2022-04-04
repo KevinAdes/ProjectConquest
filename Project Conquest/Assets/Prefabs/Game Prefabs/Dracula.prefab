@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 4287634147431147329}
   - component: {fileID: 4287634147431147338}
   - component: {fileID: 4287634147431147339}
-  - component: {fileID: 395755697}
   - component: {fileID: 395755698}
   m_Layer: 13
   m_Name: Dracula
@@ -336,20 +335,6 @@ MonoBehaviour:
   enemies:
     serializedVersion: 2
     m_Bits: 17408
---- !u!114 &395755697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4287634147431147330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d83606ac9474e78946ab8f4f69da82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DialogueChannel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
-  target: {fileID: 0}
 --- !u!114 &395755698
 MonoBehaviour:
   m_ObjectHideFlags: 0

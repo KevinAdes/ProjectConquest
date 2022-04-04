@@ -30,7 +30,7 @@ public class InteractionInstigation : MonoBehaviour
                         target = interactable;
                     }
                 }
-                GetComponent<DialogueInstigator>().target = target;
+                FindObjectOfType<DialogueInstigator>().target = target;
                 target.DoAction();
             }
         }

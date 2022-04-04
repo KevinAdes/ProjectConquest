@@ -9,6 +9,12 @@ public class CutsceneManager : MonoBehaviour
 {
     [SerializeField]
     bool onAwake;
+
+    [SerializeField]
+    bool onDelay;
+
+    [SerializeField]
+    int delay;
     
     [SerializeField]
     DialogueChannel channel;
@@ -30,6 +36,16 @@ public class CutsceneManager : MonoBehaviour
         {
             ExecuteCutscene();
         }
+        if (onDelay)
+        {
+            StartCoroutine(delayStart());
+        }
+    }
+
+    IEnumerator delayStart()
+    {
+        yield return new WaitForSeconds(delay);
+        ExecuteCutscene();
     }
 
     public void ExecuteCutscene()
@@ -37,6 +53,10 @@ public class CutsceneManager : MonoBehaviour
         if ((bool)FindObjectOfType<GameManager>().flags.GetType().GetField(flag).GetValue(FindObjectOfType<GameManager>().flags) == false)
         {
             FindObjectOfType<GameManager>().flags.GetType().GetField(flag).SetValue(FindObjectOfType<GameManager>().flags, true);
+            channel.RaiseRequestDialogue(dialogue);
+        }
+        else if(flag == "")
+        {
             channel.RaiseRequestDialogue(dialogue);
         }
         else

@@ -7,7 +7,7 @@ public class AnimationDialogueNode : DialogueNode
     [SerializeField]
     GameObject AnimatorPrefab;
     [SerializeField]
-    string AnimationToPlay;
+    public string AnimationToPlay;
 
     Animator animator;
 
@@ -21,10 +21,6 @@ public class AnimationDialogueNode : DialogueNode
         animator.Play(AnimationToPlay);
     }
 
-    public void GoNextNode(DialogueChannel channel)
-    {
-        channel.RaiseRequestDialogueNode(NextNode);
-    }
 
     public override bool CanBeFollowedByNode(DialogueNode node)
     {

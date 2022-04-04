@@ -8,7 +8,10 @@ public class CameraDialogueNode : DialogueNode
     public DialogueNode NextNode => m_NextNode;
 
     [SerializeField]
-    public Vector2 coordinates;
+    Vector3 coordinates;
+
+    [SerializeField]
+    int holdTime;
 
     public override bool CanBeFollowedByNode(DialogueNode node)
     {
@@ -18,6 +21,15 @@ public class CameraDialogueNode : DialogueNode
     public override void Accept(DialogueNodeVisitor visitor)
     {
         visitor.Visit(this);
+    }
+
+    public Vector3 GetCoords()
+    {
+        return coordinates;
+    }
+    public int GetHold()
+    {
+        return holdTime;
     }
 
 }

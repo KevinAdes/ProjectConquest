@@ -13,6 +13,9 @@ public class DialogueChannel : ScriptableObject
     public DialogueNodeCallback OnDialogueNodeStart;
     public DialogueNodeCallback OnDialogueNodeEnd;
 
+    public DialogueNode currentNode;
+    public DialogueNode nextNode;
+
     public void RaiseRequestDialogue(Dialogue dialogue)
     {
         OnDialogueRequested?.Invoke(dialogue);
@@ -30,6 +33,7 @@ public class DialogueChannel : ScriptableObject
 
     public void RaiseRequestDialogueNode(DialogueNode node)
     {
+        Debug.Log("is this happening");
         OnDialogueNodeRequested?.Invoke(node);
     }
 

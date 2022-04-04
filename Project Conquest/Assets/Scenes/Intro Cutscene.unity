@@ -328,6 +328,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 353f2833100b34054bd1f2cc6a58e580, type: 3}
+--- !u!1 &295885844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7738306762641248460, guid: 353f2833100b34054bd1f2cc6a58e580,
+    type: 3}
+  m_PrefabInstance: {fileID: 295885843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &295885845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295885844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d83606ac9474e78946ab8f4f69da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DialogueChannel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
+  target: {fileID: 0}
 --- !u!1 &452384594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,9 +1069,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onAwake: 1
+  onDelay: 0
+  delay: 0
   channel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
   dialogue: {fileID: 11400000, guid: 085c418f97ef94815b5c9263f82f68ee, type: 2}
   flag: GameStarted
+  OtherEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8489056893429971455
 Transform:
   m_ObjectHideFlags: 0

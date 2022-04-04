@@ -54,9 +54,14 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     {
         if(node.dialogueLine.text == "")
         {
-            //print("Empty Dialogue Detected");
+            GetComponent<Image>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Image>().enabled = true;
         }
         gameObject.SetActive(true);
+
 
         m_DialogueText.text = node.dialogueLine.text;
         m_SpeakerText.text = node.dialogueLine.speaker.characterName;
@@ -113,17 +118,38 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     {
         m_ListenToInput = false;
         node.playAnim();
-        print("IS THIS RUNNING");
-        if (node.GetAnimator().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        StartCoroutine(WaitForAnim(node));
+    }
+
+    IEnumerator WaitForAnim(AnimationDialogueNode node)
+    {
+        yield return new WaitForEndOfFrame();
+        while (true)
         {
-            print("is this running");
-            m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
+            if (node.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName(node.AnimationToPlay))
+            {
+                print("waiting...");
+                yield return new WaitForSeconds(node.GetAnimator().GetCurrentAnimatorStateInfo(0).length);
+                {
+                    m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
+                    print("GO!");
+                    break;
+                }
+            }
+            
         }
+
     }
     public void Visit(CameraDialogueNode node)
     {
         m_ListenToInput = false;
-        FindObjectOfType<Camera>().transform.position = node.coordinates;
+        FindObjectOfType<Camera>().transform.position = node.GetCoords();
+        StartCoroutine(CameraHold(node));
+    }
+
+    IEnumerator CameraHold(CameraDialogueNode node)
+    {
+        yield return new WaitForSeconds(node.GetHold());
         m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
     }
 

@@ -10,32 +10,33 @@ using Random = UnityEngine.Random;
 public class RoboGuy : MonoBehaviour
 {
     //TODO Check for unneeded code 
-    [Header("Stats")]
-    public int expYield;
-
-    [Header("Components")]
-    public Animator animator;
-    public Collider2D collider2;
-    public CircleCollider2D trigger;
-    public Rigidbody2D body;
+    [SerializeField]
+    int expYield;
+    
+    Animator animator;
+    Collider2D collider2;
+    CircleCollider2D trigger;
+    Rigidbody2D body;
 
     [Header("Calculation Variables")]
-    public float wait;
+    [SerializeField]
+    float wait;
+    [SerializeField]
     [Range(0, 10)]
-    public float courage;
+    float courage;
     float suspicion = 0;
-    public float alertRange;
+    [SerializeField]
+    float alertRange;
 
     [SerializeField]
-    private bool wanderer;
+    bool wanderer;
     bool courageRolled = false;
-    public bool alerted = false;
-    public bool dead = false;
+    
+    bool alerted = false;
 
-    [HideInInspector]
-    public int direction = 1;
+    int direction = 1;
     int flip;
-    public int ID;
+    int ID;
 
     PlayerMovement player;
 
@@ -103,12 +104,12 @@ public class RoboGuy : MonoBehaviour
     }
     private void CheckThings()
     {
-        if (entity.detected)
+        if (entity.GetDetected())
         {
             suspicion = 5;
             Alert();
         }
-        if (entity.dead)
+        if (entity.GetDead())
         {
             StateSwitcher("Dead");
         }
@@ -171,7 +172,7 @@ public class RoboGuy : MonoBehaviour
             transform.localScale = new Vector3(scaleCache * flip, transform.localScale.y, transform.localScale.z);
             direction = 1;
         }
-        velocity.x = entity.speed * direction * flip * Time.deltaTime * 10;
+        velocity.x = entity.GetSpeed() * direction * flip * Time.deltaTime * 10;
         velocity.y = body.velocity.y;
         body.velocity = velocity;
     }
@@ -195,7 +196,7 @@ public class RoboGuy : MonoBehaviour
             float var = Random.Range(50, 70);
             yield return new WaitForSeconds(var);
             GetComponent<Wanderer>().enabled = true;
-            GetComponent<Wanderer>().active = true;
+            GetComponent<Wanderer>().SetActive(true);
             GetComponent<Wanderer>().Gas();
             GetComponent<ContinuousMovement>().enabled = false;
             StartCoroutine(ChangeMove());
@@ -205,7 +206,7 @@ public class RoboGuy : MonoBehaviour
         {
             float iable = Random.Range(4, 8);
             yield return new WaitForSeconds(iable);
-            GetComponent<Wanderer>().active = false;
+            GetComponent<Wanderer>().SetActive(false);
             GetComponent<Wanderer>().enabled = false;
             GetComponent<ContinuousMovement>().enabled = true;
             StartCoroutine(ChangeMove());
@@ -218,7 +219,7 @@ public class RoboGuy : MonoBehaviour
         StopCoroutine(ChangeMove());
         if(GetComponent<Wanderer>() != null)
         {
-            GetComponent<Wanderer>().active = false;
+            GetComponent<Wanderer>().SetActive(false);
             GetComponent<Wanderer>().enabled = false;
         }
         if(GetComponent<ContinuousMovement>() != null)
@@ -231,7 +232,7 @@ public class RoboGuy : MonoBehaviour
     {
         if (GetComponent<Wanderer>() != null)
         {
-            GetComponent<Wanderer>().active = true;
+            GetComponent<Wanderer>().SetActive(true);
             GetComponent<Wanderer>().enabled = true;
             GetComponent<Wanderer>().Gas();
             StopCoroutine(ChangeMove());
@@ -252,5 +253,15 @@ public class RoboGuy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, alertRange);
+    }
+
+    public bool GetAlerted()
+    {
+        return alerted;
+    }
+
+    public void SetAlerted(bool b)
+    {
+        alerted = b;
     }
 }

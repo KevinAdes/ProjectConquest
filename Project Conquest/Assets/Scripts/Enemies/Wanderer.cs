@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Wanderer : MonoBehaviour
 {
-    [Header("Components")]
-    public Transform Path;
+    [SerializeField]
+    Transform Path;
 
-
-    [Header("Calculation Variables")]
-    public float speed;
-    public float wait;
+    [SerializeField]
+    float wait;
+    float speed;
 
     Entity entity;
 
     int currentPoint = 0;
-    public bool active = true;
+    bool active = true;
 
     float scaleCache;
-    public Vector3[] waypoints;
+    Vector3[] waypoints;
     Vector2 velocity = new Vector2(0, 0);
 
     void Awake()
@@ -27,7 +26,7 @@ public class Wanderer : MonoBehaviour
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
-            speed = entity.speed;
+            speed = entity.GetSpeed();
         }
         waypoints = new Vector3[Path.childCount];
 
@@ -51,12 +50,12 @@ public class Wanderer : MonoBehaviour
         if (!facingRight)
         {
             transform.localScale = new Vector3(scaleCache * -1, transform.localScale.y, transform.localScale.z);
-            entity.direction = -1;
+            entity.SetDirection(-1); 
         }
         if (facingRight)
         {
             transform.localScale = new Vector3(scaleCache, transform.localScale.y, transform.localScale.z);
-            entity.direction = 1;
+            entity.SetDirection(1);
         }
     }
 
@@ -70,7 +69,7 @@ public class Wanderer : MonoBehaviour
             Vector3 positionStore = transform.position;
             var dist = Vector3.Distance(positionStore, targetWaypoint);
             transform.position = Vector2.Lerp(transform.position, targetWaypoint, speed * .5f * (Time.deltaTime / dist));
-            if (GetComponent<Entity>().detected) { break; }
+            if (GetComponent<Entity>().GetDetected()) { break; }
             if (Mathf.Abs(transform.position.x - targetWaypoint.x) < .1)
             {
                 currentPoint = (currentPoint + 1) % waypoints.Length;
@@ -87,5 +86,15 @@ public class Wanderer : MonoBehaviour
             waypoints[i] = Path.GetChild(i).position;
         }
         StartCoroutine(Wander(waypoints));
+    }
+
+    //Getters and Setters
+    public bool GetActive()
+    {
+        return active;
+    }
+    public void SetActive(bool b)
+    {
+        active = b;
     }
 }

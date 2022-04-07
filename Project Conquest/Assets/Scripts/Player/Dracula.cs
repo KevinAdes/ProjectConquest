@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static SkillsList;
 
 public enum states
 {
@@ -13,35 +12,36 @@ public enum states
 
 public class Dracula : MonoBehaviour
 {
-    public float maxHealth;
-    public float damage;
-    public float defense;
-    public float speed;
-    public float jump;
-    public float attackModifier;
+    float maxHealth;
+    float damage;
+    float defense;
+    float speed;
+    float jump;
+    float attackModifier;
 
-    public float health;
-    public float speedCap;
-    public float acceleration;
+    float health;
+    float speedCap;
+    float acceleration;
 
-    public float speedCache;
-    public float speedCapCache;
+    float speedCache;
+    float speedCapCache;
 
     bool attack;
     bool drink;
-    public Animator animator;
+    Animator animator;
     PlayerMovement me;
     PauseControl pauseControl;
     InventoryObject inventory;
 
-    public states STATE;
+    states STATE;
 
-    public Transform attackPoint;
-    public float attackRange;
+    Transform attackPoint;
+    float attackRange;
 
     Vector2 velocity;
 
-    public LayerMask enemies;
+    [SerializeField]
+    LayerMask enemies;
 
     GameManager manager;
 
@@ -144,12 +144,12 @@ public class Dracula : MonoBehaviour
             {
                 Entity target = enemy.transform.parent.GetComponent<Entity>();
                 DamageSystem damageSystem = enemy.transform.parent.GetComponent<DamageSystem>();
-                if (damageSystem.vulnerable == true)
+                if (damageSystem.GetVulnerable())
                 {
                     Vector2 knockback = ((enemy.transform.position - transform.position) + Vector3.up);
-                    damageSystem.TakeDamage(damageSystem.body, knockback, damageSystem.DamageCalculator(damage, target.defense, attackModifier));
+                    damageSystem.TakeDamage(damageSystem.GetBody(), knockback, damageSystem.DamageCalculator(damage, target.GetDefense(), attackModifier));
 
-                    target.animator.SetTrigger("Hit");
+                    target.GetAnimator().SetTrigger("Hit");
                     enemy.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity += knockback * 5;
                 }
             }
@@ -168,7 +168,7 @@ public class Dracula : MonoBehaviour
 
     private void Scavenge()
     {
-        if (target != null && target.dead == true)
+        if (target != null && target.GetDead() == true)
         {
 
             if (Input.GetAxis("Fire1") != 0 && drink == false)
@@ -177,8 +177,8 @@ public class Dracula : MonoBehaviour
                 drink = true;
                 //Gain extra exp from victim
                 animator.SetTrigger("Drink");
-                AddXP(target.expYield);
-                target.animator.SetTrigger("Destroy");
+                AddXP((int)target.GetExpYield());
+                target.GetAnimator().SetTrigger("Destroy");
             }
         }
 
@@ -189,12 +189,6 @@ public class Dracula : MonoBehaviour
         STATE = states.DEFAULT;
         drink = false;
     }
-
-    public void StateSwitcher(states State)
-    {
-        STATE = State;
-    }
-
 
     public void AddXP(int gains)
     {
@@ -241,7 +235,7 @@ public class Dracula : MonoBehaviour
         if (collision.gameObject.layer == 10)
         {
             target = null;
-            StateSwitcher(states.DEFAULT);
+            SetState(states.DEFAULT);
         }
     }
     private void OnDrawGizmosSelected()
@@ -275,4 +269,115 @@ public class Dracula : MonoBehaviour
             pauseControl.GetPlayerData().SetBlood(0);
         }
     }
+
+    //Getters and Setters
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(float f)
+    {
+        health = f;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void SetMaxHealth(float f)
+    {
+        maxHealth = f;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+    public void SetDamage(float f)
+    {
+        damage = f;
+    }
+
+    public float GetDefense()
+    {
+        return defense;
+    }
+    public void SetDefense(float f)
+    {
+        defense = f;
+    }
+
+    public float GetAttackModifier()
+    {
+        return attackModifier;
+    }
+
+    public void SetAttackModifier(float f)
+    {
+        attackModifier = f;
+    }
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetSpeed(float f)
+    {
+        speed = f;
+    }
+    public float GetSpeedCap()
+    {
+        return speedCap;
+    }
+
+    public void SetSpeedCap(float f)
+    {
+        speedCap = f;
+    }
+    public float GetSpeedCache()
+    {
+        return speed;
+    }
+
+    public void SetSpeedCache(float f)
+    {
+        speedCache = f;
+    }
+    public float GetSpeedCapCache()
+    {
+        return speed;
+    }
+
+    public void SetSpeedCapCache(float f)
+    {
+        speed = f;
+    }
+
+    public float GetJump()
+    {
+        return jump;
+    }
+
+    public void SetJump(float f)
+    {
+        jump = f;
+    }
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+
+    public states GetState()
+    {
+        return STATE;
+    }
+
+    public void SetState(states s)
+    {
+        STATE = s;
+    }
+
+
 }

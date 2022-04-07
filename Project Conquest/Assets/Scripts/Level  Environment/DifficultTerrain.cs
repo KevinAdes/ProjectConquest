@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DifficultTerrain : MonoBehaviour
 {
+    //TODO Make type an enum instead of a string
 
-    public float modifier;
-    public string TYPE;
+    [SerializeField]
+    float modifier;
+    [SerializeField]
+    string TYPE;
     MapMovement Mapula;
 
     Vector2 respawnOffset;
@@ -21,7 +24,7 @@ public class DifficultTerrain : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Mapula.speed = Mapula.speed * modifier;
+        Mapula.SetSpeed(Mapula.GetSpeed() * modifier);
         active = true;
         if(TYPE == "WATER")
         {
@@ -56,7 +59,7 @@ public class DifficultTerrain : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        Mapula.speed = Mapula.speed / modifier;
+        Mapula.SetSpeed(Mapula.GetSpeed() / modifier);
         active = false;
     }
 

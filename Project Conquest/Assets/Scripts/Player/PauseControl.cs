@@ -100,7 +100,7 @@ public class PauseControl : MonoBehaviour
 
     void Pause()
     {
-        if (dracula.STATE == states.DEFAULT && Input.GetAxisRaw("Pause") != 0)
+        if (dracula.GetState() == states.DEFAULT && Input.GetAxisRaw("Pause") != 0)
         {
             if(isAxisInUse == false)
             {
@@ -265,16 +265,16 @@ public class PauseControl : MonoBehaviour
 
         if (dracula != null)
         {
-            dracula.maxHealth = playerData.maxHealth;
-            dracula.damage = playerData.damage;
-            dracula.defense = playerData.defense;
-            dracula.attackModifier = playerData.attackModifier;
+            dracula.SetMaxHealth(playerData.maxHealth);
+            dracula.SetDamage(playerData.damage);
+            dracula.SetDefense(playerData.defense);
+            dracula.SetAttackModifier(playerData.attackModifier);
 
-            dracula.speed = playerData.speed;
-            dracula.speedCache = dracula.speed;
-            dracula.speedCap = playerData.speedCap;
-            dracula.speedCapCache = dracula.speedCap;
-            dracula.jump = playerData.jump;
+            dracula.SetSpeed(playerData.speed);
+            dracula.SetSpeedCache(dracula.GetSpeed());
+            dracula.SetSpeedCap(playerData.speedCap);
+            dracula.SetSpeedCapCache(dracula.GetSpeedCap());
+            dracula.SetJump(playerData.jump);
         }
 
     }

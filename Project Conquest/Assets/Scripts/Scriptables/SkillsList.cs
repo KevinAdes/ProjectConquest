@@ -37,7 +37,7 @@ public class SkillsList : ScriptableObject
 
     public void Fire()
     {
-        bullet.GetComponent<PlayerBullet>().SetBullet(Mathf.RoundToInt(bulletPower * FindObjectOfType<Dracula>().damage));
+        bullet.GetComponent<PlayerBullet>().SetBullet(Mathf.RoundToInt(bulletPower * FindObjectOfType<Dracula>().GetDamage()));
         GameObject BulletInst = Instantiate(bullet, FindObjectOfType<PlayerMovement>().transform.position, Quaternion.identity);
         BulletInst.GetComponent<Rigidbody2D>().AddForce(Vector3.forward * bulletSpeed);
     }
@@ -53,7 +53,7 @@ public class SkillsList : ScriptableObject
         {
             FindObjectOfType<Dracula>().SetAttack(true);
             //me.speed = me.speed / 2;
-            FindObjectOfType<Dracula>().animator.SetTrigger("Attack");
+            FindObjectOfType<Dracula>().GetAnimator().SetTrigger("Attack");
         }
     }
 }

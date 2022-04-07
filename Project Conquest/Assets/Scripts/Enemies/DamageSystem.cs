@@ -8,14 +8,15 @@ public class DamageSystem : MonoBehaviour
     Interactable interactable;
     Dracula dracula;
 
-    public Rigidbody2D body;
+    [SerializeField]
+    Rigidbody2D body;
+    
+    float health;
+    float damage;
+    float defense;
+    int expYield;
 
-    public float health;
-    public float damage;
-    public float defense;
-    public int expYield;
-
-    public bool vulnerable = true;
+    bool vulnerable = true;
 
 
     // Start is called before the first frame update
@@ -25,16 +26,16 @@ public class DamageSystem : MonoBehaviour
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
-            health = entity.health;
-            damage = entity.damage;
-            defense = entity.defense;
+            health = entity.GetHealth();
+            damage = entity.GetDamage();
+            defense = entity.GetDefense();
         }
         if (GetComponent<Dracula>() != null)
         {
             dracula = GetComponent<Dracula>();
-            health = dracula.health;
-            damage = dracula.damage;
-            defense = dracula.defense;
+            health = dracula.GetHealth();
+            damage = dracula.GetDamage();
+            defense = dracula.GetDefense();
         }
     }
 
@@ -62,18 +63,18 @@ public class DamageSystem : MonoBehaviour
 
         if(dracula != null)
         {
-            dracula.health -= dmg;
+            dracula.SetHealth(dracula.GetHealth() - dmg);
         }
         if (entity != null)
         {
-            entity.detected = true;
-            entity.health -= dmg;
+            entity.SetDetected(true);
+            entity.SetHealth(entity.GetHealth() - dmg);
         }
         if (health <= 0)
         {
             if (entity != null)
             {
-                entity.dead = true;
+                entity.SetDead(true);
                 GetComponent<Entity>().Death();
             } 
             else
@@ -116,5 +117,24 @@ public class DamageSystem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //Getters and Setters
+    public bool GetVulnerable()
+    {
+        return vulnerable;
+    }
 
+    public void SetVulnerable(bool b)
+    {
+        vulnerable = b;
+    }
+
+    public Rigidbody2D GetBody()
+    {
+        return body;
+    }
+    
+    public Entity GetEntity()
+    {
+        return entity;
+    }
 }

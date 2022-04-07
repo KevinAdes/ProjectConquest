@@ -6,9 +6,14 @@ using static SkillsList;
 
 public class Turret : MonoBehaviour
 {
-    public GameObject projectile;
-    public float fireRate;
-    public float force;
+    [SerializeField]
+    GameObject projectile;
+    
+    [SerializeField]
+    float fireRate;
+    
+    [SerializeField]
+    float force;
     float shotSpacing = 0;
 
     GameManager manager;

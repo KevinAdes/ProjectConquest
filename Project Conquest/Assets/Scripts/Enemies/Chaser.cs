@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Chaser : MonoBehaviour
 {
-    public int speed;
-    public Rigidbody2D body;
+    [SerializeField]
+    int speed;
+    [SerializeField]
+    Rigidbody2D body;
     Vector2 velocity;
     int direction;
 
-    [HideInInspector]
-    public bool vulerable = true;
     Entity me;
     PlayerMovement player;
     float scaleCache;
@@ -26,9 +26,9 @@ public class Chaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (me.dead == false)
+        if (me.GetDead() == false)
         {
-            switch (me.detected)
+            switch (me.GetDetected())
             {
                 case true:
                     Run();
@@ -53,16 +53,16 @@ public class Chaser : MonoBehaviour
 
         if (right == true)
         {
-            me.direction = 1;
-            transform.localScale = new Vector3(scaleCache * me.direction, transform.localScale.y, transform.localScale.z);
+            me.SetDirection(1);
+            transform.localScale = new Vector3(scaleCache * me.GetDirection(), transform.localScale.y, transform.localScale.z);
         }
         if (right == false)
         {
-            me.direction = -1;
-            transform.localScale = new Vector3(scaleCache * me.direction, transform.localScale.y, transform.localScale.z);
+            me.SetDirection(-1);
+            transform.localScale = new Vector3(scaleCache * me.GetDirection(), transform.localScale.y, transform.localScale.z);
         }
         
-        velocity.x = speed * me.direction;
+        velocity.x = speed * me.GetDirection();
         velocity.y = body.velocity.y;
         body.velocity = velocity;
         

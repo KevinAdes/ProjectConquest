@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MapMovement : MonoBehaviour
 {
-    public float speed;
-    public GameObject prompt;
+    [SerializeField]
+    float speed;
+    [SerializeField]
+    GameObject prompt;
 
     string target = null;
 
@@ -110,6 +112,16 @@ public class MapMovement : MonoBehaviour
             prompt.SetActive(false);
             target = null;
         }
+    }
+
+    //Getters and Setters
+    public float GetSpeed()
+    {
+        return speed;
+    }
+    public void SetSpeed(float f)
+    {
+        speed = f;
     }
 
 }

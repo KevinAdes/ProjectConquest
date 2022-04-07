@@ -76,7 +76,7 @@ public class Level : MonoBehaviour
         int i = 0;
         while (i < temp.Count)
         {
-            if(temp[i].important == false)
+            if(temp[i].GetImportant() == false)
             {
                 temp.Remove(temp[i]);
             }
@@ -92,7 +92,7 @@ public class Level : MonoBehaviour
 
         foreach (Entity entity in entities)
         {
-            if(entity.important == true)
+            if(entity.GetImportant() == true)
             {
                 EnemyManager guy = ScriptableObject.CreateInstance<EnemyManager>();
                 if(entity.GetSkills().Length > 0)
@@ -105,7 +105,7 @@ public class Level : MonoBehaviour
                 }
                 guy.guy = entity.gameObject;
                 guy.EnemyID = count;
-                entity.ID = count;
+                entity.SetID(count);
                 guy.myName = entity.GetName();
                 guy.dead = false;
                 data.Entities[count] = guy;
@@ -119,7 +119,7 @@ public class Level : MonoBehaviour
             EnemyManager inter = ScriptableObject.CreateInstance<EnemyManager>();
             inter.guy = interactable.gameObject;
             inter.EnemyID = count;
-            interactable.ID = count;
+            interactable.SetID(count);
             inter.dead = false;
             data.Interactables[count] = inter;
             count++;
@@ -148,7 +148,7 @@ public class Level : MonoBehaviour
         int i = 0;
         while (i < temp.Count)
         {
-            if (temp[i].important == false)
+            if (temp[i].GetImportant() == false)
             {
                 temp.Remove(temp[i]);
             }
@@ -161,15 +161,15 @@ public class Level : MonoBehaviour
         entities = temp.ToArray();
         foreach (Entity entity in entities)
         {
-            if (entity.important == true)
+            if (entity.GetImportant() == true)
             {
                 EnemyManager guy = data.Entities[count];
                 guy.guy = entity.gameObject;
                 //
-                guy.important = entity.important;
+                guy.important = entity.GetImportant();
                 guy.myName = entity.GetName();
                 //
-                entity.ID = count;
+                entity.SetID(count);
                 data.Entities[count] = guy;
 
                 count++;
@@ -182,7 +182,7 @@ public class Level : MonoBehaviour
             inter.guy = interactable.gameObject;
             //
             inter.EnemyID = count;
-            interactable.ID = count;
+            interactable.SetID(count);
             //
             data.Interactables[count] = inter;
             count++;

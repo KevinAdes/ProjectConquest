@@ -7,16 +7,21 @@ using UnityEngine;
 public class FieldOfView : MonoBehaviour
 {
     enum Types {}
-    public float viewRadius;
+    [SerializeField]
+    float viewRadius;
+    [SerializeField]
     [Range(0,360)]
-    public float viewAngle;
+    float viewAngle;
 
-    public float offset;
+    [SerializeField]
+    float offset;
+    [SerializeField]
+    LayerMask TargetMask;
+    [SerializeField]
+    LayerMask Obstacles;
 
-    public LayerMask TargetMask;
-    public LayerMask Obstacles;
-
-    public int direction;
+    [SerializeField]
+    int direction;
 
     string TYPE;
 
@@ -41,7 +46,7 @@ public class FieldOfView : MonoBehaviour
     {
         if (entity != null)
         {
-            direction = GetComponent<Entity>().direction;
+            direction = GetComponent<Entity>().GetDirection();
 
         }
         FindVisibleTargets();
@@ -79,10 +84,10 @@ public class FieldOfView : MonoBehaviour
                 switch (TYPE)
                 {
                     case "ENTITY":
-                        entity.detected = false;
+                        entity.SetDetected(false);
                         break;
                     case "INTERACTABLE":
-                        interactable.detected = false;
+                        interactable.SetDetected(false);
                         break;
                 }
             }
@@ -94,18 +99,31 @@ public class FieldOfView : MonoBehaviour
         switch (TYPE)
         {
             case "ENTITY":
-                if (entity.detected == false)
+                if (entity.GetDetected() == false)
                 {
-                    entity.detected = true;
+                    entity.SetDetected(true);
                 }
                 break;
             case "INTERACTABLE":
-                if (interactable.detected == false)
+                if (interactable.GetDetected() == false)
                 {
-                    interactable.detected = true;
+                    interactable.SetDetected(true);
                 }
                 break;
         }
     }
 
+    //Getters and Setters
+    public float GetViewRadius()
+    {
+        return viewRadius;
+    }
+    public float GetViewAngle()
+    {
+        return viewAngle;
+    }
+    public int GetDirection()
+    {
+        return direction;
+    }
 }

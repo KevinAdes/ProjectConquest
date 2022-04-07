@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class TownSpawner : MonoBehaviour
 {
-    public GameObject spawn;
-    public Vector3 position;
-    public float fireRate;
+    [SerializeField]
+    GameObject spawn;
+    
+    [SerializeField]
+    Vector3 position;
+    
+    [SerializeField]
+    float fireRate;
+    
     float shotSpacing = 0;
 
     // Update is called once per frame

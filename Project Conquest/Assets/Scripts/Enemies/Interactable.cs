@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
-    public int ID;
-    public int cash;
-    public bool destructable;
+    int ID;
+    [SerializeField]
+    int cash;
+    [SerializeField]
+    bool destructable;
 
-    [HideInInspector]
-    public bool detected = false;
+    bool detected = false;
 
     GameManager manager;
 
@@ -19,13 +20,13 @@ public class Interactable : MonoBehaviour
     LevelData Data;
 
     [SerializeField]
-    public UnityEvent Interaction;
+    UnityEvent Interaction;
 
     public void DoAction()
     {
         if (Interaction != null)
         {
-            if (GetComponent<RoboGuy>() != null && GetComponent<RoboGuy>().alerted == true)
+            if (GetComponent<RoboGuy>() != null && GetComponent<RoboGuy>().GetAlerted() == true)
             {
                 return;
             }
@@ -89,5 +90,30 @@ public class Interactable : MonoBehaviour
             manager.markDestroyed(ID, SceneManager.GetActiveScene().name);
             Destroy(gameObject);
         }
+    }
+
+    //Getters and Setters
+    public int GetID()
+    {
+        return ID;
+    }
+
+    public void SetID(int i)
+    {
+        ID = i;
+    }
+
+    public bool GetDetected()
+    {
+        return detected;
+    }
+    public void SetDetected(bool b)
+    {
+        detected = b;
+    }
+
+    public UnityEvent GetInteraction()
+    {
+        return Interaction;
     }
 }

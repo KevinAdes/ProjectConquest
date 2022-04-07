@@ -16,7 +16,7 @@ public class PlayerBullet : MonoBehaviour
         switch (collision.gameObject.layer)
         {
             case 1:
-                collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, collision.gameObject.GetComponent<DamageSystem>().DamageCalculator(dmg, collision.gameObject.GetComponent<DamageSystem>().defense));
+                collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, collision.gameObject.GetComponent<DamageSystem>().DamageCalculator(dmg, collision.gameObject.GetComponent<DamageSystem>().GetEntity().GetDefense()));
                 Destroy(gameObject);
                 break;
             case 8:

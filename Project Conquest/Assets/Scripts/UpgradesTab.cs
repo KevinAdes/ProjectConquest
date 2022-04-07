@@ -54,9 +54,9 @@ public class UpgradesTab : MonoBehaviour
         foreach (string name in FindObjectOfType<GameManager>().enemies.Enemies.Keys)
         {
             GameObject newButton = Instantiate(defaultButton, enemyNames.transform, false);
-            newButton.GetComponent<XButton>().scroller = true;
+            newButton.GetComponent<XButton>().SetScroller(true);
             newButton.GetComponent<XButton>().Init(name);
-            newButton.GetComponent<XButton>().control = control ;
+            newButton.GetComponent<XButton>().SetControl(control);
             temp = newButton.GetComponent<Button>();
         }
     }
@@ -72,8 +72,8 @@ public class UpgradesTab : MonoBehaviour
         {
             GameObject newButton = Instantiate(displayButton, upgradeNames.transform, false);
             xButton = newButton.GetComponent<XButton>();
-            xButton.scroller = false;
-            xButton.control = control;
+            xButton.SetScroller(false);
+            xButton.SetControl(control) ;
             xButton.SetFunc(skill);
             if (!skill.GetPurchased())
             {

@@ -8,7 +8,7 @@ using TMPro;
 
 public class XButton : MonoBehaviour
 {
-    public PauseControl control;
+    PauseControl control;
     Button button;
 
     [SerializeField]
@@ -19,7 +19,8 @@ public class XButton : MonoBehaviour
     TextMeshProUGUI buttonDescription;
 
 
-    public bool scroller;
+    [SerializeField]
+    bool scroller;
     EnemySkill skill;
 
     public void Init(string s)
@@ -68,5 +69,25 @@ public class XButton : MonoBehaviour
     public void SetFunc(EnemySkill s)
     {
         skill = s;
+    }
+
+    public PauseControl GetControl()
+    {
+        return control;
+    }
+
+    public void SetControl(PauseControl PC)
+    {
+        control = PC;
+    }
+
+    public bool GetScroller()
+    {
+        return scroller;
+    }
+    
+    public void SetScroller(bool b)
+    {
+        scroller = b;
     }
 }

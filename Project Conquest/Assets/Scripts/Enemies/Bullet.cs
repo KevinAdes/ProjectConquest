@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int dmg;
+    [SerializeField]
+    int dmg;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Bullet : MonoBehaviour
         switch (collision.gameObject.layer)
         {
             case 13:
-                collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, collision.gameObject.GetComponent<DamageSystem>().DamageCalculator(dmg, collision.gameObject.GetComponent<DamageSystem>().defense));
+                collision.gameObject.GetComponent<DamageSystem>().TakeDamage(collision.gameObject.GetComponent<Rigidbody2D>(), transform.position - collision.transform.position + Vector3.up * 0.33f, collision.gameObject.GetComponent<DamageSystem>().DamageCalculator(dmg, collision.gameObject.GetComponent<DamageSystem>().GetEntity().GetDefense()));
                 Destroy(gameObject);
                 break;
             case 8:

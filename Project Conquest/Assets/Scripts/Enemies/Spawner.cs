@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject spawn;
-    public float fireRate;
+    [SerializeField]
+    GameObject spawn;
+    [SerializeField]
+    float fireRate;
     float shotSpacing = 0;
 
-    public bool detected = false;
 
     Interactable me;
     public void Start()
@@ -19,7 +20,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (me.detected)
+        switch (me.GetDetected())
         {
             case true:
                 SpawnTimer();

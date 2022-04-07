@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Defender: MonoBehaviour
 {
-
-    [HideInInspector]
-    public bool vulerable = true;
     Entity me;
     PlayerMovement player;
 
@@ -20,7 +17,7 @@ public class Defender: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch (me.detected)
+        switch (me.GetDetected())
         {
             case true:
                 break;

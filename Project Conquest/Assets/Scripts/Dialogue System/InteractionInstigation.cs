@@ -25,7 +25,7 @@ public class InteractionInstigation : MonoBehaviour
                 }
                 else
                 {
-                    if (Vector3.Distance(interactable.transform.position, transform.position) < Vector3.Distance(target.transform.position, transform.position) && interactable.Interaction != null)
+                    if (Vector3.Distance(interactable.transform.position, transform.position) < Vector3.Distance(target.transform.position, transform.position) && interactable.GetInteraction() != null)
                     {
                         target = interactable;
                     }

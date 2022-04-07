@@ -11,25 +11,22 @@ public class Entity : MonoBehaviour
     string myName;
 
     [Header("Stats")]
-    public float health;
-    public float damage;
-    public float defense;
-    public float speed;
-    public int expYield;
+    [SerializeField]
+    float health, damage, defense, speed, expYield;
 
     [Header("Components")]
-    public Animator animator;
+    [SerializeField]
+    Animator animator;
 
-    public bool important;
-    public int ID;
+    [SerializeField]
+    bool important;
+    int ID;
+    
+    bool detected = false;
+    bool stunned;
+    bool dead;
 
-    [HideInInspector]
-    public bool detected = false;
-    public bool stunned;
-    public bool dead;
-
-    [HideInInspector]
-    public int direction = 1;
+    int direction = 1;
 
     GameManager manager;
 
@@ -73,7 +70,7 @@ public class Entity : MonoBehaviour
         {
             FindObjectOfType<GameManager>().AddSkill(ID, SceneManager.GetActiveScene().name);
         }
-        GetComponent<DamageSystem>().vulnerable = false;
+        GetComponent<DamageSystem>().SetVulnerable(false);
         StartCoroutine(Decomposing());
     }
 
@@ -98,4 +95,100 @@ public class Entity : MonoBehaviour
         return skillSet;
     }
 
+    //Getters and Setters
+
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public void SetHealth(float f)
+    {
+        health = f;
+    }
+
+    public float GetDamage()
+    {
+        return damage;
+    }
+    public void SetDamage(float f)
+    {
+        damage = f;
+    }
+
+    public float GetDefense()
+    {
+        return defense;
+    }
+    public void SetDefense(float f)
+    {
+        defense = f;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetSpeed(float f)
+    {
+        speed = f;
+    }
+    public float GetExpYield()
+    {
+        return expYield;
+    }
+
+    public void SetExpYield(float f)
+    {
+        expYield = f;
+    }
+
+    public int GetID()
+    {
+        return ID;
+    }
+
+    public void SetID(int i)
+    {
+        ID = i;
+    }
+
+    public int GetDirection()
+    {
+        return direction;
+    }
+    public void SetDirection(int i)
+    {
+        direction = i;
+    }
+
+    public bool GetImportant()
+    {
+        return important;
+    }
+
+    public bool GetDetected()
+    {
+        return detected;
+    }
+    public void SetDetected(bool b)
+    {
+        detected = b;
+    }
+
+    public bool GetDead()
+    {
+        return dead;
+    }
+
+    public void SetDead(bool b)
+    {
+        dead = b;
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
 }

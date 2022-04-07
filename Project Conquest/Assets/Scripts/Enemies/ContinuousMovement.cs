@@ -6,7 +6,8 @@ public class ContinuousMovement : MonoBehaviour
 {
 
     [Header("Calculation Variables")]
-    public float speed;
+    [SerializeField]
+    float speed;
 
     Entity entity;
     Rigidbody2D body;
@@ -20,7 +21,7 @@ public class ContinuousMovement : MonoBehaviour
         if (GetComponent<Entity>() != null)
         {
             entity = GetComponent<Entity>();
-            speed = entity.speed;
+            speed = entity.GetSpeed();
             body = GetComponent<Rigidbody2D>();
         }
 
@@ -34,8 +35,8 @@ public class ContinuousMovement : MonoBehaviour
 
     private void Direction()
     {
-        transform.localScale = new Vector3(scaleCache * entity.direction, transform.localScale.y, transform.localScale.z);
-        moveVector.x = speed * entity.direction * Time.deltaTime * 1.5f;
+        transform.localScale = new Vector3(scaleCache * entity.GetDirection(), transform.localScale.y, transform.localScale.z);
+        moveVector.x = speed * entity.GetDirection() * Time.deltaTime * 1.5f;
         body.velocity += moveVector;
     }
 

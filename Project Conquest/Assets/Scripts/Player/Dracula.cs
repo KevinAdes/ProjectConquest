@@ -35,7 +35,9 @@ public class Dracula : MonoBehaviour
 
     states STATE;
 
+    [SerializeField]
     Transform attackPoint;
+    [SerializeField]
     float attackRange;
 
     Vector2 velocity;
@@ -59,15 +61,15 @@ public class Dracula : MonoBehaviour
         pauseControl = FindObjectOfType<PauseControl>();
         pauseControl.SetDracula(this);
         pauseControl.Calibrate();
-        inventory = pauseControl.inventory;
-        health = manager.playerData.currentHealth;
+        inventory = pauseControl.GetInventory();
+        health = manager.GetPlayerData().currentHealth;
         me = GetComponent<PlayerMovement>();
-        me.speed = speed;
-        me.jump = jump;
-        me.speedCap = speedCap;
-        me.acceleration = acceleration;
-        me.speedCache = speedCache;
-        me.speedCapCache = speedCapCache;
+        me.SetSpeed(speed);
+        me.SetJump(jump);
+        me.SetSpeedCap(speedCap);
+        me.SetAcceleration(acceleration);
+        me.SetSpeedCache(speedCache);
+        me.SetSpeedCapCache(speedCapCache);
 
         STATE = states.DEFAULT;
         animator = GetComponent<Animator>();
@@ -128,7 +130,7 @@ public class Dracula : MonoBehaviour
         if(attack == false)
         {
             attack = true;
-            me.speed = me.speed / 2;
+            me.SetSpeed(me.GetSpeed() / 2);
             animator.SetTrigger("Attack");
         }
 
@@ -204,12 +206,12 @@ public class Dracula : MonoBehaviour
             FindObjectOfType<Level>().GetData().SetRight(collision.GetComponent<LevelLoader>().GetRight());
             if (collision.GetComponent<LevelLoader>().GetCoords() != Vector3.zero)
             {
-                manager.playerData.currentHealth = health;
+                manager.GetPlayerData().currentHealth = health;
                 manager.LoadLevel("Map", collision.GetComponent<LevelLoader>().GetCoords());
             }
             else
             {
-                manager.playerData.currentHealth = health;
+                manager.GetPlayerData().currentHealth = health;
                 manager.LoadLevel(collision.GetComponent<LevelLoader>().GetID());
             }
         }
@@ -224,7 +226,7 @@ public class Dracula : MonoBehaviour
 
         if (collision.gameObject.layer == 18)
         {
-            inventory.AddItem(collision.gameObject.GetComponent<GameItem>().item, 1);
+            inventory.AddItem(collision.gameObject.GetComponent<GameItem>().GetItem(), 1);
             pauseControl.UpdateInventory();
             Destroy(collision.gameObject);
         }

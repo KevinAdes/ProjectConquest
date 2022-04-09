@@ -26,9 +26,9 @@ public class MapFog : MonoBehaviour
         {
             Animator animator = GetComponent<Animator>();
             animator.SetBool("Entered", true);
-            if (!Manager.mapFogTable.clouds.ContainsKey(cloudData.ID))
+            if (!Manager.GetMapFog().clouds.ContainsKey(cloudData.ID))
             {
-                Manager.mapFogTable.clouds.Add(cloudData.ID, cloudData);
+                Manager.GetMapFog().clouds.Add(cloudData.ID, cloudData);
             }
         }
     }

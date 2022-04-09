@@ -8,22 +8,28 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    public EnemyDictionary enemies;
-    public PlayerData playerData;
-    public LevelTable table;
-    public MapFogTable mapFogTable;
-    public GameObject LoadHider;
-    public GameObject alertBox;
-    LevelData temp;
 
-    public StoryFlags flags;
+    [SerializeField]
+    PlayerData playerData;
+
+    [SerializeField]
+    GameObject LoadHider;
+
+    [SerializeField]
+    GameObject alertBox;
 
     [SerializeField]
     Transform gameOverScreen;
 
     [SerializeField]
     SkillsList skillsList;
+
+    EnemyDictionary enemies;
+    LevelTable table;
+    MapFogTable mapFogTable;
+    LevelData temp;
+    StoryFlags flags;
+
 
     Vector3 mapulaTransform;
     public MapMovement Mapula;
@@ -59,8 +65,12 @@ public class GameManager : MonoBehaviour
         table = ScriptableObject.CreateInstance<LevelTable>();
         mapFogTable = ScriptableObject.CreateInstance<MapFogTable>();
         flags = ScriptableObject.CreateInstance<StoryFlags>();
-        animator = GetComponent<Animator>();
         AddDraculaToEnemiesList();
+    }
+
+    public void OnEnable()
+    {
+        animator = GetComponent<Animator>();
     }
 
     private void AddDraculaToEnemiesList()
@@ -73,6 +83,9 @@ public class GameManager : MonoBehaviour
         }
         enemies.Enemies.Add("Dracula", DraculaSkills);
     }
+
+//VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+//Level Loading Functions
 
     public void LoadLevel(string ID)
     {
@@ -180,8 +193,10 @@ public class GameManager : MonoBehaviour
         }
         animator.SetTrigger("Hide");
     }
+    //XXXXXXXXXXXXXXX//////////////////////////////////////
 
-    //MARKER FUNCTIONS////////////
+    //VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+    //MARKER FUNCTIONS
     public void AddSkill(int ID, string levelID)
     {
         print("this is happening");
@@ -212,7 +227,7 @@ public class GameManager : MonoBehaviour
         temp.Doors[ID].SetClosed(false);
         table.Levels[levelID] = temp;
     }
-    /////////////////////////////////
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXX
     
     public void LoadAlert(string levelID)
     {
@@ -267,6 +282,28 @@ public class GameManager : MonoBehaviour
         return singleton;
     }
 
+    public StoryFlags GetFlags()
+    {
+        return flags;
+    }
+
+    public EnemyDictionary GetEnemies()
+    {
+        return enemies;
+    }
+
+    public MapFogTable GetMapFog()
+    {
+        return mapFogTable;
+    }
+
+    public LevelTable GetTable()
+    {
+        return table;
+    }
+
+    public PlayerData GetPlayerData()
+    {
+        return playerData;
+    }
 }
-
-

@@ -33,7 +33,6 @@ public class DialogueChannel : ScriptableObject
 
     public void RaiseRequestDialogueNode(DialogueNode node)
     {
-        Debug.Log("is this happening");
         OnDialogueNodeRequested?.Invoke(node);
     }
 

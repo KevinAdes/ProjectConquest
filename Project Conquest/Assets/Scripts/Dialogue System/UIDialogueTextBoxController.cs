@@ -87,6 +87,7 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
 
         gameObject.SetActive(false);
         m_ChoicesBoxTransform.gameObject.SetActive(false);
+        m_ShopBoxTransform.GetComponent<DisplayInventory>()?.ClearInventory();
         m_ShopBoxTransform.gameObject.SetActive(false);
         FindObjectOfType<DialogueInstigator>().enabled = true;
     }
@@ -111,8 +112,9 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
         m_ListenToInput = true;
         m_ShopBoxTransform.gameObject.SetActive(true);  
         InventoryObject dummyInventory = ScriptableObject.CreateInstance<InventoryObject>();
-        dummyInventory.Container = node.shopInventory.Copy();
+        dummyInventory.SetContainer(node.shopInventory.Copy());
         m_ShopBoxTransform.GetComponent<DisplayInventory>().SetInventory(dummyInventory);
+        m_ShopBoxTransform.GetComponent<DisplayInventory>().UpdateDisplay();
     }
     public void Visit(AnimationDialogueNode node)
     {
@@ -128,11 +130,9 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
         {
             if (node.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName(node.AnimationToPlay))
             {
-                print("waiting...");
                 yield return new WaitForSeconds(node.GetAnimator().GetCurrentAnimatorStateInfo(0).length);
                 {
                     m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
-                    print("GO!");
                     break;
                 }
             }

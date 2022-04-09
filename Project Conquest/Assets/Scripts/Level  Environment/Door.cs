@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +12,17 @@ public class Door : MonoBehaviour
     GameManager manager;
 
     int ID;
-    public GameObject[] triggerGroupOff;
-    public GameObject[] triggerGroupOn;
-    public bool vertical;
-    public bool right;
+    [SerializeField]
+    GameObject[] triggerGroupOff;
+
+    [SerializeField]
+    GameObject[] triggerGroupOn;
+
+    [SerializeField]
+    bool vertical;
+
+    [SerializeField]
+    bool right;
 
     [SerializeField]
     bool closed;
@@ -40,58 +48,39 @@ public class Door : MonoBehaviour
         if (collision.gameObject.layer == 13)
         {
             active = false;
-            for (int i = 0; i < triggerGroupOff.Length; i++)
+            if (right == false && collision.transform.position.x < transform.position.x)
             {
-                if (triggerGroupOff[i] != null && triggerGroupOff[i].activeSelf == true)
+                for (int i = 0; i < triggerGroupOff.Length; i++)
                 {
-
-                    if (vertical == false)
+                    if (triggerGroupOff[i] != null)
                     {
-                        if (right == false && collision.transform.position.x < transform.position.x)
-                        {
-                            triggerGroupOff[i].SetActive(true);
-                        }
-                        if (right == true && collision.transform.position.x > transform.position.x)
-                        {
-                            triggerGroupOff[i].SetActive(true);
-                        }
-
+                        triggerGroupOff[i].SetActive(true);
                     }
-                    if (vertical == true)
+                }
+                for (int i = 0; i < triggerGroupOn.Length; i++)
+                {
+                    if (triggerGroupOn[i] != null)
                     {
-                        if (collision.transform.position.y > transform.position.y)
-                        {
-                            triggerGroupOff[i].SetActive(true);
-                        }
+                        triggerGroupOn[i].SetActive(false);
                     }
                 }
             }
-            for (int i = 0; i < triggerGroupOn.Length; i++)
+            if (right == true && collision.transform.position.x > transform.position.x)
             {
-                if (triggerGroupOn[i] != null)
+                for (int i = 0; i < triggerGroupOff.Length; i++)
                 {
-                    if (vertical == false)
+                    if (triggerGroupOff[i] != null)
                     {
-                        if (right == false && collision.transform.position.x < transform.position.x)
-                        {
-                            triggerGroupOn[i].SetActive(false);
-                        }
-                        if (right == true && collision.transform.position.x > transform.position.x)
-                        {
-                            triggerGroupOn[i].SetActive(false);
-                        }
-
+                        triggerGroupOff[i].SetActive(true);
                     }
-                    if (vertical == true)
-                    {
-                        if (collision.transform.position.y > transform.position.y)
-                        {
-                            triggerGroupOn[i].SetActive(false);
-                        }
-                    }
-
                 }
-
+                for (int i = 0; i < triggerGroupOn.Length; i++)
+                {
+                    if (triggerGroupOn[i] != null)
+                    {
+                        triggerGroupOn[i].SetActive(false);
+                    }
+                }
             }
         }
 
@@ -141,9 +130,9 @@ public class Door : MonoBehaviour
 
                 if(closed == true)
                 {
-                    for (int i = 0; i < collision.GetComponent<Dracula>().GetInventory().Container.Count; i++)
+                    for (int i = 0; i < collision.GetComponent<Dracula>().GetInventory().GetContainer().Count; i++)
                     {
-                        if(collision.GetComponent<Dracula>().GetInventory().Container[i].item == key)
+                        if(collision.GetComponent<Dracula>().GetInventory().GetContainer()[i].item == key)
                         {
                             collision.GetComponent<Dracula>().GetInventory().RemoveItem(key);
                             manager.MarkOpened(ID, SceneManager.GetActiveScene().name);

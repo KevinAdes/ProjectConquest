@@ -6,7 +6,8 @@ public class DefenseSystem : MonoBehaviour
 {
     bool powered = true;
 
-    public GameObject[] Powering;
+    [SerializeField]
+    GameObject[] Powering;
 
     public void Awake()
     {

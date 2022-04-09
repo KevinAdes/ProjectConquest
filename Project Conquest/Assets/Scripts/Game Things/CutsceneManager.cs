@@ -50,9 +50,10 @@ public class CutsceneManager : MonoBehaviour
 
     public void ExecuteCutscene()
     {
-        if ((bool)FindObjectOfType<GameManager>().flags.GetType().GetField(flag).GetValue(FindObjectOfType<GameManager>().flags) == false)
+        //An extremely complicated way of finding a variable with a string, checking its value, and then setting it
+        if ((bool)FindObjectOfType<GameManager>().GetFlags().GetType().GetField(flag).GetValue(FindObjectOfType<GameManager>().GetFlags()) == false)
         {
-            FindObjectOfType<GameManager>().flags.GetType().GetField(flag).SetValue(FindObjectOfType<GameManager>().flags, true);
+            FindObjectOfType<GameManager>().GetFlags().GetType().GetField(flag).SetValue(FindObjectOfType<GameManager>().GetFlags(), true);
             channel.RaiseRequestDialogue(dialogue);
         }
         else if(flag == "")

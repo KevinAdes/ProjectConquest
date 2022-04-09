@@ -14,7 +14,7 @@ public class InteractionInstigation : MonoBehaviour
     private void Update()
     {
 
-        if (HasNearbyInteractables() && Input.GetButtonDown("Submit"))
+        if (HasNearbyInteractables() && Input.GetButtonDown("Submit") && GetComponent<Dracula>().GetState() == states.DEFAULT)
         {
             Interactable target = null;
             foreach(Interactable interactable in nearbyInteractables)

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    public DefenseSystem[] Powering;
+    [SerializeField]
+    DefenseSystem[] Powering;
     Interactable me;
 
     // Start is called before the first frame update

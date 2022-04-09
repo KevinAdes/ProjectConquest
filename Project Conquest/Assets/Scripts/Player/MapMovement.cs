@@ -64,7 +64,7 @@ public class MapMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print(manager.table.Levels.Count);
+            print(manager.GetTable().Levels.Count);
         }
 
         if (Input.GetAxisRaw("Horizontal") > 0)
@@ -101,7 +101,7 @@ public class MapMovement : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
             prompt.SetActive(true);
-            target = collision.gameObject.GetComponent<Level>().ID;
+            target = collision.gameObject.GetComponent<Level>().GetID();
         }
     }
 

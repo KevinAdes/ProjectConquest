@@ -78,7 +78,6 @@ public class RoboGuy : MonoBehaviour
         expYield = expYield + Mathf.RoundToInt(courage / 5);
         if (!wanderer)
         {
-            print("check");
             StartCoroutine(ChangeMove());
         }
     }

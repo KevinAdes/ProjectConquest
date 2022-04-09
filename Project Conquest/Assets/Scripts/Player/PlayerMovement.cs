@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
-    public float jump;
+    float speed;
+    float jump;
 
-    public float speedCap;
-    public float acceleration;
+    float speedCap;
+    float acceleration;
 
     [Header("Components")]
-    public Rigidbody2D body;
-    public Animator animator;
-    public Collider2D collider2;
+    [SerializeField]
+    Rigidbody2D body;
+    [SerializeField]
+    Animator animator;
+    [SerializeField]
+    Collider2D collider2;
 
     [Header("Extras")]
     public LayerMask enemies;
@@ -25,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool attack;
 
-    public float speedCache;
-    public float speedCapCache;
+    float speedCache;
+    float speedCapCache;
     float scaleCache;
 
     states STATE;
@@ -170,4 +173,40 @@ public class PlayerMovement : MonoBehaviour
     {
         return isGrounded;
     }
+
+    public void SetSpeed(float f)
+    {
+        speed = f;
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetJump(float f)
+    {
+        jump = f;
+    }
+
+    public void SetSpeedCap(float f)
+    {
+        speedCap = f;
+    }
+
+    public void SetAcceleration(float f)
+    {
+        acceleration = f;
+    }
+
+    public void SetSpeedCache(float f)
+    {
+        speedCache = f;
+    }
+
+    public void SetSpeedCapCache(float f)
+    {
+        speedCapCache = f;
+    }
+
 }

@@ -35,7 +35,6 @@ public class DialogueInstigator : MonoBehaviour
 
     public void OnDestroy()
     {
-
         m_DialogueChannel.OnDialogueNodeRequested -= m_DialogueSequencer.StartDialogueNode;
         m_DialogueChannel.OnDialogueRequested -= m_DialogueSequencer.StartDialogue;
 

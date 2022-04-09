@@ -6,7 +6,8 @@ using TMPro;
 
 public class InventoryItem : MonoBehaviour
 {
-    public InventoryObject playerInventory;
+    [SerializeField]
+    InventoryObject playerInventory;
     GameItem thisItem;
 
     public void Awake()
@@ -28,7 +29,7 @@ public class InventoryItem : MonoBehaviour
         else
         {
             string priceDialogue;
-            priceDialogue = thisItem.item.name + ": " + thisItem.item.price;
+            priceDialogue = thisItem.GetItem().name + ": " + thisItem.GetItem().price;
             GetComponentInParent<UIDialogueTextBoxController>().SetText(priceDialogue);
         }
     }
@@ -44,18 +45,18 @@ public class InventoryItem : MonoBehaviour
         if (GetComponentInParent<StorageUnit>() != null)
         {
             print(GetComponentInParent<DisplayInventory>().GetTarget());
-            GetComponentInParent<DisplayInventory>().GetTarget().AddItem(GetComponent<GameItem>().item, 1);
-            GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().item);
+            GetComponentInParent<DisplayInventory>().GetTarget().AddItem(GetComponent<GameItem>().GetItem(), 1);
+            GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().GetItem());
             StorageUnit storageUnit = GetComponentInParent<StorageUnit>();
             storageUnit.UpdateDisplay();
         }
         else
         {
-            if(FindObjectOfType<PauseControl>().GetPlayerData().cash >= thisItem.item.price)
+            if(FindObjectOfType<PauseControl>().GetPlayerData().cash >= thisItem.GetItem().price)
             {
-                FindObjectOfType<PauseControl>().GetPlayerData().cash -= thisItem.item.price;
-                playerInventory.AddItem(GetComponent<GameItem>().item, 1);
-                GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().item);
+                FindObjectOfType<PauseControl>().GetPlayerData().cash -= thisItem.GetItem().price;
+                playerInventory.AddItem(GetComponent<GameItem>().GetItem(), 1);
+                GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().GetItem());
                 GetComponentInParent<DisplayInventory>().UpdateDisplay();
             }
         }

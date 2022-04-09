@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class GameItem : MonoBehaviour
 {
-    public Item item;
+    [SerializeField]
+    Item item;
+
+    public Item GetItem()
+    {
+        return item;
+    }
+
+    public void SetItem(Item i)
+    {
+        item = i;
+    }
 }

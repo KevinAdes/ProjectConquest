@@ -18,7 +18,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadIntro()
     {
-        if(GetComponent<GameManager>().flags.GameStarted == false)
+        if(GetComponent<GameManager>().GetFlags().GameStarted == false)
         {
             SceneManager.LoadScene("Intro Cutscene");
         }

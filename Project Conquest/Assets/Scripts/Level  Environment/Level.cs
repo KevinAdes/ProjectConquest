@@ -11,12 +11,15 @@ using static SkillsList;
 
 public class Level : MonoBehaviour
 {
-    public bool icon;
-    public string ID;
+    [SerializeField]
+    bool icon;
+    [SerializeField]
+    string ID;
     GameManager manager;
     LevelData data;
 
-    public Vector2[] levelSpawns;
+    [SerializeField]
+    Vector2[] levelSpawns;
 
     SpriteRenderer levelIcon;
 
@@ -37,9 +40,9 @@ public class Level : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         manager = FindObjectOfType<GameManager>();
         ID = SceneManager.GetActiveScene().name;
-        if (manager.table.Levels.Contains(ID))
+        if (manager.GetTable().Levels.Contains(ID))
         {
-            data = (LevelData)manager.table.Levels[ID];
+            data = (LevelData)manager.GetTable().Levels[ID];
             reinitializeEntities(data);
             manager.CheckData(data);
         }
@@ -204,5 +207,10 @@ public class Level : MonoBehaviour
     public LevelData GetData()
     {
         return data;
+    }
+
+    public string GetID()
+    {
+        return ID;
     }
 }

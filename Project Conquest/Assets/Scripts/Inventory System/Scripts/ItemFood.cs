@@ -5,10 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Food Item", menuName = "Inventory System/Items/Food")]
 public class ItemFood : Item
 {
-    public int restoreValue;
+    [SerializeField]
+    int restoreValue;
+
     public void Awake()
     {
         type = itemType.Food;
     }
 
+    public int GetRestore()
+    {
+        return restoreValue;
+    }
 }

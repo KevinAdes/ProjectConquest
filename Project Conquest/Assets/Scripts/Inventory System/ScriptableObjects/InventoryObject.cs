@@ -6,14 +6,17 @@ using UnityEditor;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
+using System.ComponentModel;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 {
-    public string savePath;
+    [SerializeField]
+    string savePath;
     [SerializeField]
     private InventoryDatabase database;
-    public List<InventorySlot> Container = new List<InventorySlot>();
+    [SerializeField]
+    List<InventorySlot> container = new List<InventorySlot>();
 
     public void OnEnable()
     {
@@ -22,14 +25,14 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void RemoveItem(Item item)
     {
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < container.Count; i++)
         {
-            if (Container[i].item == item)
+            if (container[i].item == item)
             {
-                Container[i].RemoveAmount(1);
-                if(Container[i].count == 0)
+                container[i].RemoveAmount(1);
+                if(container[i].count == 0)
                 {
-                    Container.Remove(Container[i]);
+                    container.Remove(container[i]);
                 }
                 return;
             }
@@ -38,15 +41,15 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void AddItem(Item item, int count)
     {
-        for(int  i = 0; i < Container.Count; i++)
+        for(int  i = 0; i < container.Count; i++)
         {
-            if (Container[i].item == item)
+            if (container[i].item == item)
             {
-                Container[i].addAmount(count);
+                container[i].addAmount(count);
                 return;
             }
         }
-        Container.Add(new InventorySlot(database.getID[item], item, count));
+        container.Add(new InventorySlot(database.GetIDDict()[item], item, count));
     }
 
     public void Save()
@@ -71,10 +74,9 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < container.Count; i++)
         {
-             Container[i].item = database.getItem[Container[i].ID];
+            container[i].item = database.GetItemDict()[container[i].ID];
         }
     }
 
@@ -86,11 +88,21 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
     {
         List<InventorySlot> newContainer = new List<InventorySlot>();
 
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < container.Count; i++)
         {
-            newContainer.Add(new InventorySlot(Container[i].ID, Container[i].item, Container[i].count));
+            newContainer.Add(new InventorySlot(container[i].ID, container[i].item, container[i].count));
         }
         return newContainer;
+    }
+
+    public List<InventorySlot> GetContainer()
+    {
+        return container;
+    }
+
+    public void SetContainer(List<InventorySlot> l)
+    {
+        container = l;
     }
 }
 
@@ -116,4 +128,5 @@ public class InventorySlot
     {
         count += amount;
     }
+
 }

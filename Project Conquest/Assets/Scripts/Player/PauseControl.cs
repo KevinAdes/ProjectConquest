@@ -12,48 +12,69 @@ public class PauseControl : MonoBehaviour
 {
     [SerializeField]
     PlayerData playerData;
-    public GameManager manager;
+
+    GameManager manager;
 
     //tabs
-    public GameObject mainTab;
-    public GameObject itemsTab;
-    public GameObject equipmentTab;
+    [SerializeField]
+    GameObject mainTab;
+    [SerializeField]
+    GameObject itemsTab;
+    [SerializeField]
+    GameObject equipmentTab;
 
     UpgradesTab upgradesTab;
-    //public GameObject upgradesTab;
-    public GameObject journalTab;
-    public GameObject optionsTab;
+
+    //These should each be given their own scripts once they are built
+    GameObject journalTab;
+    GameObject optionsTab;
 
     //buttons
-    public GameObject defaultButton;
-    public GameObject displayButton;
-    public GameObject focusButton;
-    public GameObject itemsButton;
-    public GameObject equipmentButton;
-    public GameObject upgradesButton;
-    public GameObject journalButton;
-    public GameObject optionsButton;
+    [SerializeField]
+    GameObject defaultButton;
+    [SerializeField]
+    GameObject displayButton;
+    [SerializeField]
+    GameObject focusButton;
+    [SerializeField]
+    GameObject itemsButton;
+    [SerializeField]
+    GameObject equipmentButton;
+    [SerializeField]
+    GameObject upgradesButton;
+    [SerializeField]
+    GameObject journalButton;
+    [SerializeField]
+    GameObject optionsButton;
 
     Button temp;
-    
+
     //texts
-    public Text Power;
-    public Text Defense;
-    public Text Speed;
-    public Text Health;
-    public Text Experience;
+    [SerializeField]
+    Text Power;
+    [SerializeField]
+    Text Defense;
+    [SerializeField]
+    Text Speed;
+    [SerializeField]
+    Text Health;
+    [SerializeField]
+    Text Experience;
 
     [SerializeField]
-    public GameObject upgradesButtonListContent;
-    public GameObject upgradesButtonListContentContent;
+    GameObject upgradesButtonListContent;
+    [SerializeField]
+    GameObject upgradesButtonListContentContent;
 
     //screens
-    public GameObject pauseScreen;
+    [SerializeField]
+    GameObject pauseScreen;
 
     //extra
     [SerializeField]
     Dracula dracula;
-    public InventoryObject inventory;
+    [SerializeField]
+    InventoryObject inventory;
 
     bool isAxisInUse = false;
     bool pause = false;
@@ -82,7 +103,7 @@ public class PauseControl : MonoBehaviour
         }
         upgradesTab = FindObjectOfType<UpgradesTab>(true);
         manager = FindObjectOfType<GameManager>();
-        playerData = manager.playerData;
+        playerData = manager.GetPlayerData();
         inventory = playerData.inventory;
         Calibrate();
 
@@ -286,7 +307,7 @@ public class PauseControl : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        inventory.Container.Clear();
+        inventory.GetContainer().Clear();
     }
 
     public void AssignDracula(EnemySkill skill, XButton button)
@@ -320,6 +341,11 @@ public class PauseControl : MonoBehaviour
         dracula = newDracula;
     }
 
+    public InventoryObject GetInventory()
+    {
+        return inventory;
+    }
+
     public GameObject GetMainTab()
     {
         return mainTab;
@@ -330,6 +356,7 @@ public class PauseControl : MonoBehaviour
         return upgradesTab;
     }
 
+    //Process setters
     public void SetProcess1()
     {
         process1 = heldSkill.GetSkill();

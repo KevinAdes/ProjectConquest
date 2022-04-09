@@ -7,10 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Inventory Database", menuName = "Inventory System/Items/Database")]
 public class InventoryDatabase : ScriptableObject, ISerializationCallbackReceiver
 {
-    public Item[] items;
-    public Dictionary<Item, int> getID = new Dictionary<Item, int>();
+    [SerializeField]
+    Item[] items;
 
-    public Dictionary<int, Item> getItem = new Dictionary<int, Item>();
+
+    Dictionary<Item, int> getID = new Dictionary<Item, int>();
+
+    Dictionary<int, Item> getItem = new Dictionary<int, Item>();
 
     public void OnAfterDeserialize()
     {
@@ -19,7 +22,7 @@ public class InventoryDatabase : ScriptableObject, ISerializationCallbackReceive
         for (int i = 0; i <items.Length; i++)
         {
             getID.Add(items[i], i);
-            getItem.Add(i, items[i]); 
+            getItem.Add(i, items[i]);
         }
     }
 
@@ -27,4 +30,13 @@ public class InventoryDatabase : ScriptableObject, ISerializationCallbackReceive
     {
     }
 
+    public Dictionary<Item, int> GetIDDict()
+    {
+        return getID;
+    }
+
+    public Dictionary<int, Item> GetItemDict()
+    {
+        return getItem;
+    }
 }

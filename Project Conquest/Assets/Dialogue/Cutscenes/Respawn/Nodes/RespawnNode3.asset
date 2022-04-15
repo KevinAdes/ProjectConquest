@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f6e1a56911cb48d3a621d1174e0b9eb, type: 3}
-  m_Name: TutorialNode3
+  m_Name: RespawnNode3
   m_EditorClassIdentifier: 
   m_DialogueLine: {fileID: 11400000, guid: 7a224ca02fe891a44bfe712af69c1ba4, type: 2}
   AnimatorPrefab: {fileID: 2118665228713022957, guid: 6dc342e98030f164eb52c57a48ab51f4,

@@ -104,8 +104,7 @@ public class PauseControl : MonoBehaviour
         upgradesTab = FindObjectOfType<UpgradesTab>(true);
         manager = FindObjectOfType<GameManager>();
         playerData = manager.GetPlayerData();
-        inventory = playerData.inventory;
-        Calibrate();
+        inventory = playerData.GetInventory();
 
     }
     
@@ -219,13 +218,7 @@ public class PauseControl : MonoBehaviour
 
     public void AddCash(int gains)
     {
-        playerData.cash += gains;
-        print(playerData.cash);
-    }
-
-    public void MinCash(int loss)
-    {
-        playerData.cash -= loss;
+        playerData.AddCash(gains);
     }
 
     //upgrade functions
@@ -233,10 +226,10 @@ public class PauseControl : MonoBehaviour
     public void UpgradeDamage()
     {
         print("call");
-        if (playerData.blood > 0)
+        if (playerData.GetBlood() > 0)
         {
-            playerData.blood -= 1;
-            playerData.damage += 1;
+            playerData.AddBlood(-1);
+            playerData.SetDamage(playerData.GetDamage() + 1f) ;
         }
         Calibrate();
 
@@ -244,10 +237,10 @@ public class PauseControl : MonoBehaviour
 
     public void UpgradeDefense()
     {
-        if (playerData.blood > 0)
+        if (playerData.GetBlood() > 0)
         {
-            playerData.blood -= 1;
-            playerData.defense += .1f;
+            playerData.AddBlood(-1);
+            playerData.SetDefense(playerData.GetDefense() + 1f);
         }
         Calibrate();
 
@@ -255,12 +248,10 @@ public class PauseControl : MonoBehaviour
 
     public void UpgradeSpeed()
     {
-        if (playerData.blood > 0)
+        if (playerData.GetBlood() > 0)
         {
-            playerData.blood -= 1;
-            playerData.speed += 1;
-            //speed cap may need to be upgraded by a higher amount
-            playerData.speedCap += 1;
+            playerData.AddBlood(-1);
+            playerData.SetSpeed(playerData.GetSpeed() + 1f);
         }
         Calibrate();
 
@@ -268,34 +259,31 @@ public class PauseControl : MonoBehaviour
 
     public void UpgradeHealth()
     {
-        if (playerData.blood > 0)
+        if (playerData.GetBlood() > 0)
         {
-            playerData.blood -= 1;
-            playerData.maxHealth += 1;
+            playerData.AddBlood(-1);
+            playerData.SetMaxHealth(playerData.GetMaxHealth() + 1f);
         }
         Calibrate();
     }
 
     public void Calibrate()
     {
-        Power.text = "POWER " + playerData.damage;
-        Defense.text = "DEFENSE " + playerData.defense;
-        Speed.text = "SPEED " + playerData.speed;
-        Health.text = "HEALTH " + playerData.maxHealth;
-        Experience.text = playerData.blood.ToString();
+        Power.text = "POWER " + playerData.GetDamage();
+        Defense.text = "DEFENSE " + playerData.GetDefense();
+        Speed.text = "SPEED " + playerData.GetSpeed();
+        Health.text = "HEALTH " + playerData.GetMaxHealth();
+        Experience.text = playerData.GetBlood().ToString();
 
         if (dracula != null)
         {
-            dracula.SetMaxHealth(playerData.maxHealth);
-            dracula.SetDamage(playerData.damage);
-            dracula.SetDefense(playerData.defense);
-            dracula.SetAttackModifier(playerData.attackModifier);
+            dracula.SetMaxHealth(playerData.GetMaxHealth());
+            dracula.SetDamage(playerData.GetDamage());
+            dracula.SetDefense(playerData.GetDefense());
+            dracula.SetAttackModifier(playerData.GetAttackModifier());
 
-            dracula.SetSpeed(playerData.speed);
-            dracula.SetSpeedCache(dracula.GetSpeed());
-            dracula.SetSpeedCap(playerData.speedCap);
-            dracula.SetSpeedCapCache(dracula.GetSpeedCap());
-            dracula.SetJump(playerData.jump);
+            dracula.SetSpeed(playerData.GetSpeed());
+            dracula.SetJump(playerData.GetJump());
         }
 
     }

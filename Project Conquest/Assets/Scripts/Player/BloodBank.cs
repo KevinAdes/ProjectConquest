@@ -23,7 +23,7 @@ public class BloodBank : MonoBehaviour
 
     public void ShowDisplay()
     {
-        draculaText.text = data.blood.ToString();
+        draculaText.text = data.GetBlood().ToString();
         bankText.text = bankBlood.GetInt().ToString();
         FindObjectOfType<PlayerMovement>().StateSwitcher(states.DIALOGUE);
         bankPanel.gameObject.SetActive(true);
@@ -37,16 +37,16 @@ public class BloodBank : MonoBehaviour
 
     private void UpdateDisplay()
     {
-        draculaText.text = data.blood.ToString();
+        draculaText.text = data.GetBlood().ToString();
         bankText.text = bankBlood.GetInt().ToString();
     }
 
     public void SendToBank()
     {
-        if(data.blood > 0)
+        if(data.GetBlood() > 0)
         {
             bankBlood.SetInt(bankBlood.GetInt() + 1);
-            data.blood -= 1;
+            data.AddBlood(-1);
             UpdateDisplay();
         }
     }
@@ -56,7 +56,7 @@ public class BloodBank : MonoBehaviour
         if(bankBlood.GetInt() > 0)
         {
             bankBlood.SetInt(bankBlood.GetInt() - 1);
-            data.blood += 1;
+            data.AddBlood(1);
             UpdateDisplay();
         }
     }

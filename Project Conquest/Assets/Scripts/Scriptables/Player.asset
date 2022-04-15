@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 100
   defense: 1000
   attackModifier: 0
-  speed: 2
+  speed: 7
   speedCap: 7
   jump: 5
   blood: 0

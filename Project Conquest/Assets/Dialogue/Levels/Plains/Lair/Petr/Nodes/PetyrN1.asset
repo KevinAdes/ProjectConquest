@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 186e64cdeb5ff40b69b02712911bbf9d, type: 3}
-  m_Name: TutorialCutscene
+  m_Script: {fileID: 11500000, guid: 3922fa800201544a286d1acf8273b8da, type: 3}
+  m_Name: PetyrN1
   m_EditorClassIdentifier: 
-  m_firstNode: {fileID: 11400000, guid: a50365731eb9c0a4abc0af45efa20f00, type: 2}
+  m_DialogueLine: {fileID: 0}
+  m_Choices: []

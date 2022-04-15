@@ -68,9 +68,9 @@ public class Level : MonoBehaviour
 
     private void InitializeData(LevelData data)
     {
-        data.levelID = SceneManager.GetActiveScene().name;
-        data.leftSpawn = levelSpawns[0];
-        data.rightSpawn = levelSpawns[1];
+        data.SetID(SceneManager.GetActiveScene().name);
+        data.SetLeftSpawn(levelSpawns[0]);
+        data.SetRightSpawn(levelSpawns[1]);
         int count = 0;
         Entity[] entities = FindObjectsOfType<Entity>(true);
         Interactable[] interactables = FindObjectsOfType<Interactable>(true);
@@ -89,9 +89,9 @@ public class Level : MonoBehaviour
             }
         }
         entities = temp.ToArray();
-        data.Entities = new EnemyManager[entities.Length];
-        data.Interactables = new EnemyManager[interactables.Length];
-        data.Doors = new LockManager[doors.Length];
+        EnemyManager[] tempE = new EnemyManager[entities.Length];
+        EnemyManager[] tempI = new EnemyManager[interactables.Length];
+        LockManager[] tempD = new LockManager[doors.Length];
 
         foreach (Entity entity in entities)
         {
@@ -106,27 +106,29 @@ public class Level : MonoBehaviour
                         guy.AddSkill(newSkill);
                     }
                 }
-                guy.guy = entity.gameObject;
-                guy.EnemyID = count;
+                guy.SetGuy(entity.gameObject);
+                guy.SetID(count);
                 entity.SetID(count);
-                guy.myName = entity.GetName();
-                guy.dead = false;
-                data.Entities[count] = guy;
+                guy.SetMyName(entity.GetName());
+                guy.SetDead(false);
+                tempE[count] = guy;
                 count++;
 
             }
         }
+        data.SetEntities(tempE);
         count = 0;
         foreach (Interactable interactable in interactables)
         {
             EnemyManager inter = ScriptableObject.CreateInstance<EnemyManager>();
-            inter.guy = interactable.gameObject;
-            inter.EnemyID = count;
+            inter.SetGuy(interactable.gameObject);
+            inter.SetID(count);
             interactable.SetID(count);
-            inter.dead = false;
-            data.Interactables[count] = inter;
+            inter.SetDead(false);
+            tempI[count] = inter;
             count++;
         }
+        data.SetInteractables(tempI);
         count = 0;
         foreach (Door door in doors)
         {
@@ -135,9 +137,10 @@ public class Level : MonoBehaviour
             locked.SetID(count);
             door.SetID(count);
             locked.SetClosed(door.GetClosed());
-            data.Doors[count] = locked;
+            tempD[count] = locked;
             count++;
         }
+        data.SetDoors(tempD);
         //in the event that I add non door lockables, simply add another for loop without resetting count to 0.
     }
 
@@ -166,14 +169,14 @@ public class Level : MonoBehaviour
         {
             if (entity.GetImportant() == true)
             {
-                EnemyManager guy = data.Entities[count];
-                guy.guy = entity.gameObject;
+                EnemyManager guy = data.GetEntities()[count];
+                guy.SetGuy(entity.gameObject);
                 //
-                guy.important = entity.GetImportant();
-                guy.myName = entity.GetName();
+                guy.SetImportant(entity.GetImportant());
+                guy.SetMyName(entity.GetName());
                 //
                 entity.SetID(count);
-                data.Entities[count] = guy;
+                data.GetEntities()[count] = guy;
 
                 count++;
             }
@@ -181,24 +184,26 @@ public class Level : MonoBehaviour
         count = 0;
         foreach (Interactable interactable in interactables)
         {
-            EnemyManager inter = data.Interactables[count];
-            inter.guy = interactable.gameObject;
+            EnemyManager inter = data.GetInteractables()[count];
+            inter.SetGuy(interactable.gameObject);
             //
-            inter.EnemyID = count;
+            inter.SetID(count);
             interactable.SetID(count);
             //
-            data.Interactables[count] = inter;
+            data.GetInteractables()[count] = inter;
             count++;
         }
         count = 0;
         foreach (Door door in doors)
         {
-            LockManager locked = data.Doors[count];
+            LockManager locked = data.GetDoors()[count];
             locked.SetGuy(door.gameObject);
             //
             locked.SetID(count);
             //
             door.SetID(count);
+            print("if something fucky is happening with a door it might be this");
+            data.GetDoors()[count] = locked;
             count++;
         }
         //in the event that I add non door lockables, simply add another for loop without resetting count to 0.

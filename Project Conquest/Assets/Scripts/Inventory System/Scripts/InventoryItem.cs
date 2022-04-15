@@ -52,9 +52,9 @@ public class InventoryItem : MonoBehaviour
         }
         else
         {
-            if(FindObjectOfType<PauseControl>().GetPlayerData().cash >= thisItem.GetItem().price)
+            if(FindObjectOfType<PauseControl>().GetPlayerData().GetCash() >= thisItem.GetItem().price)
             {
-                FindObjectOfType<PauseControl>().GetPlayerData().cash -= thisItem.GetItem().price;
+                FindObjectOfType<PauseControl>().GetPlayerData().AddCash(-thisItem.GetItem().price);
                 playerInventory.AddItem(GetComponent<GameItem>().GetItem(), 1);
                 GetComponentInParent<DisplayInventory>().GetInventory().RemoveItem(GetComponent<GameItem>().GetItem());
                 GetComponentInParent<DisplayInventory>().UpdateDisplay();

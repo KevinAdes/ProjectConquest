@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour
     float speed;
     float jump;
 
-    float speedCap;
-    float acceleration;
-
     [Header("Components")]
     [SerializeField]
     Rigidbody2D body;
@@ -28,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     bool attack;
 
-    float speedCache;
-    float speedCapCache;
     float scaleCache;
 
     states STATE;
@@ -55,8 +50,6 @@ public class PlayerMovement : MonoBehaviour
         velocity = new Vector2(0, 0);
         body.velocity = velocity;
         STATE = states.DEFAULT;
-        speedCache = speed;
-        speedCapCache = speedCap;
         scaleCache = transform.localScale.x;
     }
 
@@ -125,21 +118,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Run()
     {
-        if (Input.GetAxis("Horizontal") != 0 && animator.GetBool("Crouch") == false)
+        if (animator.GetBool("Crouch") == false)
         {
-            if (speed < speedCap)
-            {
-                speed += (speedCache / speedCapCache) * acceleration;
-            }
-            velocity.x = speed * Input.GetAxis("Horizontal");
-            velocity.y = body.velocity.y;
-            body.velocity = velocity;
-        }
-
-        if (Input.GetAxis("Horizontal") == 0 && animator.GetBool("Crouch") == false)
-        {
-            speedCap = speedCapCache;
-            speed = (speed + speedCache) / 2;
             velocity.x = speed * Input.GetAxis("Horizontal");
             velocity.y = body.velocity.y;
             body.velocity = velocity;
@@ -187,26 +167,6 @@ public class PlayerMovement : MonoBehaviour
     public void SetJump(float f)
     {
         jump = f;
-    }
-
-    public void SetSpeedCap(float f)
-    {
-        speedCap = f;
-    }
-
-    public void SetAcceleration(float f)
-    {
-        acceleration = f;
-    }
-
-    public void SetSpeedCache(float f)
-    {
-        speedCache = f;
-    }
-
-    public void SetSpeedCapCache(float f)
-    {
-        speedCapCache = f;
     }
 
 }

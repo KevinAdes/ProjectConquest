@@ -21,6 +21,7 @@ public class SceneLoader : MonoBehaviour
         if(GetComponent<GameManager>().GetFlags().GameStarted == false)
         {
             SceneManager.LoadScene("Intro Cutscene");
+            GetComponent<Animator>().SetTrigger("Hide");
         }
         else
         {

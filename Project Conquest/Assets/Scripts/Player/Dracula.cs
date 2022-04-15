@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,11 +21,7 @@ public class Dracula : MonoBehaviour
     float attackModifier;
 
     float health;
-    float speedCap;
     float acceleration;
-
-    float speedCache;
-    float speedCapCache;
 
     bool attack;
     bool drink;
@@ -49,6 +46,7 @@ public class Dracula : MonoBehaviour
 
     Entity target;
 
+
     UnityEvent ProcessDefault = new UnityEvent();
 
     // Start is called before the first frame update
@@ -62,15 +60,10 @@ public class Dracula : MonoBehaviour
         pauseControl.SetDracula(this);
         pauseControl.Calibrate();
         inventory = pauseControl.GetInventory();
-        health = manager.GetPlayerData().currentHealth;
+        health = manager.GetPlayerData().GetCurrentHealth();
         me = GetComponent<PlayerMovement>();
         me.SetSpeed(speed);
         me.SetJump(jump);
-        me.SetSpeedCap(speedCap);
-        me.SetAcceleration(acceleration);
-        me.SetSpeedCache(speedCache);
-        me.SetSpeedCapCache(speedCapCache);
-
         STATE = states.DEFAULT;
         animator = GetComponent<Animator>();
     }
@@ -206,12 +199,12 @@ public class Dracula : MonoBehaviour
             FindObjectOfType<Level>().GetData().SetRight(collision.GetComponent<LevelLoader>().GetRight());
             if (collision.GetComponent<LevelLoader>().GetCoords() != Vector3.zero)
             {
-                manager.GetPlayerData().currentHealth = health;
+                manager.GetPlayerData().SetCurrentHealth(health);
                 manager.LoadLevel("Map", collision.GetComponent<LevelLoader>().GetCoords());
             }
             else
             {
-                manager.GetPlayerData().currentHealth = health;
+                manager.GetPlayerData().SetCurrentHealth(health);
                 manager.LoadLevel(collision.GetComponent<LevelLoader>().GetID());
             }
         }
@@ -326,33 +319,6 @@ public class Dracula : MonoBehaviour
     }
 
     public void SetSpeed(float f)
-    {
-        speed = f;
-    }
-    public float GetSpeedCap()
-    {
-        return speedCap;
-    }
-
-    public void SetSpeedCap(float f)
-    {
-        speedCap = f;
-    }
-    public float GetSpeedCache()
-    {
-        return speed;
-    }
-
-    public void SetSpeedCache(float f)
-    {
-        speedCache = f;
-    }
-    public float GetSpeedCapCache()
-    {
-        return speed;
-    }
-
-    public void SetSpeedCapCache(float f)
     {
         speed = f;
     }

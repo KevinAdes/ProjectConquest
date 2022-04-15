@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11aaba82239c38842a6088bb2d5ce3fd, type: 3}
-  m_Name: TutorialNode2
+  m_Name: RespawnNode2
   m_EditorClassIdentifier: 
   m_DialogueLine: {fileID: 11400000, guid: 7a224ca02fe891a44bfe712af69c1ba4, type: 2}
   m_NextNode: {fileID: 11400000, guid: 6f19439ec1a92214fa65612d279b5b3d, type: 2}
-  coordinates: {x: 24.15, y: -9.76, z: -5}
+  coordinates: {x: 25.4, y: -8.7, z: -5}
+  holdTime: 0

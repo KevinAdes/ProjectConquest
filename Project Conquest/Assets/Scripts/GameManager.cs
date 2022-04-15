@@ -141,31 +141,31 @@ public class GameManager : MonoBehaviour
 
     public void CheckData(LevelData Level)
     {
-        if (table.Levels.ContainsKey(Level.levelID))
+        if (table.Levels.ContainsKey(Level.GetID()))
         {
             //TODO check if this redundance is necessary
-            temp = (LevelData)table.Levels[Level.levelID];
-            foreach (EnemyManager guy in Level.Entities)
+            temp = (LevelData)table.Levels[Level.GetID()];
+            foreach (EnemyManager guy in Level.GetEntities())
             {
-                if (guy.important == true)
+                if (guy.GetImportant() == true)
                 {
-                    if (temp.Entities[guy.EnemyID].dead == true)
+                    if (temp.GetEntities()[guy.GetID()].GetDead() == true)
                     {
-                        Destroy(guy.guy.gameObject);
+                        Destroy(guy.GetGuy().gameObject);
                     }
                 }
             }
-            foreach (EnemyManager inter in Level.Interactables)
+            foreach (EnemyManager inter in Level.GetInteractables())
             {
 
-                if (temp.Interactables[inter.EnemyID].dead == true)
+                if (temp.GetInteractables()[inter.GetID()].GetDead() == true)
                 {
-                    Destroy(inter.guy.gameObject);
+                    Destroy(inter.GetGuy().gameObject);
                 }
             }
-            foreach(LockManager locked in Level.Doors)
+            foreach(LockManager locked in Level.GetDoors())
             {
-                if (temp.Doors[locked.GetID()].GetClosed() == false)
+                if (temp.GetDoors()[locked.GetID()].GetClosed() == false)
                 {
                     locked.GetGuy().GetComponent<Door>().SetClosed(false);
                 }
@@ -173,18 +173,20 @@ public class GameManager : MonoBehaviour
         }   
         else
         {
-            table.Levels.Add(Level.levelID, Level);
+            table.Levels.Add(Level.GetID(), Level);
         }
-        target = Level.levelID;
+        target = Level.GetID();
         if (!ignoreDraculaTransform)
         {
             if (Level.GetRight())
             {
-                playerLevelTransform = Level.rightSpawn;
+                print("check");
+                playerLevelTransform = Level.GetRightSpawn();
             }
             else
             {
-                playerLevelTransform = Level.leftSpawn;
+                print("checkLeft");
+                playerLevelTransform = Level.GetLeftSpawn();
             }
             if (FindObjectOfType<PlayerMovement>() != null)
             {
@@ -201,30 +203,30 @@ public class GameManager : MonoBehaviour
     {
         print("this is happening");
         temp = (LevelData)table.Levels[levelID];
-        if (enemies.Enemies.ContainsKey(temp.Entities[ID].myName) == false)
+        if (enemies.Enemies.ContainsKey(temp.GetEntities()[ID].GetMyName()) == false)
         {
-            enemies.Enemies.Add(temp.Entities[ID].myName, temp.Entities[ID].skills);
+            enemies.Enemies.Add(temp.GetEntities()[ID].GetMyName(), temp.GetEntities()[ID].GetEnemySkills());
         }
     }
 
     public void markDead(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
-        temp.Entities[ID].dead = true;
+        temp.GetEntities()[ID].SetDead(true);
         table.Levels[levelID] = temp;
     }
 
     public void markDestroyed(int ID, string levelID)
     { 
         temp = (LevelData)table.Levels[levelID];
-        temp.Interactables[ID].dead = true;
+        temp.GetInteractables()[ID].SetDead(true);
         table.Levels[levelID] = temp;
     }
 
     public void MarkOpened(int ID, string levelID)
     {
         temp = (LevelData)table.Levels[levelID];
-        temp.Doors[ID].SetClosed(false);
+        temp.GetDoors()[ID].SetClosed(false);
         table.Levels[levelID] = temp;
     }
     //XXXXXXXXXXXXXXXXXXXXXXXXXXX

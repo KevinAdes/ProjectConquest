@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Line 1
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 8c1dcffb3e051499f91de9a6a8698a6e, type: 2}
-  m_text: Hello! This is the first line of dialogue I will ever make
+  m_text: 'Goodness, such a wonderfull day! '

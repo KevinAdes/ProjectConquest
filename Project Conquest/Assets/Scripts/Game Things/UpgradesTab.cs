@@ -50,7 +50,6 @@ public class UpgradesTab : MonoBehaviour
         {
             enemyNames.transform.GetChild(i).gameObject.SetActive(false);
         }
-        print(FindObjectOfType<GameManager>().GetEnemies().Enemies.Keys.Count);
         foreach (string name in FindObjectOfType<GameManager>().GetEnemies().Enemies.Keys)
         {
             GameObject newButton = Instantiate(defaultButton, enemyNames.transform, false);

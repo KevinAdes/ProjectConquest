@@ -128,7 +128,7 @@ public class Door : MonoBehaviour
                     break;
                 }
 
-                if(closed == true)
+                if(closed == true  && key != null)
                 {
                     for (int i = 0; i < collision.GetComponent<Dracula>().GetInventory().GetContainer().Count; i++)
                     {

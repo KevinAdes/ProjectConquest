@@ -20,6 +20,9 @@ public class Interactable : MonoBehaviour
     LevelData Data;
 
     [SerializeField]
+    GameItem[] drops;
+
+    [SerializeField]
     UnityEvent Interaction;
 
     public void DoAction()
@@ -37,9 +40,14 @@ public class Interactable : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (FindObjectOfType<InteractionInstigation>() != null && FindObjectOfType<InteractionInstigation>().nearbyInteractables.Contains(this))
+        foreach (GameItem item in drops)
         {
-            FindObjectOfType<InteractionInstigation>().nearbyInteractables.Remove(this);
+            GameObject itemInst = Instantiate(item.gameObject, transform.position, Quaternion.identity);
+            itemInst.transform.parent = this.transform.parent;
+        }
+        if (FindObjectOfType<InteractionInstigation>() != null && FindObjectOfType<InteractionInstigation>().GetInteractables().Contains(this))
+        {
+            FindObjectOfType<InteractionInstigation>().GetInteractables().Remove(this);
         }
     }
     //if the object being interacted on needs to be frozen, changed, etc
@@ -75,6 +83,7 @@ public class Interactable : MonoBehaviour
 
     public void Death()
     {
+        print("check");
         if (cash != 0)
         {
             control.AddCash(cash);

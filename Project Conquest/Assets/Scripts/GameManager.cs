@@ -180,12 +180,10 @@ public class GameManager : MonoBehaviour
         {
             if (Level.GetRight())
             {
-                print("check");
                 playerLevelTransform = Level.GetRightSpawn();
             }
             else
             {
-                print("checkLeft");
                 playerLevelTransform = Level.GetLeftSpawn();
             }
             if (FindObjectOfType<PlayerMovement>() != null)
@@ -201,7 +199,6 @@ public class GameManager : MonoBehaviour
     //MARKER FUNCTIONS
     public void AddSkill(int ID, string levelID)
     {
-        print("this is happening");
         temp = (LevelData)table.Levels[levelID];
         if (enemies.Enemies.ContainsKey(temp.GetEntities()[ID].GetMyName()) == false)
         {

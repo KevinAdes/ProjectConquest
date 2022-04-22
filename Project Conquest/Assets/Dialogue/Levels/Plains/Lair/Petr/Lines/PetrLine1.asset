@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3922fa800201544a286d1acf8273b8da, type: 3}
-  m_Name: PetyrN1
+  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
+  m_Name: PetrLine1
   m_EditorClassIdentifier: 
-  m_DialogueLine: {fileID: 0}
-  m_Choices: []
+  m_speaker: {fileID: 11400000, guid: 7240c6c6993a84086910854dfb22dfdf, type: 2}
+  m_text: Sorry, still working on this.

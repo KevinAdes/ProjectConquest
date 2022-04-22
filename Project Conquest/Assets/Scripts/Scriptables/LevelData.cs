@@ -27,7 +27,6 @@ public class LevelData : ScriptableObject
     //Marks the level to determine spawn location. false = left, true = right.
     public void SetRight(bool b)
     {
-        Debug.Log(b);
         right = b;
     }
     public bool GetRight()

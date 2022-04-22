@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Line2
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 8c1dcffb3e051499f91de9a6a8698a6e, type: 2}
-  m_text: This is the second Line
+  m_text: Wouldn't you agree?

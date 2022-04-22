@@ -34,6 +34,16 @@ public class TownSpawner : MonoBehaviour
     {
         GameObject EntityInst = Instantiate(spawn, position, Quaternion.identity);
         EntityInst.transform.parent = gameObject.transform;
+        int RandomDir = Random.Range(-1, 1);
+        if(RandomDir < 0)
+        {
+            RandomDir = -1;
+        }
+        if(RandomDir >= 0)
+        {
+            RandomDir = 1;
+        }
+        EntityInst.GetComponent<Entity>().SetDirection(RandomDir);
         EntityInst.transform.GetChild(0).transform.position = position;
     }
 }

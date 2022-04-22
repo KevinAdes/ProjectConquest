@@ -1018,6 +1018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cash: 0
   destructable: 0
+  drops: []
   Interaction:
     m_PersistentCalls:
       m_Calls:
@@ -1253,6 +1254,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1255133278517448032, guid: 49368192c37e341ef9c833b0a898b556,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2820618213655594949, guid: 49368192c37e341ef9c833b0a898b556,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1289,6 +1295,11 @@ PrefabInstance:
       propertyPath: ID
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 5521853900191879419, guid: 49368192c37e341ef9c833b0a898b556,
+        type: 3}
+      propertyPath: Alert
+      value: 
+      objectReference: {fileID: 1247427776}
     - target: {fileID: 5521853900193662912, guid: 49368192c37e341ef9c833b0a898b556,
         type: 3}
       propertyPath: levelSpawns.Array.data[0].x
@@ -1296,8 +1307,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5521853900193662912, guid: 49368192c37e341ef9c833b0a898b556,
         type: 3}
+      propertyPath: levelSpawns.Array.data[0].y
+      value: -9.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521853900193662912, guid: 49368192c37e341ef9c833b0a898b556,
+        type: 3}
       propertyPath: levelSpawns.Array.data[1].x
       value: 36.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521853900193662912, guid: 49368192c37e341ef9c833b0a898b556,
+        type: 3}
+      propertyPath: levelSpawns.Array.data[1].y
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 5521853900193662913, guid: 49368192c37e341ef9c833b0a898b556,
         type: 3}
@@ -1412,6 +1433,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5521853900191879416, guid: 49368192c37e341ef9c833b0a898b556, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 49368192c37e341ef9c833b0a898b556, type: 3}
+--- !u!212 &1247427776 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1741448525675966240, guid: 49368192c37e341ef9c833b0a898b556,
+    type: 3}
+  m_PrefabInstance: {fileID: 1247427775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1336970624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,6 +1591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cash: 0
   destructable: 0
+  drops: []
   Interaction:
     m_PersistentCalls:
       m_Calls:
@@ -1900,6 +1928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cash: 0
   destructable: 0
+  drops: []
   Interaction:
     m_PersistentCalls:
       m_Calls:
@@ -1908,7 +1937,8 @@ MonoBehaviour:
         m_MethodName: RaiseRequestDialogue
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 11400000, guid: 9d3746b04390b4634a591a37bd712d2c,
+            type: 2}
           m_ObjectArgumentAssemblyTypeName: Dialogue, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1939,7 +1969,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790845143}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -2012,8 +2042,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790845143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.3, y: -9.1181, z: 0}
-  m_LocalScale: {x: 1, y: 1.5637, z: 1}
+  m_LocalPosition: {x: 28.2224, y: -9.2604, z: 0}
+  m_LocalScale: {x: 0.8447, y: 1.2789502, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2419,6 +2449,38 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0bc655c97e6ff41458f193dd1ba6323e,
         type: 2}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: flags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: flags.Array.data[0]
+      value: TutorialDone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: flags.Array.data[1]
+      value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: dialogues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: dialogues.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: fdd084aa817814386a755899caf2d90f,
+        type: 2}
+    - target: {fileID: 2118665228713022953, guid: 6dc342e98030f164eb52c57a48ab51f4,
+        type: 3}
+      propertyPath: dialogues.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bc655c97e6ff41458f193dd1ba6323e,
+        type: 2}
     - target: {fileID: 2118665228713022954, guid: 6dc342e98030f164eb52c57a48ab51f4,
         type: 3}
       propertyPath: m_RootOrder
@@ -2487,30 +2549,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dc342e98030f164eb52c57a48ab51f4, type: 3}
---- !u!1 &2118665228559091016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2118665228713022957, guid: 6dc342e98030f164eb52c57a48ab51f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2118665228559091015}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2118665228559091017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118665228559091016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onAwake: 1
-  onDelay: 0
-  delay: 0
-  channel: {fileID: 0}
-  dialogue: {fileID: 0}
-  flag: TutorialDone
-  OtherEvent:
-    m_PersistentCalls:
-      m_Calls: []

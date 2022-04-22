@@ -10,6 +10,7 @@ public class RespawnAnchor : MonoBehaviour
     public void SpawnDracula()
     {
         GameObject DraculaInst = Instantiate(dracula, transform.position, Quaternion.identity, transform.parent);
+        FindObjectOfType<GameManager>().GetFlags().GetType().GetField("Respawn").SetValue(FindObjectOfType<GameManager>().GetFlags(), true);
         FindObjectOfType<GameManager>().SetIgnore(false);
     }
 

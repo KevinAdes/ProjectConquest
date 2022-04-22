@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Choice1
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 8c1dcffb3e051499f91de9a6a8698a6e, type: 2}
-  m_text: doesn't matter what you pick
+  m_text: Right?! It's soooo nice out!

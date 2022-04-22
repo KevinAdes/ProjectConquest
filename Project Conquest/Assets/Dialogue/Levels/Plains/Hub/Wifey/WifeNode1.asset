@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1630047c3acf42bab8dce9dadc302ec, type: 3}
-  m_Name: Pietr
+  m_Script: {fileID: 11500000, guid: 835a408bcfee94a50a1aea0c7272bfbf, type: 3}
+  m_Name: WifeNode1
   m_EditorClassIdentifier: 
-  m_CharacterName: Pietr
+  m_DialogueLine: {fileID: 11400000, guid: 101c320bc013a43c28c4eaa31e94a563, type: 2}
+  m_NextNode: {fileID: 0}

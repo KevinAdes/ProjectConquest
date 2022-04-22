@@ -884,12 +884,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: 0
   onAwake: 1
   onDelay: 0
   delay: 0
+  flags:
+  - GameStarted
+  dialogues:
+  - {fileID: 11400000, guid: 085c418f97ef94815b5c9263f82f68ee, type: 2}
   channel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
-  dialogue: {fileID: 11400000, guid: 085c418f97ef94815b5c9263f82f68ee, type: 2}
-  flag: GameStarted
   OtherEvent:
     m_PersistentCalls:
       m_Calls: []

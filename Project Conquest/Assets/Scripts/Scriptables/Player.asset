@@ -18,10 +18,9 @@ MonoBehaviour:
   defense: 1000
   attackModifier: 0
   speed: 7
-  speedCap: 7
   jump: 5
-  blood: 0
-  inventory: {fileID: 11400000, guid: 689b71e4bae3c4af882e80534a1d4dec, type: 2}
+  blood: 3
   cash: 0
+  inventory: {fileID: 11400000, guid: 689b71e4bae3c4af882e80534a1d4dec, type: 2}
   skills:
   - {fileID: 11400000, guid: 9d083d58d8c2f4baa86b1902f8d132c8, type: 2}

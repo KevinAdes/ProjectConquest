@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DialogueLine: {fileID: 11400000, guid: 2c4a849d7f2e241aea99032923496285, type: 2}
   m_Choices:
-  - m_ChoicePreview: Yes!
+  - m_ChoicePreview: yes...
     m_ChoiceNode: {fileID: 11400000, guid: 1d0c141a5d4ee453484fac1a9d468539, type: 2}
-  - m_ChoicePreview: Huh?
+  - m_ChoicePreview: NO!!!!!!
     m_ChoiceNode: {fileID: 11400000, guid: 772d6bce26f2744378569848ef238e1d, type: 2}

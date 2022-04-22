@@ -131,6 +131,7 @@ public class PauseControl : MonoBehaviour
                 }
                 else
                 {
+                    dracula.GetComponent<InteractionInstigation>().enabled = false;
                     pause = true;
                     pauseScreen.SetActive(true);
                     Time.timeScale = 0;
@@ -149,6 +150,7 @@ public class PauseControl : MonoBehaviour
 
     public void Unpause()
     {
+        dracula.GetComponent<InteractionInstigation>().enabled = true;
         itemsTab.SetActive(false);
         //equipmentTab.SetActive(false);
         upgradesTab.gameObject.SetActive(false);
@@ -314,6 +316,7 @@ public class PauseControl : MonoBehaviour
         }
         else
         {
+            heldSkill = skill;
             upgradesTab.DisplayAssign();
         }
     }
@@ -348,6 +351,7 @@ public class PauseControl : MonoBehaviour
     public void SetProcess1()
     {
         process1 = heldSkill.GetSkill();
+        heldSkill = null;
     }
     public UnityEvent GetProcess1()
     {
@@ -357,6 +361,7 @@ public class PauseControl : MonoBehaviour
     public void SetProcess2()
     {
         process2 = heldSkill.GetSkill();
+        heldSkill = null;
     }
     public UnityEvent GetProcess2()
     {
@@ -366,6 +371,7 @@ public class PauseControl : MonoBehaviour
     public void SetProcess3()
     {
         process3 = heldSkill.GetSkill();
+        heldSkill = null;
     }
     public UnityEvent GetProcess3()
     {
@@ -375,6 +381,7 @@ public class PauseControl : MonoBehaviour
     public void SetProcess4()
     {
         process4 = heldSkill.GetSkill();
+        heldSkill = null;
     }
     public UnityEvent GetProcess4()
     {

@@ -150,6 +150,7 @@ public class Dracula : MonoBehaviour
             }
             if (enemy.GetComponent<Interactable>() != null)
             {
+                print("huh?");
                 enemy.GetComponent<Interactable>().Death();
             }
         }
@@ -259,8 +260,9 @@ public class Dracula : MonoBehaviour
     {
         if(health <= 0)
         {
-
+            manager.SetMapula(Vector3.zero);
             manager.GetComponent<Animator>().SetTrigger("GameOver");
+            FindObjectOfType<GameManager>().GetFlags().GetType().GetField("Respawn").SetValue(FindObjectOfType<GameManager>().GetFlags(), false);
             pauseControl.GetPlayerData().SetBlood(0);
         }
     }

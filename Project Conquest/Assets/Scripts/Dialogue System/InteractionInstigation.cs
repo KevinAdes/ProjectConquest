@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class InteractionInstigation : MonoBehaviour
 {
-    public List<Interactable> nearbyInteractables = new List<Interactable>();
+
+    [SerializeField]
+    SpriteRenderer Alert;
+
+    List<Interactable> nearbyInteractables = new List<Interactable>();
 
     public bool HasNearbyInteractables()
     {
@@ -13,7 +17,14 @@ public class InteractionInstigation : MonoBehaviour
 
     private void Update()
     {
-
+        if (HasNearbyInteractables())
+        {
+            Alert.enabled = true;
+        }
+        else
+        {
+            Alert.enabled = false;
+        }
         if (HasNearbyInteractables() && Input.GetButtonDown("Submit") && GetComponent<Dracula>().GetState() == states.DEFAULT)
         {
             Interactable target = null;
@@ -52,5 +63,10 @@ public class InteractionInstigation : MonoBehaviour
         {
             nearbyInteractables.Remove(interactable);
         }
+    }
+
+    public List<Interactable> GetInteractables()
+    {
+        return nearbyInteractables;
     }
 }

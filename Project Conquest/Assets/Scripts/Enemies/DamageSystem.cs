@@ -137,4 +137,9 @@ public class DamageSystem : MonoBehaviour
     {
         return entity;
     }
+
+    public float GetDefense()
+    {
+        return defense;
+    }
 }

@@ -78,6 +78,8 @@ public class RoboGuy : MonoBehaviour
         expYield = expYield + Mathf.RoundToInt(courage / 5);
         if (!wanderer)
         {
+            print(!wanderer);
+            print("yahaha");
             StartCoroutine(ChangeMove());
         }
     }
@@ -125,7 +127,6 @@ public class RoboGuy : MonoBehaviour
 
             foreach (Collider2D guy in friends)
             {
-                print("there are friends");
                 if (guy.GetComponent<DefenseSystem>() != null)
                 {
                     guy.GetComponent<DefenseSystem>().PowerOn();

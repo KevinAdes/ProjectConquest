@@ -30,7 +30,8 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
             if (container[i].item == item)
             {
                 container[i].RemoveAmount(1);
-                if(container[i].count == 0)
+                Debug.Log("WHAT");
+                if (container[i].count == 0)
                 {
                     container.Remove(container[i]);
                 }

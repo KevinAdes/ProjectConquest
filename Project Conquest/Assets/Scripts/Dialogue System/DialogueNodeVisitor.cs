@@ -6,4 +6,5 @@ public interface DialogueNodeVisitor
     void Visit(ShopDialogueNode node);
     void Visit(AnimationDialogueNode node);
     void Visit(CameraDialogueNode node);
+    void Visit(StateSwitchingNode node);
 }

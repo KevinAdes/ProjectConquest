@@ -55,17 +55,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //TODO check if this camera set can be moved elsewhere or removed
         if (mainCamera == null)
         {
             mainCamera = FindObjectOfType<Camera>();
         }
-        mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z - 5);
 
         isGrounded = Physics2D.IsTouchingLayers(GetComponent<Collider2D>(), ground);
         
         switch (STATE)
         {
             case states.DEFAULT:
+                mainCamera.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z - 5);
                 Run();
                 Jumping();
                 Crouch();
@@ -142,11 +143,6 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = velocity;
     }
 
-    public void StateSwitcher(states State)
-    {
-        STATE = State;
-    }
-
     //Setters and Getters
 
     public bool IsGrounded()
@@ -167,6 +163,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetJump(float f)
     {
         jump = f;
+    }
+
+    public void SetState(states State)
+    {
+        STATE = State;
     }
 
 }

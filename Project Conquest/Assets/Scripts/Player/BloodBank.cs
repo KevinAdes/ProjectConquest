@@ -25,13 +25,13 @@ public class BloodBank : MonoBehaviour
     {
         draculaText.text = data.GetBlood().ToString();
         bankText.text = bankBlood.GetInt().ToString();
-        FindObjectOfType<PlayerMovement>().StateSwitcher(states.DIALOGUE);
+        FindObjectOfType<PlayerMovement>().SetState(states.DIALOGUE);
         bankPanel.gameObject.SetActive(true);
     }
 
     public void HideDisplay()
     {
-        FindObjectOfType<PlayerMovement>(true).StateSwitcher(states.DEFAULT);
+        FindObjectOfType<PlayerMovement>(true).SetState(states.DEFAULT);
         bankPanel.gameObject.SetActive(false);
     }
 

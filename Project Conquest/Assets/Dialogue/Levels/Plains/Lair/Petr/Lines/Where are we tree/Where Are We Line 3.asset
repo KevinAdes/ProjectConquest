@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835a408bcfee94a50a1aea0c7272bfbf, type: 3}
-  m_Name: PetrNode1
+  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
+  m_Name: Where Are We Line 3
   m_EditorClassIdentifier: 
-  m_DialogueLine: {fileID: 11400000, guid: 27ac3ffa5c06b48dd964d348e4bcaad6, type: 2}
-  m_NextNode: {fileID: 0}
+  m_speaker: {fileID: 11400000, guid: d025ebcd602b0457287f4f754693c770, type: 2}
+  m_text: Metsula? Continent?

@@ -15,11 +15,11 @@ MonoBehaviour:
   maxHealth: 1000
   currentHealth: 100
   damage: 100
-  defense: 1000
+  defense: 8
   attackModifier: 0
   speed: 7
   jump: 5
-  blood: 3
+  blood: 0
   cash: 0
   inventory: {fileID: 11400000, guid: 689b71e4bae3c4af882e80534a1d4dec, type: 2}
   skills:

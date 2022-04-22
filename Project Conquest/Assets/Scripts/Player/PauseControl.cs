@@ -180,6 +180,7 @@ public class PauseControl : MonoBehaviour
     {
         mainTab.SetActive(false);
         itemsTab.SetActive(true);
+        UpdateInventory();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(itemsButton);
     }

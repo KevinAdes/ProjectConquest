@@ -49,7 +49,7 @@ public class DialogueInstigator : MonoBehaviour
     private void OnDialogueStart(Dialogue dialogue)
     {
         dracula?.SetState(states.DIALOGUE);
-        playerMovement?.StateSwitcher(states.DIALOGUE);
+        playerMovement?.SetState(states.DIALOGUE);
         m_DialogueChannel.RaiseDialogueStart(dialogue);
     }
 
@@ -58,7 +58,7 @@ public class DialogueInstigator : MonoBehaviour
         m_DialogueChannel.RaiseDialogueEnd(dialogue);
         target?.undoAdditionalAction();
         dracula?.SetState(states.DEFAULT);
-        playerMovement?.StateSwitcher(states.DEFAULT);
+        playerMovement?.SetState(states.DEFAULT);
 
     }
 }

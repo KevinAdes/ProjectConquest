@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3922fa800201544a286d1acf8273b8da, type: 3}
   m_Name: PetrN1
   m_EditorClassIdentifier: 
-  m_DialogueLine: {fileID: 0}
-  m_Choices: []
+  m_DialogueLine: {fileID: 11400000, guid: 27ac3ffa5c06b48dd964d348e4bcaad6, type: 2}
+  m_Choices:
+  - m_ChoicePreview: Where are we?
+    m_ChoiceNode: {fileID: 11400000, guid: 45734079d63604e0c9c94709a82eb2bf, type: 2}
+  - m_ChoicePreview: How do I play?
+    m_ChoiceNode: {fileID: 11400000, guid: eb8a682067acd4056b7e4e9bdc298fdf, type: 2}
+  - m_ChoicePreview: What should I do
+    m_ChoiceNode: {fileID: 11400000, guid: 7ab9adfd733ec4d6b8700ffb4b2f95ee, type: 2}
+  - m_ChoicePreview: Nothing, Actually
+    m_ChoiceNode: {fileID: 11400000, guid: 9a968587157984c79a7226db62131d0c, type: 2}

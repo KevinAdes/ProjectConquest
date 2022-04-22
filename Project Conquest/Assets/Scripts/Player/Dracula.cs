@@ -169,7 +169,7 @@ public class Dracula : MonoBehaviour
 
             if (Input.GetAxis("Fire1") != 0 && drink == false)
             {
-                me.StateSwitcher(states.SCAVENGING);
+                me.SetState(states.SCAVENGING);
                 drink = true;
                 //Gain extra exp from victim
                 animator.SetTrigger("Drink");

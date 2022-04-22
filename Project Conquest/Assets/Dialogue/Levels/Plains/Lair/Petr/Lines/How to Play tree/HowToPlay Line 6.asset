@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
+  m_Name: HowToPlay Line 6
+  m_EditorClassIdentifier: 
+  m_speaker: {fileID: 11400000, guid: b0bf54a678b554d418959238a7be8fd0, type: 2}
+  m_text: Because I used a robotic frame as the host for your summoning, you can
+    download abilities from your victims after you defeat them and equip the skill
+    in the upgrades menu.

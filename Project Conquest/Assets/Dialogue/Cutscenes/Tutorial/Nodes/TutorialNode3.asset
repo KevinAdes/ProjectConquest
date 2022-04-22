@@ -16,4 +16,4 @@ MonoBehaviour:
   AnimatorPrefab: {fileID: 2118665228713022957, guid: 6dc342e98030f164eb52c57a48ab51f4,
     type: 3}
   AnimationToPlay: Spawn
-  m_NextNode: {fileID: 11400000, guid: cb0ddbddab39b4b7d93c913dd4f7d983, type: 2}
+  m_NextNode: {fileID: 11400000, guid: e6860ffa27ac243e6a896807ac6ec674, type: 2}

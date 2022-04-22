@@ -143,8 +143,14 @@ public class UIDialogueTextBoxController : MonoBehaviour, DialogueNodeVisitor
     public void Visit(CameraDialogueNode node)
     {
         m_ListenToInput = false;
-        FindObjectOfType<Camera>().transform.position = node.GetCoords();
+        FindObjectOfType<Camera>().transform.position = Vector3.Lerp(FindObjectOfType<Camera>().transform.position, node.GetCoords(), 1f) ;
         StartCoroutine(CameraHold(node));
+    }
+
+    public void Visit(StateSwitchingNode node)
+    {
+        FindObjectOfType<PlayerMovement>().SetState(node.GetState());
+        m_DialogueChannel.RaiseRequestDialogueNode(node.NextNode);
     }
 
     IEnumerator CameraHold(CameraDialogueNode node)

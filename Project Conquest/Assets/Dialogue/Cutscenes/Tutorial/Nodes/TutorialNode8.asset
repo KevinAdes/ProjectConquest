@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TutorialNode8
   m_EditorClassIdentifier: 
   m_DialogueLine: {fileID: 11400000, guid: 594fa2452e99a40be86b12862696f938, type: 2}
-  m_NextNode: {fileID: 11400000, guid: dc890b801ced14944b286334b4e16469, type: 2}
+  m_NextNode: {fileID: 11400000, guid: 4025f3a6e7ebd4f8387d7305471c9980, type: 2}
   coordinates: {x: 28.2, y: -8.7, z: -5}
   holdTime: 0

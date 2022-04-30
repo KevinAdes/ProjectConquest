@@ -33,7 +33,7 @@ public class TownSpawner : MonoBehaviour
     private void Shoot()
     {
         GameObject EntityInst = Instantiate(spawn, position, Quaternion.identity);
-        EntityInst.transform.parent = gameObject.transform;
+        EntityInst.transform.parent = gameObject.transform.parent.transform;
         int RandomDir = Random.Range(-1, 1);
         if(RandomDir < 0)
         {

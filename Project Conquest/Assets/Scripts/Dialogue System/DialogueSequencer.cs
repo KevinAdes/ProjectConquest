@@ -29,7 +29,6 @@ public class DialogueSequencer
             OnDialogueStart?.Invoke(m_CurrentDialogue);
             StartDialogueNode(dialogue.FirstNode);
         }
-        else
         {
             throw new DialogueException("cant start a dialogue when another is already running");
         }

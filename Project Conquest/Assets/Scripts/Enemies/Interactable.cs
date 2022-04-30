@@ -53,7 +53,7 @@ public class Interactable : MonoBehaviour
     //if the object being interacted on needs to be frozen, changed, etc
     public void AdditionalAction()
     {
-        if (gameObject.GetComponent<RoboGuy>() != false)
+        if (gameObject.GetComponent<RoboGuy>() != null)
         {
             gameObject.GetComponent<RoboGuy>().Freeze();
         }
@@ -62,7 +62,7 @@ public class Interactable : MonoBehaviour
     public void undoAdditionalAction()
     {
 
-        if (gameObject.GetComponent<RoboGuy>() != false)
+        if (gameObject.GetComponent<RoboGuy>() != null)
         {
             gameObject.GetComponent<RoboGuy>().UnFreeze();
         }
@@ -83,7 +83,6 @@ public class Interactable : MonoBehaviour
 
     public void Death()
     {
-        print("check");
         if (cash != 0)
         {
             control.AddCash(cash);

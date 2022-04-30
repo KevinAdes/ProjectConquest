@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
-  m_Name: Mayor Line4
+  m_Name: LockedDoorLine
   m_EditorClassIdentifier: 
-  m_speaker: {fileID: 11400000, guid: b1de825e744d449ea9a8e531f5b78b04, type: 2}
-  m_text: Only Stuart has the bridge key, and I haven't seen him in a while. He probably
-    got stuck in his silly tall house again...
+  m_speaker: {fileID: 11400000, guid: 500d3749c4c5c40a1823eb4fe84ff282, type: 2}
+  m_text: Hmmm. It's locked.

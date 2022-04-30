@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: What to do Line 2
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 36a7392bbaa5049f785518c7ee14a899, type: 2}
-  m_text: My lord, this island is swarming with Robots.
+  m_text: 'My lord, this island has been fully taken over by Robots. No natural life
+    remains. '

@@ -38,7 +38,8 @@ public class Door : MonoBehaviour
     {
         active = true;
         if (collision.gameObject.layer == 13)
-        {            
+        {
+            FindObjectOfType<Dracula>().ActivateAlert();
             StartCoroutine(OpenDoor(collision));
         }
     }
@@ -47,6 +48,7 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.layer == 13)
         {
+            collision.GetComponent<Dracula>().DeactivateAlert();
             active = false;
             if (right == false && collision.transform.position.x < transform.position.x)
             {
@@ -108,6 +110,7 @@ public class Door : MonoBehaviour
             if (!active) { break; }
             if (Input.GetAxis("Submit") != 0)
             {
+                collision.GetComponent<Dracula>().DeactivateAlert();
                 if(closed == false)
                 {
 
@@ -139,6 +142,8 @@ public class Door : MonoBehaviour
                             closed = false;
                         }
                     }
+                    GetComponent<CutsceneManager>().ExecuteCutscene();
+                    FindObjectOfType<GameManager>().GetFlags().GetType().GetField("LockedDoor").SetValue(FindObjectOfType<GameManager>().GetFlags(), false);
                 }
             }
             yield return null;

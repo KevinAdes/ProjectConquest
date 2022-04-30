@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: StuartLN3
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 594e9d531177e6a4d9eb8b29c19442fa, type: 2}
-  m_text: If you can get me out of this house, I'll give you the key to the Hydro
-    Plant!
+  m_text: If somebody wants this key they'd have to get it over my dead body!

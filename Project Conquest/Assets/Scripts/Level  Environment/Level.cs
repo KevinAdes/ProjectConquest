@@ -61,7 +61,7 @@ public class Level : MonoBehaviour
             if (levelIcon.enabled == false)
             {
                 levelIcon.enabled = true;
-                manager.LoadAlert(ID);
+                FindObjectOfType<GameManager>().LoadAlert(ID);
             }
         }
     }

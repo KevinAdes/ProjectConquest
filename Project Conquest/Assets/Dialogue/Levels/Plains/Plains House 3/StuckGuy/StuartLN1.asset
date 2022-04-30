@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StuartLN1
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 594e9d531177e6a4d9eb8b29c19442fa, type: 2}
-  m_text: This may shock you, but I'm stuck
+  m_text: Stuck? Me? Nooooosirree, I CHOSE to be up here!

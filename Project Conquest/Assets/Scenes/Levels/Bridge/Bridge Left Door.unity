@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 106934304}
   - component: {fileID: 106934303}
   - component: {fileID: 106934306}
+  - component: {fileID: 106934307}
   m_Layer: 8
   m_Name: LockedDoor
   m_TagString: Untagged
@@ -292,6 +293,99 @@ MonoBehaviour:
   vertical: 0
   right: 0
   closed: 1
+--- !u!114 &106934307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106934300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  onAwake: 0
+  onDelay: 0
+  delay: 0
+  flags:
+  - LockedDoor
+  dialogues:
+  - {fileID: 11400000, guid: 260e57282f64447fa96c0d25b688ef83, type: 2}
+  channel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
+  OtherEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &149290792
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4670289392004237092, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_Name
+      value: TextboxUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -58.42661
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9953961
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -853.9172
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670289392004237093, guid: 306e3e0f3b20a42e08327dd608ad5d99,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 306e3e0f3b20a42e08327dd608ad5d99, type: 3}
 --- !u!1 &200851430
 GameObject:
   m_ObjectHideFlags: 0

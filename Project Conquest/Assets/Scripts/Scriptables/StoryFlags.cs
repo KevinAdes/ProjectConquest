@@ -11,4 +11,6 @@ public class StoryFlags : ScriptableObject
     public bool GameStarted;
     public bool TutorialDone;
     public bool Respawn;
+    public bool EnemyKilled;
+    public bool LockedDoor;
 }

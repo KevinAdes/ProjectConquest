@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StuartLN2
   m_EditorClassIdentifier: 
   m_speaker: {fileID: 11400000, guid: 594e9d531177e6a4d9eb8b29c19442fa, type: 2}
-  m_text: Do you have any idea how I can get out of here?
+  m_text: I'm up here to protect this here key to the power plant!

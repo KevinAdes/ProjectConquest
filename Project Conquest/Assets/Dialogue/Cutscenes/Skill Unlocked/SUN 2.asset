@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 455c4f1bbbe284f719452b4348d8cf9d, type: 3}
-  m_Name: SignL1
+  m_Script: {fileID: 11500000, guid: 835a408bcfee94a50a1aea0c7272bfbf, type: 3}
+  m_Name: SUN 2
   m_EditorClassIdentifier: 
-  m_speaker: {fileID: 11400000, guid: 8a4352193bda5d248981c0912e0c7484, type: 2}
-  m_text: 'House Access restricted! Big hoppers ONLY!!!
-
-    (Small hoppers may need
-    a running start)'
+  m_DialogueLine: {fileID: 11400000, guid: 2458a0433b77e469dba35fecfb0d1e1f, type: 2}
+  m_NextNode: {fileID: 0}

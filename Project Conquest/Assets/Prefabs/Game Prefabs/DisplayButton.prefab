@@ -125,7 +125,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3385506894596083553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -1799021927090337116}
+        m_TargetAssemblyTypeName: XButton, Assembly-CSharp
+        m_MethodName: SetPlayerMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-1799021927090337116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839f7d2568f5a4656b396bbb02fb8f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  control: {fileID: 0}
   buttonName: {fileID: 8167984404570735737}
   buttonPrice: {fileID: 2005089291005448864}
   buttonDescription: {fileID: 2755501689714623650}

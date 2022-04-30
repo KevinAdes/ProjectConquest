@@ -305,6 +305,12 @@ Transform:
   m_Father: {fileID: 1207377257}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &120764892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6608930680588157263, guid: 7c6aea0a25a2f1149848e5482daae1d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1166431708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &236747120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608930680588157256, guid: 7c6aea0a25a2f1149848e5482daae1d1,
@@ -343,7 +349,7 @@ PrefabInstance:
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 64.3
+      value: -5.7
       objectReference: {fileID: 0}
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
@@ -835,7 +841,7 @@ PrefabInstance:
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 83.42709
+      value: 71.7
       objectReference: {fileID: 0}
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
@@ -999,6 +1005,7 @@ GameObject:
   - component: {fileID: 1155691298}
   - component: {fileID: 1155691297}
   - component: {fileID: 1155691296}
+  - component: {fileID: 1155691299}
   m_Layer: 16
   m_Name: RightDoor
   m_TagString: Untagged
@@ -1058,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: {fileID: 0}
+  key: {fileID: 11400000, guid: 73e43d4c5504d423f8106da600972190, type: 2}
   triggerGroupOff:
   - {fileID: 7364071960465607035}
   triggerGroupOn:
@@ -1119,6 +1126,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1155691299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155691294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  onAwake: 0
+  onDelay: 0
+  delay: 0
+  flags:
+  - LockedDoor
+  dialogues:
+  - {fileID: 11400000, guid: 260e57282f64447fa96c0d25b688ef83, type: 2}
+  channel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
+  OtherEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1166431708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1233,7 +1264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207377256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3170935, y: -1.6298137, z: -0.24166298}
+  m_LocalPosition: {x: 0, y: 0, z: -0.24166298}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1566899622}
@@ -1437,6 +1468,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 18eda8aa326ca417d8f5a0812218e5c1,
         type: 2}
+    - target: {fileID: 3387728800608343047, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOn.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387728800608343047, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOff.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387728800608343047, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOn.Array.data[4]
+      value: 
+      objectReference: {fileID: 120764892}
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: m_RootOrder
@@ -1492,6 +1538,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6138067775493596771, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOn.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138067775493596771, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOff.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138067775493596771, guid: 6ae2d378f28a768448534b679b8aabbf,
+        type: 3}
+      propertyPath: triggerGroupOn.Array.data[3]
+      value: 
+      objectReference: {fileID: 120764892}
     - target: {fileID: 6472704782632108579, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: m_Name
@@ -1667,7 +1728,7 @@ PrefabInstance:
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.98
+      value: 48.8
       objectReference: {fileID: 0}
     - target: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
         type: 3}
@@ -2097,7 +2158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn: {fileID: 6608930680588157263, guid: 7c6aea0a25a2f1149848e5482daae1d1, type: 3}
-  position: {x: 0, y: 3, z: 0}
+  position: {x: 0, y: 2.3, z: 0}
   fireRate: 0.05
 --- !u!4 &2030394022 stripped
 Transform:
@@ -2437,7 +2498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: {fileID: 0}
+  key: {fileID: 11400000, guid: 73e43d4c5504d423f8106da600972190, type: 2}
   triggerGroupOff:
   - {fileID: 7364071960465607035}
   triggerGroupOn:
@@ -2485,6 +2546,7 @@ GameObject:
   - component: {fileID: 852599411348244893}
   - component: {fileID: 852599411348244894}
   - component: {fileID: 852599411348244895}
+  - component: {fileID: 852599411348244900}
   m_Layer: 16
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -2492,6 +2554,30 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &852599411348244900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852599411348244899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  onAwake: 0
+  onDelay: 0
+  delay: 0
+  flags:
+  - LockedDoor
+  dialogues:
+  - {fileID: 11400000, guid: 260e57282f64447fa96c0d25b688ef83, type: 2}
+  channel: {fileID: 11400000, guid: 45136a8abc4bf475f970bd655f34e266, type: 2}
+  OtherEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &853489433676615487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3444131702745449727, guid: 6ae2d378f28a768448534b679b8aabbf,
@@ -4003,6 +4089,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1207377257}
     m_Modifications:
+    - target: {fileID: 1427742085, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
+      propertyPath: MapCoordinates.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427742085, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
+      propertyPath: MapCoordinates.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427742085, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
+      propertyPath: MapCoordinates.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792746224, guid: 9f40a71d462ec4a4baadb1b94a75d15c, type: 3}
+      propertyPath: ID
+      value: Map
+      objectReference: {fileID: 0}
     - target: {fileID: 7747679615082091169, guid: 9f40a71d462ec4a4baadb1b94a75d15c,
         type: 3}
       propertyPath: m_RootOrder

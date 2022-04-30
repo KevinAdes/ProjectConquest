@@ -42,6 +42,9 @@ public class Dracula : MonoBehaviour
     [SerializeField]
     LayerMask enemies;
 
+    [SerializeField]
+    SpriteRenderer alert;
+
     GameManager manager;
 
     Entity target;
@@ -150,8 +153,11 @@ public class Dracula : MonoBehaviour
             }
             if (enemy.GetComponent<Interactable>() != null)
             {
-                print("huh?");
                 enemy.GetComponent<Interactable>().Death();
+            }
+            if(enemy.GetComponent<Destructable>() != null)
+            {
+                Destroy(enemy.gameObject);
             }
         }
     }
@@ -196,7 +202,6 @@ public class Dracula : MonoBehaviour
     {
         if (collision.gameObject.layer == 17)
         {
-            //this shit is why i hate getters and setters. why cant i just make this shit public Oh nO yOu CAnt HaVE GlobBal VaRiaAbLEs why. why not. i did it until now and its been fine. f this shit. 
             FindObjectOfType<Level>().GetData().SetRight(collision.GetComponent<LevelLoader>().GetRight());
             if (collision.GetComponent<LevelLoader>().GetCoords() != Vector3.zero)
             {
@@ -265,6 +270,16 @@ public class Dracula : MonoBehaviour
             FindObjectOfType<GameManager>().GetFlags().GetType().GetField("Respawn").SetValue(FindObjectOfType<GameManager>().GetFlags(), false);
             pauseControl.GetPlayerData().SetBlood(0);
         }
+    }
+
+    public void ActivateAlert()
+    {
+        alert.enabled = true;
+    }
+
+    public void DeactivateAlert()
+    {
+        alert.enabled = false;
     }
 
     //Getters and Setters

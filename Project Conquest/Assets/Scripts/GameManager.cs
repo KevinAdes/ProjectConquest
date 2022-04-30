@@ -202,6 +202,11 @@ public class GameManager : MonoBehaviour
         temp = (LevelData)table.Levels[levelID];
         if (enemies.Enemies.ContainsKey(temp.GetEntities()[ID].GetMyName()) == false)
         {
+            //Starts at one instead of zero to account for dracula
+            if (enemies.Enemies.Count == 1)
+            {
+                FindObjectOfType<Dracula>().GetComponent<CutsceneManager>().ExecuteCutscene();
+            }
             enemies.Enemies.Add(temp.GetEntities()[ID].GetMyName(), temp.GetEntities()[ID].GetEnemySkills());
         }
     }

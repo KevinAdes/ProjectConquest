@@ -60,6 +60,8 @@ public class PauseControl : MonoBehaviour
     Text Health;
     [SerializeField]
     Text Experience;
+    [SerializeField]
+    Text Cash;
 
     [SerializeField]
     GameObject upgradesButtonListContent;
@@ -276,7 +278,8 @@ public class PauseControl : MonoBehaviour
         Defense.text = "DEFENSE " + playerData.GetDefense();
         Speed.text = "SPEED " + playerData.GetSpeed();
         Health.text = "HEALTH " + playerData.GetMaxHealth();
-        Experience.text = playerData.GetBlood().ToString();
+        Experience.text = "BLOOD " + playerData.GetBlood();
+        Cash.text = "MONEY " + playerData.GetCash();
 
         if (dracula != null)
         {

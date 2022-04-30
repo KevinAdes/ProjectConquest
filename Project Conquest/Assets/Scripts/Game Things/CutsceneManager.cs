@@ -67,8 +67,10 @@ public class CutsceneManager : MonoBehaviour
     {
         PickCutscene();
         //An extremely complicated way of finding a variable with a string, checking its value, and then setting it
+        print("hello?");
         if ((bool)FindObjectOfType<GameManager>().GetFlags().GetType().GetField(flag).GetValue(FindObjectOfType<GameManager>().GetFlags()) == false)
         {
+            print("yellow??");
             FindObjectOfType<GameManager>().GetFlags().GetType().GetField(flag).SetValue(FindObjectOfType<GameManager>().GetFlags(), true);
             channel.RaiseRequestDialogue(dialogue);
         }

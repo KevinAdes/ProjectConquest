@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 342851756617657206}
   - component: {fileID: 342851756617657205}
   - component: {fileID: 342851756617657204}
+  - component: {fileID: 5888321886587002139}
   m_Layer: 16
   m_Name: Door
   m_TagString: Untagged
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e052df5e7384644993012b6a80c6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: {fileID: 0}
   triggerGroupOff:
   - {fileID: 0}
   triggerGroupOn:
@@ -129,3 +132,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &5888321886587002139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342851756617657160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef98b93e6cf540a0b7fb718f01a4e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  onAwake: 0
+  onDelay: 0
+  delay: 0
+  flags:
+  - LockedDoor
+  dialogues:
+  - {fileID: 11400000, guid: 260e57282f64447fa96c0d25b688ef83, type: 2}
+  channel: {fileID: 0}
+  OtherEvent:
+    m_PersistentCalls:
+      m_Calls: []
